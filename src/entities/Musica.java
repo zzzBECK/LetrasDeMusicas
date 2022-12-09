@@ -1,6 +1,6 @@
 package entities;
 
-public class Musica {
+public class Musica{
     
     private Integer id;
     private String nome;
@@ -13,7 +13,6 @@ public class Musica {
     }
 
     public Musica(Integer id, String nome, String letra, Double duracao, boolean statusTocando){
-        
         this.id = id;
         this.nome = nome;
         this.letra = letra;
@@ -62,4 +61,8 @@ public class Musica {
         this.statusTocando = statusTocando;
     }
 
+    @Override
+    public String toString(){
+        return "Nome: " + nome + " Letra: " + letra + " duracao: " + duracao + " Status: " + statusTocando;
+    }
 }

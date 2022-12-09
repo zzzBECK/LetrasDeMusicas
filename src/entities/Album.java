@@ -56,4 +56,9 @@ public class Album {
         musicas.remove(musica);
     }
 
+    @Override
+    public String toString(){
+        return String.format("Nome: %s\n", nome) + "Musicas: " + musicas;
+    }
+
 }
