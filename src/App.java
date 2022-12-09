@@ -12,13 +12,26 @@ public class App {
 
         Album alb1 = new Album(1, "pedra", null, art1);
         Musica mus1 = new Musica(1, "coracao", "gelo", 2.4, false, alb1);
-        Musica mus2 = new Musica(1, "obrabo", "fogo", 2.6, false, alb1);
-        Musica mus3 = new Musica(1, "liw", "agua", 2.3, false, alb1);
+        // Musica mus2 = new Musica(1, "obrabo", "fogo", 2.6, false, alb1);
+        // Musica mus3 = new Musica(1, "liw", "agua", 2.3, false, alb1);
 
 
-        System.out.println(art1);
-        System.out.println(alb1);
+        // System.out.println(art1);
+        // System.out.println(alb1);
+
+        mus1.setStatusTocando(true);
+
+        // System.out.println(mus1);
     
+        // System.out.print("Get Alubuns: ");
+        // System.out.println(art1.getAlbuns());
+
+        // System.out.print("Get Artistas: ");
+        // System.out.println(alb1.getArtista());
+
+        user1.seguirArtista(art1);
+
+        System.out.println(user1);
 
     }
 }

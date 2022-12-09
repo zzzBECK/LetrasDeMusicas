@@ -55,4 +55,9 @@ public class Usuario {
         artistasSeguidos.remove(artista);
     }
 
+    @Override
+    public String toString(){
+        return "Nome: " + nome + " RG: " + rg + " Seguindo: " + artistasSeguidos;
+    }
+
 }

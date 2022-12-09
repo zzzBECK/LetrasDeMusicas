@@ -37,6 +37,10 @@ public class Artista extends Usuario{
         this.estiloMusical = estiloMusical;
     }
 
+    public List<Album> getAlbuns(){
+        return albuns;
+    }
+
     public void adicionarAlbum(Album album){
         albuns.add(album);
     }
