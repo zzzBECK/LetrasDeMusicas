@@ -10,17 +10,19 @@ public class Album {
     private String nome;
     private Date dataLancamento;
 
+    private Artista artista;
     private List<Musica> musicas = new ArrayList<>();
 
     public Album(){
 
     }
 
-    public Album(Integer id, String nome, Date dataLancamento){
+    public Album(Integer id, String nome, Date dataLancamento, Artista artista){
 
         this.id = id;
         this.nome = nome;
         this.dataLancamento = dataLancamento;
+        this.artista = artista;
     }
     
     
@@ -46,6 +48,14 @@ public class Album {
 
     public void setDataLancamento(Date dataLancamento) {
         this.dataLancamento = dataLancamento;
+    }
+
+    public Artista getArtista(){
+        return artista;
+    }
+
+    public void setArtista(Artista artista){
+        this.artista = artista;
     }
 
     public void adicionarMusica(Musica musica){

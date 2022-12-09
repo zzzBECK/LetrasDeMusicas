@@ -8,16 +8,20 @@ public class Musica{
     private Double duracao;
     private boolean statusTocando;
 
+    private Album album;
+
     public Musica(){
 
     }
 
-    public Musica(Integer id, String nome, String letra, Double duracao, boolean statusTocando){
+    public Musica(Integer id, String nome, String letra, Double duracao, boolean statusTocando, Album album){
         this.id = id;
         this.nome = nome;
         this.letra = letra;
         this.duracao = duracao;
         this.statusTocando = statusTocando;
+        this.album = album;
+        album.adicionarMusica(this);
     }
 
 
@@ -60,6 +64,14 @@ public class Musica{
     public void setStatusTocando(boolean statusTocando) {
         this.statusTocando = statusTocando;
     }
+
+    public Album getAlbum(){
+        return album;
+    }
+
+    public void setAlbum(Album album){
+        this.album = album;
+    }   
 
     @Override
     public String toString(){

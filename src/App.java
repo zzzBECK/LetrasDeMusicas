@@ -10,17 +10,10 @@ public class App {
         Usuario user1 = new Usuario(1, "Alexandre", "373183");
         Artista art1 = new Artista(2, "Hungria", "8742659", 1000, "rap");
 
-        Album alb1 = new Album(1, "pedra", null);
-        Musica mus1 = new Musica(1, "coracao", "gelo", 2.4, false);
-        Musica mus2 = new Musica(1, "obrabo", "fogo", 2.6, false);
-        Musica mus3 = new Musica(1, "liw", "agua", 2.3, false);
-
-
-        art1.adicionarAlbum(alb1);
-
-        alb1.adicionarMusica(mus1);
-        alb1.adicionarMusica(mus2);
-        alb1.adicionarMusica(mus3);
+        Album alb1 = new Album(1, "pedra", null, art1);
+        Musica mus1 = new Musica(1, "coracao", "gelo", 2.4, false, alb1);
+        Musica mus2 = new Musica(1, "obrabo", "fogo", 2.6, false, alb1);
+        Musica mus3 = new Musica(1, "liw", "agua", 2.3, false, alb1);
 
 
         System.out.println(alb1);
