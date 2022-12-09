@@ -16,6 +16,7 @@ public class App {
         Musica mus3 = new Musica(1, "liw", "agua", 2.3, false, alb1);
 
 
+        System.out.println(art1);
         System.out.println(alb1);
     
 

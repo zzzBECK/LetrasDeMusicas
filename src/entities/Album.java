@@ -23,6 +23,7 @@ public class Album {
         this.nome = nome;
         this.dataLancamento = dataLancamento;
         this.artista = artista;
+        artista.adicionarAlbum(this);
     }
     
     
@@ -68,7 +69,7 @@ public class Album {
 
     @Override
     public String toString(){
-        return String.format("Nome: %s\n", nome) + "Musicas: " + musicas;
+        return String.format("Nome: %s ", nome) + "Musicas: " + musicas;
     }
 
 }

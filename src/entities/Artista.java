@@ -45,4 +45,12 @@ public class Artista extends Usuario{
         albuns.remove(album);
     }
 
+    @Override
+    public String toString(){
+        return String.format("Nome: %s ", super.getNome()) + "RG: " 
+                            + super.getRg() + " Qtd Seguidores: " 
+                            + qtdSeguidores + " Estilo Musical: " 
+                            + estiloMusical + " Albuns: " +  albuns;
+    }
+
 }
