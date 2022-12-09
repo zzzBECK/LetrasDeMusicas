@@ -13,9 +13,6 @@ public class Album {
     private Artista artista;
     private List<Musica> musicas = new ArrayList<>();
 
-    public Album(){
-
-    }
 
     public Album(Integer id, String nome, Date dataLancamento, Artista artista){
 

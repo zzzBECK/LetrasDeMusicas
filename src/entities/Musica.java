@@ -10,10 +10,6 @@ public class Musica{
 
     private Album album;
 
-    public Musica(){
-
-    }
-
     public Musica(Integer id, String nome, String letra, Double duracao, boolean statusTocando, Album album){
         this.id = id;
         this.nome = nome;
@@ -72,6 +68,15 @@ public class Musica{
     public void setAlbum(Album album){
         this.album = album;
     }   
+
+    public void tocarOuPausar(){
+
+        if (statusTocando == true)
+            statusTocando = false;
+
+        else
+            statusTocando = true;
+    }
 
     @Override
     public String toString(){

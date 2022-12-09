@@ -49,6 +49,13 @@ public class Artista extends Usuario{
         albuns.remove(album);
     }
 
+    // public void editarAlbum(){
+    //     Scanner sc = new Scanner(System.in);
+    //     System.out.print("Digite o nome para alterar: ");
+    //     albuns.set
+
+    // }
+
     @Override
     public String toString(){
         return String.format("Nome: %s ", super.getNome()) + "RG: " 

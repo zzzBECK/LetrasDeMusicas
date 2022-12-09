@@ -10,6 +10,9 @@ public class App {
         Usuario user1 = new Usuario(1, "Alexandre", "373183");
         Artista art1 = new Artista(2, "Hungria", "8742659", 1000, "rap");
 
+        Artista art2 = new Artista(3, "Justin", "3743183", 123124, "pop");
+
+
         Album alb1 = new Album(1, "pedra", null, art1);
         Musica mus1 = new Musica(1, "coracao", "gelo", 2.4, false, alb1);
         // Musica mus2 = new Musica(1, "obrabo", "fogo", 2.6, false, alb1);
@@ -32,6 +35,8 @@ public class App {
         user1.seguirArtista(art1);
 
         System.out.println(user1);
+
+        user1.pararDeSeguirArtista(art2);
 
     }
 }
