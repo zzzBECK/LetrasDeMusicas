@@ -1,0 +1,5 @@
+#Ignoring bin folder
+/bin/
+
+#Ignoring Vscode folder
+./.vscode/
