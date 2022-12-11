@@ -2,6 +2,7 @@ package entities;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 public class Artista extends Usuario{
     
@@ -49,12 +50,31 @@ public class Artista extends Usuario{
         albuns.remove(album);
     }
 
-    // public void editarAlbum(){
-    //     Scanner sc = new Scanner(System.in);
-    //     System.out.print("Digite o nome para alterar: ");
-    //     albuns.set
+    public void editarAlbum(){
+        Scanner sc = new Scanner(System.in);
+        Album alb;
 
-    // }
+        do{
+            System.out.println(albuns);
+            System.out.print("Escolha o album para editar o nome: ");
+            String nomeAlbum = sc.nextLine();
+            alb = albuns.stream().filter(x -> x.getNome().equals(nomeAlbum)).findAny().orElse(null);
+
+            if (alb == null){
+                System.out.println("Album inexistente!");
+            }
+        } while (alb == null);
+
+        for (Album y : albuns){
+            if (alb == y){
+                System.out.print("Digite o novo nome: ");
+                y.setNome(sc.nextLine());
+            }
+        }
+        
+        sc.close();
+
+    }
 
     @Override
     public String toString(){

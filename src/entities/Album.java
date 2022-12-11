@@ -3,6 +3,7 @@ package entities;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Scanner;
 
 public class Album {
     
@@ -62,6 +63,32 @@ public class Album {
 
     public void removerMusica(Musica musica){
         musicas.remove(musica);
+    }
+
+    //Resolver bug
+    public void editarMusica(){
+        Scanner sc = new Scanner(System.in);
+        Musica mus;
+        
+        do{
+            System.out.println(musicas);
+            System.out.print("Digite o nome da musica para alterar o nome: ");
+            String nomeMusica = sc.nextLine();
+            mus = musicas.stream().filter(y -> y.getNome().equals(nomeMusica)).findAny().orElse(null);
+
+            if (mus.equals(null)){
+                System.out.println("Musica inexistente!");
+            }
+        } while(mus.equals(null));
+
+        for (Musica x : musicas){
+            if (mus == x){
+                System.out.print("Digite o novo nome: ");
+                x.setNome(sc.nextLine());
+            }
+        }
+        null
+        sc.close();
     }
 
     @Override
