@@ -47,6 +47,11 @@ public class Usuario {
         this.rg = rg;
     }
 
+        @Override
+    public String toString(){
+        return "Nome: " + nome + " RG: " + rg + " Seguindo: " + artistasSeguidos;
+    }
+
     public void seguirArtista(Artista artista){
         artistasSeguidos.add(artista);
     }
@@ -55,9 +60,5 @@ public class Usuario {
         artistasSeguidos.remove(artista);
     }
 
-    @Override
-    public String toString(){
-        return "Nome: " + nome + " RG: " + rg + " Seguindo: " + artistasSeguidos;
-    }
 
 }

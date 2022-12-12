@@ -69,6 +69,11 @@ public class Musica{
         this.album = album;
     }   
 
+    @Override
+    public String toString(){
+        return "Nome: " + nome + " Letra: " + letra + " duracao: " + duracao + " Status: " + statusTocando + " | ";
+    }
+    
     public void tocarOuPausar(){
 
         if (statusTocando == true)
@@ -78,8 +83,4 @@ public class Musica{
             statusTocando = true;
     }
 
-    @Override
-    public String toString(){
-        return "Nome: " + nome + " Letra: " + letra + " duracao: " + duracao + " Status: " + statusTocando;
-    }
 }

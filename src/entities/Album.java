@@ -57,6 +57,12 @@ public class Album {
         this.artista = artista;
     }
 
+    @Override
+    public String toString(){
+        return String.format("Nome: %s ", nome) + "Musicas: " + musicas;
+    }
+
+    
     public void adicionarMusica(Musica musica){
         musicas.add(musica);
     }
@@ -64,6 +70,7 @@ public class Album {
     public void removerMusica(Musica musica){
         musicas.remove(musica);
     }
+
 
     //Resolver bug
     public void editarMusica(){
@@ -87,13 +94,8 @@ public class Album {
                 x.setNome(sc.nextLine());
             }
         }
-        null
-        sc.close();
-    }
 
-    @Override
-    public String toString(){
-        return String.format("Nome: %s ", nome) + "Musicas: " + musicas;
+        sc.close();
     }
 
 }

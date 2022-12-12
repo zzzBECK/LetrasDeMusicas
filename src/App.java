@@ -1,3 +1,5 @@
+import java.text.DateFormat;
+
 import entities.Album;
 import entities.Artista;
 import entities.Musica;
@@ -5,6 +7,8 @@ import entities.Usuario;
 
 public class App {
     public static void main(String[] args) throws Exception {
+
+        DateFormat f = DateFormat.getDateInstance();
         
 
         Usuario user1 = new Usuario(1, "Alexandre", "373183");
@@ -14,6 +18,7 @@ public class App {
 
 
         Album alb1 = new Album(1, "nomeIncorreto", null, art1);
+        Album alb2 = new Album(1, "Indestructible", null, art1);
 
         Musica mus1 = new Musica(1, "coracao", "gelo", 2.4, false, alb1);
 
@@ -30,8 +35,9 @@ public class App {
         System.out.println(alb1);
         System.out.println();
 
-        mus1.setStatusTocando(true);
+        mus1.tocarOuPausar();
         mus1.setNome("Vitor");
+
         System.out.println(mus1);
         System.out.println();
 
@@ -50,6 +56,8 @@ public class App {
         System.out.println();
 
         user1.pararDeSeguirArtista(art1);
+        user1.seguirArtista(art2);
+        
         System.out.println(user1);
         System.out.println();
 

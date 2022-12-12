@@ -42,6 +42,14 @@ public class Artista extends Usuario{
         return albuns;
     }
 
+    @Override
+    public String toString(){
+        return String.format("Nome: %s ", super.getNome()) + "RG: " 
+                            + super.getRg() + " Qtd Seguidores: " 
+                            + qtdSeguidores + " Estilo Musical: " 
+                            + estiloMusical + " Albuns: " +  albuns;
+    }
+
     public void adicionarAlbum(Album album){
         albuns.add(album);
     }
@@ -76,12 +84,5 @@ public class Artista extends Usuario{
 
     }
 
-    @Override
-    public String toString(){
-        return String.format("Nome: %s ", super.getNome()) + "RG: " 
-                            + super.getRg() + " Qtd Seguidores: " 
-                            + qtdSeguidores + " Estilo Musical: " 
-                            + estiloMusical + " Albuns: " +  albuns;
-    }
 
 }
