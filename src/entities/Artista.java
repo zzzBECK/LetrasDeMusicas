@@ -66,7 +66,7 @@ public class Artista extends Usuario{
             System.out.println(albuns);
             System.out.print("Escolha o album para editar o nome: ");
             String nomeAlbum = sc.nextLine();
-            alb = albuns.stream().filter(x -> x.getNome().equals(nomeAlbum)).findAny().orElse(null);
+            alb = albuns.stream().filter(x -> x.getNome().toLowerCase().equals(nomeAlbum.toLowerCase())).findAny().orElse(null);
 
             if (alb == null){
                 System.out.println("Album inexistente!");

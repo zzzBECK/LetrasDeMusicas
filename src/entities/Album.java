@@ -49,17 +49,17 @@ public class Album {
         this.dataLancamento = dataLancamento;
     }
 
-    public Artista getArtista(){
-        return artista;
+    public String getArtista(){
+        return artista.getNome();
     }
 
-    public void setArtista(Artista artista){
-        this.artista = artista;
+    public List<Musica> getMusicas(){
+        return musicas;
     }
 
     @Override
     public String toString(){
-        return String.format("Nome: %s ", nome) + "Musicas: " + musicas;
+        return String.format("Nome: %s ", nome) + "Musicas: " + musicas + " Data: " + dataLancamento;
     }
 
     
