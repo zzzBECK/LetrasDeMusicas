@@ -58,29 +58,20 @@ public class Artista extends Usuario{
         albuns.remove(album);
     }
 
-    public void editarAlbum(){
-        Scanner sc = new Scanner(System.in);
+    public void editarAlbum(String nomeAlbum, String novoNome){
         Album alb;
+        
+        alb = albuns.stream().filter(x -> x.getNome().toLowerCase().equals(nomeAlbum.toLowerCase())).findAny().orElse(null);
 
-        do{
-            System.out.println(albuns);
-            System.out.print("Escolha o album para editar o nome: ");
-            String nomeAlbum = sc.nextLine();
-            alb = albuns.stream().filter(x -> x.getNome().toLowerCase().equals(nomeAlbum.toLowerCase())).findAny().orElse(null);
-
-            if (alb == null){
-                System.out.println("Album inexistente!");
-            }
-        } while (alb == null);
+        if (alb == null){
+            System.out.println("Album inexistente!");
 
         for (Album y : albuns){
             if (alb == y){
-                System.out.print("Digite o novo nome: ");
-                y.setNome(sc.nextLine());
+                y.setNome(novoNome);
             }
         }
-        
-        sc.close();
+
 
     }
 

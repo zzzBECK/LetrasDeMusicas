@@ -35,9 +35,6 @@ public class App {
 
 
         // System.out.println(mus1.getAlbum().getArtista());
-        art1.editarAlbum();
-
-
 
         System.out.println(art1);
         System.out.println();
