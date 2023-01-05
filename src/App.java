@@ -33,41 +33,12 @@ public class App {
         Musica mus3 = new Musica(1, "nightmare", "letras da musica3", 2.3, false, alb1);
 
 
+        art1.editarAlbum("her loss", "teste");
 
-        // System.out.println(mus1.getAlbum().getArtista());
+        alb1.editarMusica("coracao de gelo", "2022");
 
-        System.out.println(art1);
-        System.out.println();
+        System.out.println(mus1.getNome());
 
-        System.out.println(alb1);
-        System.out.println();
-
-        mus1.tocarOuPausar();
-        mus1.setNome("Vitor");
-
-        System.out.println(mus1);
-        System.out.println();
-
-    
-        
-        System.out.print("Get Alubuns: ");
-        System.out.println(art1.getAlbuns());
-        System.out.println();
-
-        System.out.print("Get Artistas: ");
-        System.out.println(alb1.getArtista());
-        System.out.println();
-
-        user1.seguirArtista(art1);
-
-        System.out.println(user1);
-        System.out.println();
-
-        user1.pararDeSeguirArtista(art1);
-        user1.seguirArtista(art2);
-        
-        System.out.println(user1);
-        System.out.println();
 
     }
 }

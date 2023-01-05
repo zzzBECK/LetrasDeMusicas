@@ -2,7 +2,6 @@ package entities;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
 
 public class Artista extends Usuario{
     
@@ -63,7 +62,7 @@ public class Artista extends Usuario{
         
         alb = albuns.stream().filter(x -> x.getNome().toLowerCase().equals(nomeAlbum.toLowerCase())).findAny().orElse(null);
 
-        if (alb == null){
+        if (alb == null)
             System.out.println("Album inexistente!");
 
         for (Album y : albuns){
