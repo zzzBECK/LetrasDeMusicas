@@ -71,8 +71,6 @@ public class Artista extends Usuario{
             }
         }
 
-
     }
-
 
 }

@@ -1,5 +1,6 @@
 package entities;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -12,6 +13,8 @@ public class Album {
 
     private List<Artista> artistas;
     private List<Musica> musicas = new ArrayList<>();
+
+    SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
 
 
     public Album(Integer id, String nome, Date dataLancamento, List<Artista> artistas){
@@ -61,7 +64,7 @@ public class Album {
 
     @Override
     public String toString(){
-        return String.format("Nome: %s ", nome) + "Musicas: " + musicas + " Data: " + dataLancamento;
+        return String.format("Nome: %s ", nome) + "Musicas: " + musicas + " Data: " + sdf.format(dataLancamento);
     }
 
     
