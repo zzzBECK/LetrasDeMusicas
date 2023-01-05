@@ -10,17 +10,20 @@ public class Album {
     private String nome;
     private Date dataLancamento;
 
-    private Artista artista;
+    private List<Artista> artistas;
     private List<Musica> musicas = new ArrayList<>();
 
 
-    public Album(Integer id, String nome, Date dataLancamento, Artista artista){
+    public Album(Integer id, String nome, Date dataLancamento, List<Artista> artistas){
 
         this.id = id;
         this.nome = nome;
         this.dataLancamento = dataLancamento;
-        this.artista = artista;
-        artista.adicionarAlbum(this);
+        this.artistas = artistas;
+
+        for (Artista art : artistas){
+            art.adicionarAlbum(this);
+        }
     }
     
     
@@ -48,8 +51,8 @@ public class Album {
         this.dataLancamento = dataLancamento;
     }
 
-    public String getArtista(){
-        return artista.getNome();
+    public List<Artista> getArtistas(){
+        return artistas;
     }
 
     public List<Musica> getMusicas(){
