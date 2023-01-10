@@ -1,4 +1,4 @@
-package entities;
+package model;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
