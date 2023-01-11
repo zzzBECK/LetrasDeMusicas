@@ -27,6 +27,7 @@ public class Album {
         for (Artista art : artistas){
             art.adicionarAlbum(this);
         }
+
     }
     
     

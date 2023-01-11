@@ -1,5 +1,11 @@
 // import java.text.DateFormat;
 
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+
+import model.Artista;
 import view.TelaPrincipal;
 
 public class App {
@@ -7,11 +13,11 @@ public class App {
 
         // Scanner sc = new Scanner(System.in);
 
-        // List<Artista> artistas1 = new ArrayList<>();
+        List<Artista> artistas = new ArrayList<>();
         
-        // SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
 
-        // Date y1 = sdf.parse("25/12/2022");
+        Date y1 = sdf.parse("25/12/2022");
 
         // Usuario user1 = new Usuario(1, "Alexandre", "373183");
 
@@ -46,10 +52,20 @@ public class App {
         // Pesquisa pesquisa = new Pesquisa();
 
         // System.out.println(pesquisa.procurarArtista(sc.nextLine()));
-
         TelaPrincipal tela = new TelaPrincipal();
 
+        tela.show();
         tela.getBotao().addActionListener(tela);
-        
+
+        // Pesquisa pesquisa = new Pesquisa();
+        // Artista art = new Artista(1, "Alexandre", "3743183", 20, "Rock");
+        // artistas.add(art);
+        // pesquisa.adicionarArtista(art);
+
+        // Album alb = new Album(2, "love", y1, artistas);
+        // pesquisa.adicionarAlbum(alb);
+
+        // System.out.println(pesquisa.procurarArtista("alexandre"));
+
     }
 }
