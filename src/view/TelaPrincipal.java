@@ -2,18 +2,21 @@ package view;
 
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 
-public class TelaPrincipal {
+public class TelaPrincipal implements ActionListener{
 
     private static JFrame janela = new JFrame("Letras de Músicas");
 	private static JLabel titulo = new JLabel("Letras de Músicas");
 	private static JButton botao = new JButton("Entrar");
 
     public TelaPrincipal(){
+
         janela.getContentPane().setBackground(Color.darkGray);
 		janela.setResizable(false);
 		
@@ -22,7 +25,7 @@ public class TelaPrincipal {
 		titulo.setBounds(285, 116, 345, 48);
 		 
 		
-		botao.setBackground(Color.magenta);
+		botao.setBackground(Color.decode("#A020F0"));
         botao.setForeground(Color.WHITE);
 		botao.setBounds(342, 404, 125, 35);
         botao.setBorder(null);
@@ -38,5 +41,19 @@ public class TelaPrincipal {
         janela.setVisible(true);
 
     }
+
+	public JButton getBotao(){
+		return botao;
+	}
     
+	public void actionPerformed(ActionEvent e){
+		Object src = e.getSource();
+
+		if (src == botao){
+			janela.dispose();
+
+			new TelaAplicativo();
+		}
+
+	}
 }

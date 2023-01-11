@@ -49,5 +49,7 @@ public class App {
 
         TelaPrincipal tela = new TelaPrincipal();
 
+        tela.getBotao().addActionListener(tela);
+        
     }
 }
