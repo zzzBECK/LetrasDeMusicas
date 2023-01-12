@@ -16,6 +16,7 @@ public class TelaPrincipal implements ActionListener{
 	private static JButton botao = new JButton("Entrar");
 	private Font fonte = new Font("Ms Gothic", Font.BOLD, 24);
 
+
     public void show(){
 
         janela.getContentPane().setBackground(Color.darkGray);
@@ -58,7 +59,11 @@ public class TelaPrincipal implements ActionListener{
 		if (src == botao){
 			janela.dispose();
 
-			new TelaCadastro().show();
+			TelaCadastro telaCadastro = new TelaCadastro();
+			telaCadastro.show();
+			telaCadastro.getCheckBox().addActionListener(telaCadastro);
+
+			telaCadastro.getButton().addActionListener(telaCadastro);
 		}
 
 	}

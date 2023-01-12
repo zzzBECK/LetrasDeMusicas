@@ -13,11 +13,11 @@ public class App {
 
         // Scanner sc = new Scanner(System.in);
 
-        List<Artista> artistas = new ArrayList<>();
+        // List<Artista> artistas = new ArrayList<>();
         
-        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        // SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
 
-        Date y1 = sdf.parse("25/12/2022");
+        // Date y1 = sdf.parse("25/12/2022");
 
         // Usuario user1 = new Usuario(1, "Alexandre", "373183");
 
