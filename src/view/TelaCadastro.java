@@ -4,8 +4,6 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.ItemEvent;
-import java.awt.event.ItemListener;
 
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
@@ -13,6 +11,8 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.plaf.metal.MetalCheckBoxIcon;
+
+import controller.Controle;
 
 public class TelaCadastro implements ActionListener{
 
@@ -34,6 +34,7 @@ public class TelaCadastro implements ActionListener{
     
     private Font fonte = new TelaPrincipal().getFonte();
 
+    private Controle controle = new Controle();
 
     public void show(){
         janela.getContentPane().setBackground(Color.darkGray);
@@ -129,5 +130,19 @@ public class TelaCadastro implements ActionListener{
             this.showEstilo();
 		}
 
+        if (src == botao){
+            janela.dispose();
+
+            if (opcaoBox.isSelected()){
+                controle.artista(entradaNome.getText(), entradaRg.getText(), entradaEstilo.getText());
+                new TelaAplicativo().show(true);
+                
+            }
+            else{
+                controle.usuario(entradaNome.getText(), entradaRg.getText());
+                new TelaAplicativo().show(false);
+            }
+            
+        }
 	}
 }
