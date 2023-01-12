@@ -20,5 +20,8 @@ public class Controle{
         pesquisa.adicionarArtista(new Artista(nome, rg, 0, estiloMusical));
     }
 
+    public Pesquisa getPesquisa(){
+        return pesquisa;
+    }
 
 }

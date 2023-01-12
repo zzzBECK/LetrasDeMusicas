@@ -2,11 +2,15 @@ package view;
 
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
 
-public class TelaAplicativo {
+import controller.Controle;
+
+public class TelaAplicativo implements ActionListener{
     private static JFrame janela = new JFrame("Aplicativo");
 
 	private static JButton musBotao = new JButton("Músicas");
@@ -17,7 +21,35 @@ public class TelaAplicativo {
 
 	private Font fonte = new Font("Ms Gothic", Font.BOLD, 16);
 
+	private Controle controle;
+	public TelaAplicativo(Controle controle){
+		this.controle = controle;
+	}
+
+	public Controle getControle(){
+		return controle;
+	}
 	
+	public JButton getMusBotao() {
+		return musBotao;
+	}
+
+	public JButton getAlbBotao() {
+		return albBotao;
+	}
+
+	public JButton getArtBotao() {
+		return artBotao;
+	}
+
+	public JButton getcAlbmBotao() {
+		return cAlbmBotao;
+	}
+
+	public JButton getcMusBotao() {
+		return cMusBotao;
+	}
+
 	public void show(boolean artista){
         janela.getContentPane().setBackground(Color.darkGray);
 		janela.setResizable(false);
@@ -73,6 +105,16 @@ public class TelaAplicativo {
 
         janela.setVisible(true);
     }
-	
+
+    public void actionPerformed(ActionEvent e){
+		Object src = e.getSource();
+
+		if (src == artBotao){
+			janela.dispose();
+			TelaArtistas telaArtistas = new TelaArtistas(controle);
+
+			telaArtistas.show();
+		}
+	}	
 
 }

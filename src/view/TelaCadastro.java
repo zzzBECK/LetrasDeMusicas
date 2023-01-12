@@ -135,12 +135,16 @@ public class TelaCadastro implements ActionListener{
 
             if (opcaoBox.isSelected()){
                 controle.artista(entradaNome.getText(), entradaRg.getText(), entradaEstilo.getText());
-                new TelaAplicativo().show(true);
+                TelaAplicativo telaAplicativo = new TelaAplicativo(controle);
+                telaAplicativo.show(true);
+                telaAplicativo.getArtBotao().addActionListener(telaAplicativo);
                 
             }
             else{
                 controle.usuario(entradaNome.getText(), entradaRg.getText());
-                new TelaAplicativo().show(false);
+                TelaAplicativo telaAplicativo = new TelaAplicativo(controle);
+                telaAplicativo.show(false);
+                telaAplicativo.getArtBotao().addActionListener(telaAplicativo);
             }
             
         }
