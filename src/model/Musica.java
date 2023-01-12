@@ -2,7 +2,6 @@ package model;
 
 public class Musica{
     
-    private Integer id;
     private String nome;
     private String letra;
     private Double duracao;
@@ -10,23 +9,13 @@ public class Musica{
 
     private Album album;
 
-    public Musica(Integer id, String nome, String letra, Double duracao, boolean statusTocando, Album album){
-        this.id = id;
+    public Musica(String nome, String letra, Double duracao, boolean statusTocando, Album album){
         this.nome = nome;
         this.letra = letra;
         this.duracao = duracao;
         this.statusTocando = statusTocando;
         this.album = album;
         album.adicionarMusica(this);
-    }
-
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
     }
 
     public String getNome() {

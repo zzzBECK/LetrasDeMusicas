@@ -14,8 +14,8 @@ public class Artista extends Usuario{
         super();
     }
 
-    public Artista(Integer id, String nome, String rg, Integer qtdSeguidores, String estiloMusical){
-        super(id, nome, rg);
+    public Artista(String nome, String rg, Integer qtdSeguidores, String estiloMusical){
+        super(nome, rg);
         this.qtdSeguidores = qtdSeguidores;
         this.estiloMusical = estiloMusical;
 

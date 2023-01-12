@@ -7,7 +7,6 @@ import java.util.List;
 
 public class Album {
     
-    private Integer id;
     private String nome;
     private Date dataLancamento;
 
@@ -17,9 +16,8 @@ public class Album {
     SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
 
 
-    public Album(Integer id, String nome, Date dataLancamento, List<Artista> artistas){
+    public Album(String nome, Date dataLancamento, List<Artista> artistas){
 
-        this.id = id;
         this.nome = nome;
         this.dataLancamento = dataLancamento;
         this.artistas = artistas;
@@ -30,14 +28,6 @@ public class Album {
 
     }
     
-    
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
 
     public String getNome() {
         return nome;
