@@ -19,6 +19,8 @@ public class TelaAplicativo implements ActionListener{
 	private static JButton cAlbmBotao = new JButton("Cadastrar Álbum");
 	private static JButton cMusBotao = new JButton("Cadastrar Música");
 
+	private static JButton botaoVoltar = new JButton("Voltar");
+
 	private Font fonte = new Font("Ms Gothic", Font.BOLD, 16);
 
 	private Controle controle;
@@ -48,6 +50,10 @@ public class TelaAplicativo implements ActionListener{
 
 	public JButton getcMusBotao() {
 		return cMusBotao;
+	}
+
+	public JButton getBotaoVoltar(){
+		return botaoVoltar;
 	}
 
 	public void show(boolean artista){
@@ -91,10 +97,18 @@ public class TelaAplicativo implements ActionListener{
 		cMusBotao.setBounds(432, 387, 187, 62);
         cMusBotao.setBorder(null);
         cMusBotao.setFocusPainted(false);
+
+		botaoVoltar.setFont(fonte);
+		botaoVoltar.setBackground(Color.decode("#A020F0"));
+        botaoVoltar.setForeground(Color.WHITE);
+		botaoVoltar.setBounds(337, 494, 125, 35);
+        botaoVoltar.setBorder(null);
+        botaoVoltar.setFocusPainted(false);
 	
 		janela.add(musBotao);
 		janela.add(albBotao);
 		janela.add(artBotao);
+		janela.add(botaoVoltar);
 
 
 		if (artista){
@@ -114,6 +128,18 @@ public class TelaAplicativo implements ActionListener{
 			TelaArtistas telaArtistas = new TelaArtistas(controle);
 
 			telaArtistas.show();
+		}
+
+		if (src == botaoVoltar){
+			janela.dispose();
+			
+			TelaCadastro telaCadastro = new TelaCadastro(controle);
+
+			telaCadastro.getCheckBox().setSelected(false);
+
+			telaCadastro.show();
+			telaCadastro.showEstilo();
+
 		}
 	}	
 

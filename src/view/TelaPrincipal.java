@@ -9,12 +9,16 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 
+import controller.Controle;
+
 public class TelaPrincipal implements ActionListener{
 
     private static JFrame janela = new JFrame("Letras de Músicas");
 	private static JLabel titulo = new JLabel("Letras de Músicas");
 	private static JButton botao = new JButton("Entrar");
 	private Font fonte = new Font("Ms Gothic", Font.BOLD, 24);
+
+    private Controle controle = new Controle();
 
 
     public void show(){
@@ -59,7 +63,7 @@ public class TelaPrincipal implements ActionListener{
 		if (src == botao){
 			janela.dispose();
 
-			TelaCadastro telaCadastro = new TelaCadastro();
+			TelaCadastro telaCadastro = new TelaCadastro(controle);
 			telaCadastro.show();
 			telaCadastro.getCheckBox().addActionListener(telaCadastro);
 

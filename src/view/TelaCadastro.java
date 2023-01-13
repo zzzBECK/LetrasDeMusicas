@@ -34,7 +34,11 @@ public class TelaCadastro implements ActionListener{
     
     private Font fonte = new TelaPrincipal().getFonte();
 
-    private Controle controle = new Controle();
+    private Controle controle;
+
+    public TelaCadastro(Controle controle){
+        this.controle = controle;
+    }
 
     public void show(){
         janela.getContentPane().setBackground(Color.darkGray);
@@ -53,7 +57,7 @@ public class TelaCadastro implements ActionListener{
 
         entradaNome.setBounds(248, 221, 350, 23);
         entradaNome.setLayout(null);
-        // entradaNome.setEnabled(false);
+        entradaNome.setText(null);
 
         rg.setBounds(145, 250, 100, 29);
         rg.setFont(fonte);
@@ -61,6 +65,7 @@ public class TelaCadastro implements ActionListener{
         
         entradaRg.setBounds(248, 253, 350, 23);
         entradaRg.setLayout(null);
+        entradaRg.setText(null);
 
         opcaoBox.setIcon(new MetalCheckBoxIcon(){
             protected int getControlSize() { return 20; }
@@ -78,6 +83,7 @@ public class TelaCadastro implements ActionListener{
 
         entradaEstilo.setBounds(248, 353, 350, 23);
         entradaEstilo.setLayout(null);
+        entradaEstilo.setText(null);
         
 		botao.setFont(new Font("Ms Gothic", Font.BOLD, 16));
 		botao.setBackground(Color.decode("#A020F0"));
@@ -133,19 +139,20 @@ public class TelaCadastro implements ActionListener{
         if (src == botao){
             janela.dispose();
 
+            TelaAplicativo telaAplicativo = new TelaAplicativo(controle);
+
             if (opcaoBox.isSelected()){
                 controle.artista(entradaNome.getText(), entradaRg.getText(), entradaEstilo.getText());
-                TelaAplicativo telaAplicativo = new TelaAplicativo(controle);
                 telaAplicativo.show(true);
-                telaAplicativo.getArtBotao().addActionListener(telaAplicativo);
                 
             }
             else{
                 controle.usuario(entradaNome.getText(), entradaRg.getText());
-                TelaAplicativo telaAplicativo = new TelaAplicativo(controle);
                 telaAplicativo.show(false);
-                telaAplicativo.getArtBotao().addActionListener(telaAplicativo);
             }
+
+            telaAplicativo.getArtBotao().addActionListener(telaAplicativo);
+            telaAplicativo.getBotaoVoltar().addActionListener(telaAplicativo);
             
         }
 	}
