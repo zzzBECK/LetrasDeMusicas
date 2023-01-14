@@ -12,13 +12,12 @@ import javax.swing.JLabel;
 import controller.Controle;
 
 public class TelaPrincipal implements ActionListener{
-
-    private static JFrame janela = new JFrame("Letras de Músicas");
-	private static JLabel titulo = new JLabel("Letras de Músicas");
-	private static JButton botao = new JButton("Entrar");
-	private Font fonte = new Font("Ms Gothic", Font.BOLD, 24);
-
     private Controle controle = new Controle();
+    private JFrame janela = new JFrame("Letras de Músicas");
+
+	private JLabel titulo = new JLabel("Letras de Músicas");
+	private JButton botao = new JButton("Entrar");
+	private Font fonte = new Font("Ms Gothic", Font.BOLD, 24);
 
 
     public void show(){
@@ -61,12 +60,14 @@ public class TelaPrincipal implements ActionListener{
 		Object src = e.getSource();
 
 		if (src == botao){
-			janela.dispose();
 
-			TelaCadastro telaCadastro = new TelaCadastro(controle);
+			janela.remove(titulo);
+			janela.remove(botao);
+
+			TelaCadastro telaCadastro = new TelaCadastro(controle, janela);
 			telaCadastro.show();
-			telaCadastro.getCheckBox().addActionListener(telaCadastro);
 
+			telaCadastro.getCheckBox().addActionListener(telaCadastro);
 			telaCadastro.getButton().addActionListener(telaCadastro);
 		}
 

@@ -11,21 +11,25 @@ import javax.swing.JFrame;
 import controller.Controle;
 
 public class TelaAplicativo implements ActionListener{
-    private static JFrame janela = new JFrame("Aplicativo");
+	private Controle controle;
+    private JFrame janela;
+	private boolean isArtista;
 
-	private static JButton musBotao = new JButton("Músicas");
-	private static JButton albBotao = new JButton("Álbuns");
-	private static JButton artBotao = new JButton("Artistas");
-	private static JButton cAlbmBotao = new JButton("Cadastrar Álbum");
-	private static JButton cMusBotao = new JButton("Cadastrar Música");
+	private JButton musBotao = new JButton("Músicas");
+	private JButton albBotao = new JButton("Álbuns");
+	private JButton artBotao = new JButton("Artistas");
+	private JButton cAlbmBotao = new JButton("Cadastrar Álbum");
+	private JButton cMusBotao = new JButton("Cadastrar Música");
 
-	private static JButton botaoVoltar = new JButton("Voltar");
+	private JButton botaoVoltar = new JButton("Voltar");
 
 	private Font fonte = new Font("Ms Gothic", Font.BOLD, 16);
 
-	private Controle controle;
-	public TelaAplicativo(Controle controle){
+
+	public TelaAplicativo(Controle controle, JFrame janela, boolean isArtista){
 		this.controle = controle;
+		this.janela = janela;
+		this.isArtista = isArtista;
 	}
 
 	public Controle getControle(){
@@ -56,12 +60,7 @@ public class TelaAplicativo implements ActionListener{
 		return botaoVoltar;
 	}
 
-	public void show(boolean artista){
-        janela.getContentPane().setBackground(Color.darkGray);
-		janela.setResizable(false);
-        janela.setSize(800, 600);
-		janela.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		janela.setLayout(null);
+	public void show(){
 		
 		musBotao.setFont(fonte);
 		musBotao.setBackground(Color.decode("#A020F0"));
@@ -111,34 +110,52 @@ public class TelaAplicativo implements ActionListener{
 		janela.add(botaoVoltar);
 
 
-		if (artista){
+		if (isArtista){
 			janela.add(cAlbmBotao);
 			janela.add(cMusBotao);
 		}
 
 
-        janela.setVisible(true);
+        janela.repaint();
     }
 
     public void actionPerformed(ActionEvent e){
 		Object src = e.getSource();
 
 		if (src == artBotao){
-			janela.dispose();
-			TelaArtistas telaArtistas = new TelaArtistas(controle);
+
+			janela.remove(musBotao);
+			janela.remove(albBotao);
+			janela.remove(artBotao);
+			janela.remove(botaoVoltar);
+			janela.remove(cAlbmBotao);
+			janela.remove(cMusBotao);
+
+			TelaArtistas telaArtistas = new TelaArtistas(controle, janela, isArtista);
 
 			telaArtistas.show();
+
+			telaArtistas.getBotaoVoltar().addActionListener(telaArtistas);
 		}
 
 		if (src == botaoVoltar){
-			janela.dispose();
+
+			janela.remove(musBotao);
+			janela.remove(albBotao);
+			janela.remove(artBotao);
+			janela.remove(botaoVoltar);
+			janela.remove(cAlbmBotao);
+			janela.remove(cMusBotao);
 			
-			TelaCadastro telaCadastro = new TelaCadastro(controle);
+			TelaCadastro telaCadastro = new TelaCadastro(controle, janela);
 
 			telaCadastro.getCheckBox().setSelected(false);
 
 			telaCadastro.show();
 			telaCadastro.showEstilo();
+
+			telaCadastro.getCheckBox().addActionListener(telaCadastro);
+			telaCadastro.getButton().addActionListener(telaCadastro);
 
 		}
 	}	

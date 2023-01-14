@@ -1,6 +1,9 @@
 package view;
 
 import java.awt.Color;
+import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.DefaultListModel;
 import javax.swing.JButton;
@@ -11,34 +14,32 @@ import javax.swing.JList;
 import controller.Controle;
 import model.Artista;
 
-public class TelaArtistas {
+public class TelaArtistas implements ActionListener{
     private Controle controle;
+    private JFrame janela;
+    private boolean isArtista;
     
-    private static JFrame janela = new JFrame();
-    private static JList<Artista> jList = new JList<>();
+    private JList<Artista> jList = new JList<>();
 
-    private static JLabel artista = new JLabel();
+    private JLabel artista = new JLabel();
 
-    private static JButton botaoVoltar = new JButton("Voltar");
+    private JButton botaoVoltar = new JButton("Voltar");
 
     
-    public TelaArtistas(Controle controle){
+    public TelaArtistas(Controle controle, JFrame janela, boolean isArtista){
         this.controle = controle;
+        this.janela = janela;
+        this.isArtista = isArtista;
+    }
+
+    public JButton getBotaoVoltar(){
+        return botaoVoltar;
     }
 
     public void show(){
-        janela.getContentPane().setBackground(Color.darkGray);
-		janela.setResizable(false);
-        janela.setSize(800, 600);
-		janela.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		janela.setLayout(null);
 
         try{
             artista.setText(controle.getPesquisa().getArtistas().get(0).toString());
-
-            // jList.
-
-            // jList.add(controle.getPesquisa().getArtistas());
         
         }
         catch(RuntimeException e){
@@ -46,13 +47,38 @@ public class TelaArtistas {
             System.out.println(e.getMessage());
         }
         finally{
-            artista.setBounds(200, 200, 800, 600);
+            artista.setBounds(200, 100, 800, 600);
             artista.setForeground(Color.white);
             janela.add(artista);
         }
 
-        
+        botaoVoltar.setFont( new Font("Ms Gothic", Font.BOLD, 16));
+		botaoVoltar.setBackground(Color.decode("#A020F0"));
+        botaoVoltar.setForeground(Color.WHITE);
+		botaoVoltar.setBounds(337, 494, 125, 35);
+        botaoVoltar.setBorder(null);
+        botaoVoltar.setFocusPainted(false);
 
-        janela.setVisible(true);
+        janela.add(botaoVoltar);
+
+        janela.repaint();
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        Object src = e.getSource();
+
+        if (src == botaoVoltar){
+            janela.remove(artista);
+            janela.remove(botaoVoltar);
+
+            TelaAplicativo telaAplicativo = new TelaAplicativo(controle, janela, isArtista);
+
+            telaAplicativo.show();
+
+            telaAplicativo.getArtBotao().addActionListener(telaAplicativo);
+            telaAplicativo.getBotaoVoltar().addActionListener(telaAplicativo);
+        }
+        
     }
 }   

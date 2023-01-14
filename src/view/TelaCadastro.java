@@ -15,37 +15,34 @@ import javax.swing.plaf.metal.MetalCheckBoxIcon;
 import controller.Controle;
 
 public class TelaCadastro implements ActionListener{
+    private Controle controle;
+    private JFrame janela;
 
-    private static JFrame janela = new JFrame("Cadastro");
-    private static JLabel titulo = new JLabel("Cadastro:");
-    private static JLabel nome = new JLabel("Nome:");
-    private static JTextField entradaNome = new JTextField();
+    private JLabel titulo = new JLabel("Cadastro:");
+    private JLabel nome = new JLabel("Nome:");
+    private JTextField entradaNome = new JTextField();
 
-    private static JLabel rg = new JLabel("Rg:");
-    private static JTextField entradaRg = new JTextField();
+    private JLabel rg = new JLabel("Rg:");
+    private JTextField entradaRg = new JTextField();
 
-    private static JLabel estilo = new JLabel("Estilo Musical:");
-    private static JTextField entradaEstilo = new JTextField();
+    private JLabel estilo = new JLabel("Estilo Musical:");
+    private JTextField entradaEstilo = new JTextField();
 
-    private static JCheckBox opcaoBox = new JCheckBox();
-    private static JLabel textoBox = new JLabel("Cadastrar como Artista");
+    private JCheckBox opcaoBox = new JCheckBox();
+    private JLabel textoBox = new JLabel("Cadastrar como Artista");
 
-    private static JButton botao = new JButton("Cadastrar");
+    private JButton botao = new JButton("Cadastrar");
     
     private Font fonte = new TelaPrincipal().getFonte();
 
-    private Controle controle;
 
-    public TelaCadastro(Controle controle){
+
+    public TelaCadastro(Controle controle, JFrame janela){
         this.controle = controle;
+        this.janela = janela;
     }
 
     public void show(){
-        janela.getContentPane().setBackground(Color.darkGray);
-		janela.setResizable(false);
-        janela.setSize(800, 600);
-		janela.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		janela.setLayout(null);
 
         titulo.setFont(fonte);
 		titulo.setForeground(Color.white);
@@ -102,7 +99,7 @@ public class TelaCadastro implements ActionListener{
         janela.add(botao);
 
 
-        janela.setVisible(true);
+        janela.repaint();
     }
 
     public JCheckBox getCheckBox(){
@@ -137,22 +134,38 @@ public class TelaCadastro implements ActionListener{
 		}
 
         if (src == botao){
-            janela.dispose();
 
-            TelaAplicativo telaAplicativo = new TelaAplicativo(controle);
+            janela.remove(titulo);
+            janela.remove(nome);
+            janela.remove(entradaNome);
+            janela.remove(rg);
+            janela.remove(entradaRg);
+            janela.remove(opcaoBox);
+            janela.remove(textoBox);
+            janela.remove(botao);
+            janela.remove(estilo);
+            janela.remove(entradaEstilo);
+
 
             if (opcaoBox.isSelected()){
+                TelaAplicativo telaAplicativo = new TelaAplicativo(controle, janela, true);
+
                 controle.artista(entradaNome.getText(), entradaRg.getText(), entradaEstilo.getText());
-                telaAplicativo.show(true);
-                
+                telaAplicativo.show();
+                telaAplicativo.getArtBotao().addActionListener(telaAplicativo);
+                telaAplicativo.getBotaoVoltar().addActionListener(telaAplicativo); 
             }
             else{
+                TelaAplicativo telaAplicativo = new TelaAplicativo(controle, janela, false);
+
                 controle.usuario(entradaNome.getText(), entradaRg.getText());
-                telaAplicativo.show(false);
+                telaAplicativo.show();
+
+                telaAplicativo.getArtBotao().addActionListener(telaAplicativo);
+                telaAplicativo.getBotaoVoltar().addActionListener(telaAplicativo);
             }
 
-            telaAplicativo.getArtBotao().addActionListener(telaAplicativo);
-            telaAplicativo.getBotaoVoltar().addActionListener(telaAplicativo);
+
             
         }
 	}
