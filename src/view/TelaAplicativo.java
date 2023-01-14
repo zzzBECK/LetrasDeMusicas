@@ -155,6 +155,21 @@ public class TelaAplicativo implements ActionListener{
 			telaAlbuns.getBotaoVoltar().addActionListener(telaAlbuns);
 		}
 
+		if (src == musBotao){
+			janela.remove(musBotao);
+			janela.remove(albBotao);
+			janela.remove(artBotao);
+			janela.remove(botaoVoltar);
+			janela.remove(cAlbmBotao);
+			janela.remove(cMusBotao);
+
+			TelaMusicas telaMusicas = new TelaMusicas(controle, janela, isArtista);
+
+			telaMusicas.show();
+
+			telaMusicas.getBotaoVoltar().addActionListener(telaMusicas);
+		}
+
 		if (src == botaoVoltar){
 
 			janela.remove(musBotao);
