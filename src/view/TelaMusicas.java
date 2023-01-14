@@ -20,6 +20,8 @@ public class TelaMusicas implements ActionListener{
     private boolean isArtista;
     private JFrame janela;
 
+    private JLabel titulo = new JLabel("Músicas");
+
     private DefaultListModel<Musica> model = new DefaultListModel<>();
     private JList<Musica> list = new JList<>();
 
@@ -36,6 +38,10 @@ public class TelaMusicas implements ActionListener{
     }
 
     public void show(){
+
+        titulo.setFont(new Font("Ms Gothic", Font.BOLD, 24));
+		titulo.setForeground(Color.white);
+		titulo.setBounds(365, 15, 200, 48);
 
         for (Musica musica : controle.getPesquisa().getMusicas()){
             model.addElement(musica);
@@ -55,6 +61,7 @@ public class TelaMusicas implements ActionListener{
         botaoVoltar.setBorder(null);
         botaoVoltar.setFocusPainted(false);
 
+        janela.add(titulo);
         janela.add(botaoVoltar);
         janela.add(list);
 
@@ -66,6 +73,7 @@ public class TelaMusicas implements ActionListener{
         Object src = e.getSource();
 
         if (src == botaoVoltar){
+            janela.remove(titulo);
             janela.remove(list);
             janela.remove(botaoVoltar);
 

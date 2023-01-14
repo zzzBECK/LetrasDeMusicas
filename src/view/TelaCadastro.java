@@ -33,14 +33,23 @@ public class TelaCadastro implements ActionListener{
 
     private JButton botao = new JButton("Cadastrar");
     
-    private Font fonte = new TelaPrincipal().getFonte();
-
+    private Font fonte =  new Font("Ms Gothic", Font.BOLD, 24);
 
 
     public TelaCadastro(Controle controle, JFrame janela){
         this.controle = controle;
         this.janela = janela;
     }
+
+
+    public JCheckBox getCheckBox(){
+        return opcaoBox;
+    }
+
+    public JButton getButton(){
+        return botao;
+    }
+
 
     public void show(){
 
@@ -100,14 +109,6 @@ public class TelaCadastro implements ActionListener{
 
 
         janela.repaint();
-    }
-
-    public JCheckBox getCheckBox(){
-        return opcaoBox;
-    }
-
-    public JButton getButton(){
-        return botao;
     }
 
     public void showEstilo(){

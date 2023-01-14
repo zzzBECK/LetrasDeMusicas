@@ -20,6 +20,8 @@ public class TelaAlbuns implements ActionListener{
     private boolean isArtista;
     private JFrame janela;
 
+    private JLabel titulo = new JLabel("Álbuns");
+
     private DefaultListModel<Album> model = new DefaultListModel<>();
     private JList<Album> list = new JList<>();
 
@@ -36,6 +38,10 @@ public class TelaAlbuns implements ActionListener{
     }
 
     public void show(){
+
+		titulo.setFont(new Font("Ms Gothic", Font.BOLD, 24));
+		titulo.setForeground(Color.white);
+		titulo.setBounds(370, 15, 200, 48);
 
         for (Album album : controle.getPesquisa().getAlbuns()){
             model.addElement(album);
@@ -55,6 +61,7 @@ public class TelaAlbuns implements ActionListener{
         botaoVoltar.setBorder(null);
         botaoVoltar.setFocusPainted(false);
 
+        janela.add(titulo);
         janela.add(botaoVoltar);
         janela.add(list);
 
@@ -66,6 +73,7 @@ public class TelaAlbuns implements ActionListener{
         Object src = e.getSource();
 
         if (src == botaoVoltar){
+            janela.remove(titulo);
             janela.remove(list);
             janela.remove(botaoVoltar);
 

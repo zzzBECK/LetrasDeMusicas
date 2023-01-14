@@ -51,10 +51,6 @@ public class TelaPrincipal implements ActionListener{
 	public JButton getBotao(){
 		return botao;
 	}
-
-	public Font getFonte(){
-		return fonte;
-	}
 	
 	@Override
 	public void actionPerformed(ActionEvent e){

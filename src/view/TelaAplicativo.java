@@ -170,6 +170,22 @@ public class TelaAplicativo implements ActionListener{
 			telaMusicas.getBotaoVoltar().addActionListener(telaMusicas);
 		}
 
+		if (src == cAlbmBotao){
+			janela.remove(musBotao);
+			janela.remove(albBotao);
+			janela.remove(artBotao);
+			janela.remove(botaoVoltar);
+			janela.remove(cAlbmBotao);
+			janela.remove(cMusBotao);
+
+			TelaCadastroAlbum telaCadastroAlbum = new TelaCadastroAlbum(controle, janela, isArtista);
+			
+			telaCadastroAlbum.show();
+
+			telaCadastroAlbum.getBotaoCadastrar().addActionListener(telaCadastroAlbum);
+			telaCadastroAlbum.getBotaoCancelar().addActionListener(telaCadastroAlbum);
+		}
+
 		if (src == botaoVoltar){
 
 			janela.remove(musBotao);

@@ -19,6 +19,8 @@ public class TelaArtistas implements ActionListener{
     private Controle controle;
     private JFrame janela;
     private boolean isArtista;
+
+    private JLabel titulo = new JLabel("Artistas");
     
     private DefaultListModel<Artista> model = new DefaultListModel<>();
     private JList<Artista> list = new JList<>();
@@ -37,6 +39,9 @@ public class TelaArtistas implements ActionListener{
     }
 
     public void show(){
+        titulo.setFont(new Font("Ms Gothic", Font.BOLD, 24));
+		titulo.setForeground(Color.white);
+		titulo.setBounds(360, 15, 200, 48);
 
         for (Artista artista : controle.getPesquisa().getArtistas()){
             model.addElement(artista);
@@ -49,13 +54,14 @@ public class TelaArtistas implements ActionListener{
         DefaultListCellRenderer renderer =  (DefaultListCellRenderer)list.getCellRenderer();  
         renderer.setHorizontalAlignment(JLabel.CENTER);
 
-        botaoVoltar.setFont( new Font("Ms Gothic", Font.BOLD, 16));
+        botaoVoltar.setFont(new Font("Ms Gothic", Font.BOLD, 16));
 		botaoVoltar.setBackground(Color.decode("#A020F0"));
         botaoVoltar.setForeground(Color.WHITE);
 		botaoVoltar.setBounds(337, 494, 125, 35);
         botaoVoltar.setBorder(null);
         botaoVoltar.setFocusPainted(false);
 
+        janela.add(titulo);
         janela.add(botaoVoltar);
         janela.add(list);
 
@@ -67,6 +73,7 @@ public class TelaArtistas implements ActionListener{
         Object src = e.getSource();
 
         if (src == botaoVoltar){
+            janela.remove(titulo);
             janela.remove(list);
             janela.remove(botaoVoltar);
 
