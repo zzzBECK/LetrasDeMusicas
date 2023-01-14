@@ -86,14 +86,14 @@ public class TelaAplicativo implements ActionListener{
 		cAlbmBotao.setFont(fonte);
 		cAlbmBotao.setBackground(Color.decode("#A020F0"));
         cAlbmBotao.setForeground(Color.WHITE);
-		cAlbmBotao.setBounds(190, 387, 187, 62);
+		cAlbmBotao.setBounds(190, 300, 187, 62);
         cAlbmBotao.setBorder(null);
         cAlbmBotao.setFocusPainted(false);
 
 		cMusBotao.setFont(fonte);
 		cMusBotao.setBackground(Color.decode("#A020F0"));
         cMusBotao.setForeground(Color.WHITE);
-		cMusBotao.setBounds(432, 387, 187, 62);
+		cMusBotao.setBounds(432, 300, 187, 62);
         cMusBotao.setBorder(null);
         cMusBotao.setFocusPainted(false);
 
