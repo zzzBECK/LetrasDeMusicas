@@ -24,6 +24,8 @@ public class TelaCadastroAlbum implements ActionListener{
     private JLabel data = new JLabel("Data de Lançamento:");
     private JTextField entradaData = new JTextField();
 
+    private JButton botaoArtista = new JButton("Adicionar Artista");
+
     private JButton botaoCadastrar = new JButton("Cadastrar");
     private JButton botaoCancelar = new JButton("Cancelar");
 
@@ -41,6 +43,10 @@ public class TelaCadastroAlbum implements ActionListener{
 
     public JButton getBotaoCancelar(){
         return botaoCancelar;
+    }
+
+    public JButton getBotaoArtista(){
+        return botaoArtista;
     }
 
     public void show(){
@@ -65,6 +71,13 @@ public class TelaCadastroAlbum implements ActionListener{
         entradaData.setLayout(null);
         entradaData.setText(null);
 
+        botaoArtista.setFont(new Font("Ms Gothic", Font.BOLD, 16));
+		botaoArtista.setBackground(Color.decode("#A020F0"));
+        botaoArtista.setForeground(Color.WHITE);
+		botaoArtista.setBounds(306, 300, 220, 35);
+        botaoArtista.setBorder(null);
+        botaoArtista.setFocusPainted(false);
+
         
 		botaoCadastrar.setFont(new Font("Ms Gothic", Font.BOLD, 16));
 		botaoCadastrar.setBackground(Color.decode("#A020F0"));
@@ -85,6 +98,7 @@ public class TelaCadastroAlbum implements ActionListener{
         janela.add(entradaNome);
         janela.add(data);
         janela.add(entradaData);
+        janela.add(botaoArtista);
         janela.add(botaoCadastrar);
         janela.add(botaoCancelar);
 
@@ -102,6 +116,7 @@ public class TelaCadastroAlbum implements ActionListener{
             janela.remove(entradaNome);
             janela.remove(data);
             janela.remove(entradaData);
+            janela.remove(botaoArtista);
             janela.remove(botaoCadastrar);
             janela.remove(botaoCancelar);
 
