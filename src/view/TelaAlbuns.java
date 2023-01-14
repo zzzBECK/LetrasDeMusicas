@@ -13,20 +13,19 @@ import javax.swing.JLabel;
 import javax.swing.JList;
 
 import controller.Controle;
-import model.Artista;
+import model.Album;
 
-public class TelaArtistas implements ActionListener{
+public class TelaAlbuns implements ActionListener{
     private Controle controle;
-    private JFrame janela;
     private boolean isArtista;
-    
-    private DefaultListModel<Artista> model = new DefaultListModel<>();
-    private JList<Artista> list = new JList<>();
+    private JFrame janela;
+
+    private DefaultListModel<Album> model = new DefaultListModel<>();
+    private JList<Album> list = new JList<>();
 
     private JButton botaoVoltar = new JButton("Voltar");
 
-    
-    public TelaArtistas(Controle controle, JFrame janela, boolean isArtista){
+    public TelaAlbuns(Controle controle, JFrame janela, boolean isArtista){
         this.controle = controle;
         this.janela = janela;
         this.isArtista = isArtista;
@@ -38,8 +37,8 @@ public class TelaArtistas implements ActionListener{
 
     public void show(){
 
-        for (Artista artista : controle.getPesquisa().getArtistas()){
-            model.addElement(artista);
+        for (Album album : controle.getPesquisa().getAlbuns()){
+            model.addElement(album);
         }
 
         list.setModel(model);
@@ -49,7 +48,7 @@ public class TelaArtistas implements ActionListener{
         DefaultListCellRenderer renderer =  (DefaultListCellRenderer)list.getCellRenderer();  
         renderer.setHorizontalAlignment(JLabel.CENTER);
 
-        botaoVoltar.setFont( new Font("Ms Gothic", Font.BOLD, 16));
+        botaoVoltar.setFont(new Font("Ms Gothic", Font.BOLD, 16));
 		botaoVoltar.setBackground(Color.decode("#A020F0"));
         botaoVoltar.setForeground(Color.WHITE);
 		botaoVoltar.setBounds(337, 494, 125, 35);
@@ -80,7 +79,9 @@ public class TelaArtistas implements ActionListener{
             telaAplicativo.getCAlbmBotao().addActionListener(telaAplicativo);
             telaAplicativo.getCMusBotao().addActionListener(telaAplicativo);
             telaAplicativo.getBotaoVoltar().addActionListener(telaAplicativo);
+
         }
         
     }
-}   
+    
+}

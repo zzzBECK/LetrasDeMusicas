@@ -48,11 +48,11 @@ public class TelaAplicativo implements ActionListener{
 		return artBotao;
 	}
 
-	public JButton getcAlbmBotao() {
+	public JButton getCAlbmBotao() {
 		return cAlbmBotao;
 	}
 
-	public JButton getcMusBotao() {
+	public JButton getCMusBotao() {
 		return cMusBotao;
 	}
 
@@ -119,6 +119,8 @@ public class TelaAplicativo implements ActionListener{
         janela.repaint();
     }
 
+
+	@Override
     public void actionPerformed(ActionEvent e){
 		Object src = e.getSource();
 
@@ -136,6 +138,21 @@ public class TelaAplicativo implements ActionListener{
 			telaArtistas.show();
 
 			telaArtistas.getBotaoVoltar().addActionListener(telaArtistas);
+		}
+
+		if (src == albBotao){
+			janela.remove(musBotao);
+			janela.remove(albBotao);
+			janela.remove(artBotao);
+			janela.remove(botaoVoltar);
+			janela.remove(cAlbmBotao);
+			janela.remove(cMusBotao);
+
+			TelaAlbuns telaAlbuns = new TelaAlbuns(controle, janela, isArtista);
+
+			telaAlbuns.show();
+
+			telaAlbuns.getBotaoVoltar().addActionListener(telaAlbuns);
 		}
 
 		if (src == botaoVoltar){

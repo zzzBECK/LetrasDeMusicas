@@ -126,6 +126,7 @@ public class TelaCadastro implements ActionListener{
     }
 
 
+    @Override
     public void actionPerformed(ActionEvent e){
 		Object src = e.getSource();
 
@@ -152,8 +153,13 @@ public class TelaCadastro implements ActionListener{
 
                 controle.artista(entradaNome.getText(), entradaRg.getText(), entradaEstilo.getText());
                 telaAplicativo.show();
+
                 telaAplicativo.getArtBotao().addActionListener(telaAplicativo);
-                telaAplicativo.getBotaoVoltar().addActionListener(telaAplicativo); 
+                telaAplicativo.getAlbBotao().addActionListener(telaAplicativo);
+                telaAplicativo.getMusBotao().addActionListener(telaAplicativo);
+                telaAplicativo.getCAlbmBotao().addActionListener(telaAplicativo);
+                telaAplicativo.getCMusBotao().addActionListener(telaAplicativo);
+                telaAplicativo.getBotaoVoltar().addActionListener(telaAplicativo);
             }
             else{
                 TelaAplicativo telaAplicativo = new TelaAplicativo(controle, janela, false);
@@ -162,6 +168,10 @@ public class TelaCadastro implements ActionListener{
                 telaAplicativo.show();
 
                 telaAplicativo.getArtBotao().addActionListener(telaAplicativo);
+                telaAplicativo.getAlbBotao().addActionListener(telaAplicativo);
+                telaAplicativo.getMusBotao().addActionListener(telaAplicativo);
+                telaAplicativo.getCAlbmBotao().addActionListener(telaAplicativo);
+                telaAplicativo.getCMusBotao().addActionListener(telaAplicativo);
                 telaAplicativo.getBotaoVoltar().addActionListener(telaAplicativo);
             }
 

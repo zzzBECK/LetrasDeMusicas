@@ -56,6 +56,7 @@ public class TelaPrincipal implements ActionListener{
 		return fonte;
 	}
 	
+	@Override
 	public void actionPerformed(ActionEvent e){
 		Object src = e.getSource();
 
