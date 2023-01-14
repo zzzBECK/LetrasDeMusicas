@@ -47,6 +47,8 @@ public class TelaArtistas implements ActionListener{
             model.addElement(artista);
         }
 
+        list.setForeground(Color.white);
+        list.setFont(new Font("Ms Gothic", Font.BOLD, 16));
         list.setModel(model);
         list.setBounds(110, 60, 579, 476);
         list.setBackground(Color.gray);
