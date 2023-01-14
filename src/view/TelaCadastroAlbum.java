@@ -100,6 +100,8 @@ public class TelaCadastroAlbum implements ActionListener{
             janela.remove(titulo);
             janela.remove(nome);
             janela.remove(entradaNome);
+            janela.remove(data);
+            janela.remove(entradaData);
             janela.remove(botaoCadastrar);
             janela.remove(botaoCancelar);
 
