@@ -50,13 +50,15 @@ public class TelaCadastroAlbum implements ActionListener{
     private String nomeDigitado;
     private String dataDigitado;
 
+
     public TelaCadastroAlbum(Controle controle, JFrame janela, boolean isArtista){
         this.controle = controle;
         this.janela = janela;
         this.isArtista = isArtista;
     }
 
-    public TelaCadastroAlbum(Controle controle, JFrame janela, boolean isArtista, Artista artista, String nomeDigitado, String dataDigitado, DefaultListModel<Artista> model){
+    public TelaCadastroAlbum(Controle controle, JFrame janela, boolean isArtista, Artista artista, String nomeDigitado,
+                             String dataDigitado, DefaultListModel<Artista> model, List<Artista> artistas){                            
         this.controle = controle;
         this.janela = janela;
         this.isArtista = isArtista;
@@ -64,6 +66,7 @@ public class TelaCadastroAlbum implements ActionListener{
         this.nomeDigitado = nomeDigitado;
         this.dataDigitado = dataDigitado;
         this.model = model;
+        this.artistas = artistas;
     }
 
     public JButton getBotaoCadastrar(){
@@ -107,7 +110,13 @@ public class TelaCadastroAlbum implements ActionListener{
         botaoArtista.setBorder(null);
         botaoArtista.setFocusPainted(false);
 
-        artistas.add(artista);
+        if(artistas.isEmpty()){
+            artistas.add(controle.getPesquisa().getArtistas().get(controle.getPesquisa().getArtistas().size() - 1));
+            model.addElement(controle.getPesquisa().getArtistas().get(controle.getPesquisa().getArtistas().size() - 1));
+        }
+
+        if (artista != null)
+            artistas.add(artista);
 
         model.addElement(artista);
         list.setModel(model);
@@ -186,7 +195,8 @@ public class TelaCadastroAlbum implements ActionListener{
             janela.remove(botaoCancelar);
             janela.remove(scrollPane);
 
-            TelaAdicionarArtista telaAdicionarArtista = new TelaAdicionarArtista(controle, janela, isArtista, entradaNome.getText(), entradaData.getText(), model);
+            TelaAdicionarArtista telaAdicionarArtista = new TelaAdicionarArtista(controle, janela, isArtista,
+                                                            entradaNome.getText(), entradaData.getText(), model, artistas);
 
             telaAdicionarArtista.show();
 

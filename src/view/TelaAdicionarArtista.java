@@ -4,6 +4,8 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.DefaultListModel;
 import javax.swing.JButton;
@@ -34,13 +36,16 @@ public class TelaAdicionarArtista implements ActionListener{
     private String dataDigitado;
     private DefaultListModel<Artista> model1;
 
-    public TelaAdicionarArtista(Controle controle, JFrame janela, boolean isArtista, String nomeDigitado, String dataDigitado, DefaultListModel<Artista> model){
+    private List<Artista> artistas = new ArrayList<>();
+
+    public TelaAdicionarArtista(Controle controle, JFrame janela, boolean isArtista, String nomeDigitado, String dataDigitado, DefaultListModel<Artista> model, List<Artista> artistas){
         this.controle = controle;
         this.janela = janela;
         this.isArtista = isArtista;
         this.nomeDigitado = nomeDigitado;
         this.dataDigitado = dataDigitado;
         this.model1 = model;
+        this.artistas = artistas;
     }
 
     public JButton getBotaoCadastrar(){
@@ -67,8 +72,8 @@ public class TelaAdicionarArtista implements ActionListener{
         list.setForeground(Color.white);
         list.setFont(new Font("Ms Gothic", Font.BOLD, 16));
         list.setBackground(Color.gray);
-
         list.setBounds(110, 60, 579, 400);
+
         scrollPane.setBounds(110, 60, 579, 400);
 
         botaoCadastrar.setFont(new Font("Ms Gothic", Font.BOLD, 16));
@@ -105,7 +110,7 @@ public class TelaAdicionarArtista implements ActionListener{
             janela.remove(botaoCancelar);
             janela.remove(scrollPane);
 
-            TelaCadastroAlbum telaCadastroAlbum = new TelaCadastroAlbum(controle, janela, isArtista, null, nomeDigitado, dataDigitado, model1);
+            TelaCadastroAlbum telaCadastroAlbum = new TelaCadastroAlbum(controle, janela, isArtista, null, nomeDigitado, dataDigitado, model1, artistas);
 			
 			telaCadastroAlbum.show();
 
@@ -121,7 +126,7 @@ public class TelaAdicionarArtista implements ActionListener{
                 janela.remove(botaoCancelar);
                 janela.remove(scrollPane);
     
-                TelaCadastroAlbum telaCadastroAlbum = new TelaCadastroAlbum(controle, janela, isArtista, list.getSelectedValue(), nomeDigitado, dataDigitado, model1);
+                TelaCadastroAlbum telaCadastroAlbum = new TelaCadastroAlbum(controle, janela, isArtista, list.getSelectedValue(), nomeDigitado, dataDigitado, model1, artistas);
                 
                 telaCadastroAlbum.show();
     
