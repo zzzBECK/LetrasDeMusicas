@@ -184,6 +184,7 @@ public class TelaAplicativo implements ActionListener{
 
 			telaCadastroAlbum.getBotaoCadastrar().addActionListener(telaCadastroAlbum);
 			telaCadastroAlbum.getBotaoCancelar().addActionListener(telaCadastroAlbum);
+			telaCadastroAlbum.getBotaoArtista().addActionListener(telaCadastroAlbum);
 		}
 
 		if (src == botaoVoltar){

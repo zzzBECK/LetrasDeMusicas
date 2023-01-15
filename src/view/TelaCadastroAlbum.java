@@ -4,18 +4,33 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 
+import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JList;
+import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 
 import controller.Controle;
+import model.Artista;
 
 public class TelaCadastroAlbum implements ActionListener{
     private Controle controle;
     private JFrame janela;
     private boolean isArtista;
+    private Artista artista;
+    private List<Artista> artistas = new ArrayList<>();
+
+    private DefaultListModel<Artista> model = new DefaultListModel<>();
+    private JScrollPane scrollPane = new JScrollPane();
+    private JList<Artista> list = new JList<>();
 
     private JLabel titulo = new JLabel("Cadastro:");
     private JLabel nome = new JLabel("Nome:");
@@ -31,10 +46,23 @@ public class TelaCadastroAlbum implements ActionListener{
 
     private Font fonte =  new Font("Ms Gothic", Font.BOLD, 24);
 
+    private String nomeDigitado;
+    private String dataDigitado;
+
     public TelaCadastroAlbum(Controle controle, JFrame janela, boolean isArtista){
         this.controle = controle;
         this.janela = janela;
         this.isArtista = isArtista;
+    }
+
+    public TelaCadastroAlbum(Controle controle, JFrame janela, boolean isArtista, Artista artista, String nomeDigitado, String dataDigitado, DefaultListModel<Artista> model){
+        this.controle = controle;
+        this.janela = janela;
+        this.isArtista = isArtista;
+        this.artista = artista;
+        this.nomeDigitado = nomeDigitado;
+        this.dataDigitado = dataDigitado;
+        this.model = model;
     }
 
     public JButton getBotaoCadastrar(){
@@ -61,7 +89,7 @@ public class TelaCadastroAlbum implements ActionListener{
 
         entradaNome.setBounds(248, 221, 350, 23);
         entradaNome.setLayout(null);
-        entradaNome.setText(null);
+        entradaNome.setText(nomeDigitado);
 
         data.setBounds(5, 250, 300, 29);
         data.setFont(fonte);
@@ -69,7 +97,7 @@ public class TelaCadastroAlbum implements ActionListener{
         
         entradaData.setBounds(248, 253, 350, 23);
         entradaData.setLayout(null);
-        entradaData.setText(null);
+        entradaData.setText(dataDigitado);
 
         botaoArtista.setFont(new Font("Ms Gothic", Font.BOLD, 16));
 		botaoArtista.setBackground(Color.decode("#A020F0"));
@@ -78,6 +106,18 @@ public class TelaCadastroAlbum implements ActionListener{
         botaoArtista.setBorder(null);
         botaoArtista.setFocusPainted(false);
 
+        artistas.add(artista);
+
+        model.addElement(artista);
+        list.setModel(model);
+        scrollPane.setViewportView(list);
+
+        list.setForeground(Color.white);
+        list.setFont(new Font("Ms Gothic", Font.BOLD, 16));
+        list.setBackground(Color.gray);
+
+        list.setBounds(250, 350, 350, 128);
+        scrollPane.setBounds(250, 350, 350, 128);
         
 		botaoCadastrar.setFont(new Font("Ms Gothic", Font.BOLD, 16));
 		botaoCadastrar.setBackground(Color.decode("#A020F0"));
@@ -101,6 +141,7 @@ public class TelaCadastroAlbum implements ActionListener{
         janela.add(botaoArtista);
         janela.add(botaoCadastrar);
         janela.add(botaoCancelar);
+        janela.add(scrollPane);
 
 
         janela.repaint();
@@ -119,6 +160,7 @@ public class TelaCadastroAlbum implements ActionListener{
             janela.remove(botaoArtista);
             janela.remove(botaoCadastrar);
             janela.remove(botaoCancelar);
+            janela.remove(scrollPane);
 
             TelaAplicativo telaAplicativo = new TelaAplicativo(controle, janela, isArtista);
 
@@ -130,6 +172,61 @@ public class TelaCadastroAlbum implements ActionListener{
             telaAplicativo.getCAlbmBotao().addActionListener(telaAplicativo);
             telaAplicativo.getCMusBotao().addActionListener(telaAplicativo);
             telaAplicativo.getBotaoVoltar().addActionListener(telaAplicativo);
+        }
+
+        if (src == botaoArtista){
+            janela.remove(titulo);
+            janela.remove(nome);
+            janela.remove(entradaNome);
+            janela.remove(data);
+            janela.remove(entradaData);
+            janela.remove(botaoArtista);
+            janela.remove(botaoCadastrar);
+            janela.remove(botaoCancelar);
+            janela.remove(scrollPane);
+
+            TelaAdicionarArtista telaAdicionarArtista = new TelaAdicionarArtista(controle, janela, isArtista, entradaNome.getText(), entradaData.getText(), model);
+
+            telaAdicionarArtista.show();
+
+            telaAdicionarArtista.getBotaoCadastrar().addActionListener(telaAdicionarArtista);
+            telaAdicionarArtista.getBotaoCancelar().addActionListener(telaAdicionarArtista);
+
+        }
+
+        if (src == botaoCadastrar){
+            janela.remove(titulo);
+            janela.remove(nome);
+            janela.remove(entradaNome);
+            janela.remove(data);
+            janela.remove(entradaData);
+            janela.remove(botaoArtista);
+            janela.remove(botaoCadastrar);
+            janela.remove(botaoCancelar);
+            janela.remove(scrollPane);
+
+            Date dateFormat = new Date();
+
+            try {
+                dateFormat = new SimpleDateFormat("dd/MM/yyyy").parse(entradaData.getText());
+            } catch (ParseException e1) {
+                e1.printStackTrace();
+            }
+            
+            controle.album(entradaNome.getText(), dateFormat, artistas);
+
+            TelaAplicativo telaAplicativo = new TelaAplicativo(controle, janela, isArtista);
+
+            telaAplicativo.show();
+
+            telaAplicativo.getArtBotao().addActionListener(telaAplicativo);
+            telaAplicativo.getAlbBotao().addActionListener(telaAplicativo);
+            telaAplicativo.getMusBotao().addActionListener(telaAplicativo);
+            telaAplicativo.getCAlbmBotao().addActionListener(telaAplicativo);
+            telaAplicativo.getCMusBotao().addActionListener(telaAplicativo);
+            telaAplicativo.getBotaoVoltar().addActionListener(telaAplicativo);
+
+
         }
             
 	}

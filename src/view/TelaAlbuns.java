@@ -50,6 +50,8 @@ public class TelaAlbuns implements ActionListener{
         list.setModel(model);
         list.setBounds(110, 60, 579, 476);
         list.setBackground(Color.gray);
+        list.setForeground(Color.white);
+        list.setFont(new Font("Ms Gothic", Font.BOLD, 16));
 
         DefaultListCellRenderer renderer =  (DefaultListCellRenderer)list.getCellRenderer();  
         renderer.setHorizontalAlignment(JLabel.CENTER);
