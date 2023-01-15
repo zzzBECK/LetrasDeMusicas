@@ -56,7 +56,7 @@ public class Musica{
 
     @Override
     public String toString(){
-        return "Nome: " + nome + " Letra: " + letra + " duracao: " + duracao + " Status: " + statusTocando + " | ";
+        return "Nome: " + nome + " Duracao: " + duracao + " Artista: " + getAlbum().getArtistas().get(getAlbum().getArtistas().size() - 1).getNome();
     }
     
     public void tocarOuPausar(){
