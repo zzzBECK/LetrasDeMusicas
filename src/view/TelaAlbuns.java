@@ -11,6 +11,7 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JList;
+import javax.swing.JScrollPane;
 
 import controller.Controle;
 import model.Album;
@@ -24,6 +25,7 @@ public class TelaAlbuns implements ActionListener{
 
     private DefaultListModel<Album> model = new DefaultListModel<>();
     private JList<Album> list = new JList<>();
+    private JScrollPane scrollPane = new JScrollPane();
 
     private JButton botaoVoltar = new JButton("Voltar");
 
@@ -48,13 +50,17 @@ public class TelaAlbuns implements ActionListener{
         }
 
         list.setModel(model);
-        list.setBounds(110, 60, 579, 476);
-        list.setBackground(Color.gray);
+        scrollPane.setViewportView(list);
+
         list.setForeground(Color.white);
         list.setFont(new Font("Ms Gothic", Font.BOLD, 16));
+        list.setBounds(110, 60, 579, 420);
+        list.setBackground(Color.gray);
 
         DefaultListCellRenderer renderer =  (DefaultListCellRenderer)list.getCellRenderer();  
         renderer.setHorizontalAlignment(JLabel.CENTER);
+
+        scrollPane.setBounds(110, 60, 579, 420);
 
         botaoVoltar.setFont(new Font("Ms Gothic", Font.BOLD, 16));
 		botaoVoltar.setBackground(Color.decode("#A020F0"));
@@ -65,7 +71,7 @@ public class TelaAlbuns implements ActionListener{
 
         janela.add(titulo);
         janela.add(botaoVoltar);
-        janela.add(list);
+        janela.add(scrollPane);
 
         janela.repaint();
     }
@@ -76,7 +82,7 @@ public class TelaAlbuns implements ActionListener{
 
         if (src == botaoVoltar){
             janela.remove(titulo);
-            janela.remove(list);
+            janela.remove(scrollPane);
             janela.remove(botaoVoltar);
 
             TelaAplicativo telaAplicativo = new TelaAplicativo(controle, janela, isArtista);
