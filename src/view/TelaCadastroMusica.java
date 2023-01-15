@@ -4,8 +4,6 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
-import java.util.List;
 
 import javax.swing.DefaultListModel;
 import javax.swing.JButton;
@@ -31,6 +29,7 @@ public class TelaCadastroMusica implements ActionListener{
     private JLabel duracao = new JLabel("Duração:");
     private JTextField entradaDuracao = new JTextField();
 
+    private JButton botaoLetra = new JButton("Adicionar Letra");
     private JButton botaoCadastrar = new JButton("Cadastrar");
     private JButton botaoCancelar = new JButton("Cancelar");
 
@@ -39,9 +38,9 @@ public class TelaCadastroMusica implements ActionListener{
     private JList<Album> list = new JList<>();
 
     private Album album;
-    private List<Album> albuns = new ArrayList<>();
     private String nomeDigitado;
     private String duracaoDigitado;
+    private String letra;
 
     private JButton botaoAlbum = new JButton("Adicionar Album");
 
@@ -51,9 +50,10 @@ public class TelaCadastroMusica implements ActionListener{
         this.janela = janela;
         this.isArtista = isArtista;
     }
+     
     
     public TelaCadastroMusica(Controle controle, JFrame janela, boolean isArtista, Album album, String nomeDigitado,
-                              String duracaoDigitado, DefaultListModel<Album> model, List<Album> albuns){
+                              String duracaoDigitado, DefaultListModel<Album> model, String letra){
         this.controle = controle;
         this.janela = janela;
         this.isArtista = isArtista;
@@ -61,7 +61,7 @@ public class TelaCadastroMusica implements ActionListener{
         this.nomeDigitado = nomeDigitado;
         this.duracaoDigitado = duracaoDigitado;
         this.model = model;
-        this.albuns = albuns;
+        this.letra = letra;
     }
 
     public JButton getBotaoCadastrar(){
@@ -76,30 +76,32 @@ public class TelaCadastroMusica implements ActionListener{
         return botaoAlbum;
     }
 
+    public JButton getBotaoLetra(){
+        return botaoLetra;
+    }
+
     public void show(){
         titulo.setFont(new Font("Ms Gothic", Font.BOLD, 24));
 		titulo.setForeground(Color.white);
-        titulo.setBounds(330, 121, 360, 60);
+        titulo.setBounds(330, 70, 360, 60);
 
-        nome.setBounds(145, 218, 100, 29);
+        nome.setBounds(145, 170, 100, 29);
         nome.setFont(new Font("Ms Gothic", Font.BOLD, 24));
         nome.setForeground(Color.white);
-
-        entradaNome.setBounds(248, 221, 350, 23);
+        
+        entradaNome.setText(nomeDigitado);
+        entradaNome.setBounds(248, 173, 350, 23);
         entradaNome.setLayout(null);
         entradaNome.setText(nomeDigitado);
 
-        duracao.setBounds(125, 250, 300, 29);
+        duracao.setBounds(125, 200, 300, 29);
         duracao.setFont(new Font("Ms Gothic", Font.BOLD, 24));
         duracao.setForeground(Color.white);
         
-        entradaDuracao.setBounds(248, 253, 350, 23);
+        entradaDuracao.setText(duracaoDigitado);
+        entradaDuracao.setBounds(248, 203, 350, 23);
         entradaDuracao.setLayout(null);
         entradaDuracao.setText(duracaoDigitado);
-
-
-        if (album != null)
-            albuns.add(album);
 
         model.addElement(album);
         list.setModel(model);
@@ -112,6 +114,12 @@ public class TelaCadastroMusica implements ActionListener{
         list.setBounds(250, 350, 350, 128);
         scrollPane.setBounds(250, 350, 350, 128);
 
+        botaoLetra.setFont(new Font("Ms Gothic", Font.BOLD, 16));
+		botaoLetra.setBackground(Color.decode("#A020F0"));
+        botaoLetra.setForeground(Color.WHITE);
+		botaoLetra.setBounds(306, 260, 220, 35);
+        botaoLetra.setBorder(null);
+        botaoLetra.setFocusPainted(false);
 
         botaoAlbum.setFont(new Font("Ms Gothic", Font.BOLD, 16));
 		botaoAlbum.setBackground(Color.decode("#A020F0"));
@@ -141,6 +149,7 @@ public class TelaCadastroMusica implements ActionListener{
         janela.add(entradaDuracao);
         janela.add(scrollPane);
         janela.add(botaoAlbum);
+        janela.add(botaoLetra);
         janela.add(botaoCadastrar);
         janela.add(botaoCancelar);
 
@@ -155,7 +164,31 @@ public class TelaCadastroMusica implements ActionListener{
 		Object src = e.getSource();
 
         if (src == botaoCadastrar){
+            janela.remove(titulo);
+            janela.remove(nome);
+            janela.remove(entradaNome);
+            janela.remove(duracao);
+            janela.remove(entradaDuracao);
+            janela.remove(scrollPane);
+            janela.remove(botaoAlbum);
+            janela.remove(botaoLetra);
+            janela.remove(botaoCadastrar);
+            janela.remove(botaoCancelar);
 
+            Double dur = Double.parseDouble(entradaDuracao.getText());
+
+            controle.musica(nomeDigitado, letra, dur, album);
+
+            TelaAplicativo telaAplicativo = new TelaAplicativo(controle, janela, isArtista);
+
+            telaAplicativo.show();
+
+            telaAplicativo.getArtBotao().addActionListener(telaAplicativo);
+            telaAplicativo.getAlbBotao().addActionListener(telaAplicativo);
+            telaAplicativo.getMusBotao().addActionListener(telaAplicativo);
+            telaAplicativo.getCAlbmBotao().addActionListener(telaAplicativo);
+            telaAplicativo.getCMusBotao().addActionListener(telaAplicativo);
+            telaAplicativo.getBotaoVoltar().addActionListener(telaAplicativo);
         }
 
         if (src == botaoAlbum){
@@ -166,15 +199,36 @@ public class TelaCadastroMusica implements ActionListener{
             janela.remove(entradaDuracao);
             janela.remove(scrollPane);
             janela.remove(botaoAlbum);
+            janela.remove(botaoLetra);
             janela.remove(botaoCadastrar);
             janela.remove(botaoCancelar);
 
-            TelaAdicionarAlbum telaAdicionarAlbum = new TelaAdicionarAlbum(controle, janela, isArtista, entradaNome.getText(), entradaDuracao.getText(), model, albuns);
+            TelaAdicionarAlbum telaAdicionarAlbum = new TelaAdicionarAlbum(controle, janela, isArtista, entradaNome.getText(), entradaDuracao.getText(), model, letra);
 
             telaAdicionarAlbum.show();
 
             telaAdicionarAlbum.getBotaoCadastrar().addActionListener(telaAdicionarAlbum);
             telaAdicionarAlbum.getBotaoCancelar().addActionListener(telaAdicionarAlbum);
+        }
+
+        if (src == botaoLetra){
+            janela.remove(titulo);
+            janela.remove(nome);
+            janela.remove(entradaNome);
+            janela.remove(duracao);
+            janela.remove(entradaDuracao);
+            janela.remove(scrollPane);
+            janela.remove(botaoAlbum);
+            janela.remove(botaoLetra);
+            janela.remove(botaoCadastrar);
+            janela.remove(botaoCancelar);
+
+            TelaAdicionarLetra telaAdicionarLetra = new TelaAdicionarLetra(controle, janela, isArtista, entradaNome.getText(), entradaDuracao.getText(), model, album);
+
+            telaAdicionarLetra.show();
+
+            telaAdicionarLetra.getBotaoCancelar().addActionListener(telaAdicionarLetra);
+            telaAdicionarLetra.getButaoSalvar().addActionListener(telaAdicionarLetra);
         }
 
         if (src == botaoCancelar){
@@ -185,6 +239,7 @@ public class TelaCadastroMusica implements ActionListener{
             janela.remove(entradaDuracao);
             janela.remove(scrollPane);
             janela.remove(botaoAlbum);
+            janela.remove(botaoLetra);
             janela.remove(botaoCadastrar);
             janela.remove(botaoCancelar);
 

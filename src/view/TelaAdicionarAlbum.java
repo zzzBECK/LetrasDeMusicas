@@ -4,8 +4,6 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
-import java.util.List;
 
 import javax.swing.DefaultListCellRenderer;
 import javax.swing.DefaultListModel;
@@ -23,7 +21,7 @@ public class TelaAdicionarAlbum implements ActionListener{
     private JFrame janela;
     private boolean isArtista;
 
-    private JLabel titulo = new JLabel("Adicionar Artista:");
+    private JLabel titulo = new JLabel("Adicionar Album:");
 
     private DefaultListModel<Album> model = new DefaultListModel<>();
     private JList<Album> list = new JList<>();
@@ -33,21 +31,21 @@ public class TelaAdicionarAlbum implements ActionListener{
 
     private JScrollPane scrollPane = new JScrollPane();
 
-    private List<Album> albuns = new ArrayList<>();
     private String nomeDigitado;
     private String duracaoDigitado;
     private DefaultListModel<Album> model1;
+    private String letra;
 
 
     public TelaAdicionarAlbum(Controle controle, JFrame janela, boolean isArtista, String nomeDigitado,
-                              String duracaoDigitado, DefaultListModel<Album> model, List<Album> albuns){
+                              String duracaoDigitado, DefaultListModel<Album> model, String letra){
         this.controle = controle;
         this.janela = janela;
         this.isArtista = isArtista;
         this.nomeDigitado = nomeDigitado;
         this.duracaoDigitado = duracaoDigitado;
         this.model1 = model;
-        this.albuns = albuns;
+        this.letra = letra;
     }
 
     public JButton getBotaoCadastrar(){
@@ -115,13 +113,14 @@ public class TelaAdicionarAlbum implements ActionListener{
             janela.remove(botaoCancelar);
             janela.remove(scrollPane);
 
-            TelaCadastroMusica telaCadastroMusica = new TelaCadastroMusica(controle, janela, isArtista, null, nomeDigitado, duracaoDigitado, model1, albuns);
+            TelaCadastroMusica telaCadastroMusica = new TelaCadastroMusica(controle, janela, isArtista, null, nomeDigitado, duracaoDigitado, model1, letra);
 			
             telaCadastroMusica.show();
     
-            telaCadastroMusica.getBotaoCadastrar().addActionListener(telaCadastroMusica);
-            telaCadastroMusica.getBotaoCancelar().addActionListener(telaCadastroMusica);
-            telaCadastroMusica.getBotaoAlbum().addActionListener(telaCadastroMusica);
+			telaCadastroMusica.getBotaoCadastrar().addActionListener(telaCadastroMusica);
+			telaCadastroMusica.getBotaoCancelar().addActionListener(telaCadastroMusica);
+			telaCadastroMusica.getBotaoAlbum().addActionListener(telaCadastroMusica);
+			telaCadastroMusica.getBotaoLetra().addActionListener(telaCadastroMusica);
         }
 
         if (src == botaoCadastrar){
@@ -131,13 +130,14 @@ public class TelaAdicionarAlbum implements ActionListener{
                 janela.remove(botaoCancelar);
                 janela.remove(scrollPane);
     
-                TelaCadastroMusica telaCadastroMusica = new TelaCadastroMusica(controle, janela, isArtista, list.getSelectedValue(), nomeDigitado, duracaoDigitado, model1, albuns);
+                TelaCadastroMusica telaCadastroMusica = new TelaCadastroMusica(controle, janela, isArtista, list.getSelectedValue(), nomeDigitado, duracaoDigitado, model1, letra);
                 
                 telaCadastroMusica.show();
     
                 telaCadastroMusica.getBotaoCadastrar().addActionListener(telaCadastroMusica);
                 telaCadastroMusica.getBotaoCancelar().addActionListener(telaCadastroMusica);
                 telaCadastroMusica.getBotaoAlbum().addActionListener(telaCadastroMusica);
+                telaCadastroMusica.getBotaoLetra().addActionListener(telaCadastroMusica);
             }
         }
         

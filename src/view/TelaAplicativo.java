@@ -195,13 +195,14 @@ public class TelaAplicativo implements ActionListener{
 			janela.remove(cAlbmBotao);
 			janela.remove(cMusBotao);
 
-			TelaCadastroMusica telaCadastroAlbum = new TelaCadastroMusica(controle, janela, isArtista);
+			TelaCadastroMusica telaCadastroMusica = new TelaCadastroMusica(controle, janela, isArtista);
 			
-			telaCadastroAlbum.show();
+			telaCadastroMusica.show();
 
-			telaCadastroAlbum.getBotaoCadastrar().addActionListener(telaCadastroAlbum);
-			telaCadastroAlbum.getBotaoCancelar().addActionListener(telaCadastroAlbum);
-			telaCadastroAlbum.getBotaoAlbum().addActionListener(telaCadastroAlbum);
+			telaCadastroMusica.getBotaoCadastrar().addActionListener(telaCadastroMusica);
+			telaCadastroMusica.getBotaoCancelar().addActionListener(telaCadastroMusica);
+			telaCadastroMusica.getBotaoAlbum().addActionListener(telaCadastroMusica);
+			telaCadastroMusica.getBotaoLetra().addActionListener(telaCadastroMusica);
 		}
 
 		if (src == botaoVoltar){

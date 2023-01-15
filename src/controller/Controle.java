@@ -5,6 +5,7 @@ import java.util.List;
 
 import model.Album;
 import model.Artista;
+import model.Musica;
 import model.Pesquisa;
 import model.Usuario;
 
@@ -29,6 +30,10 @@ public class Controle{
 
     public void album(String nome, Date data, List<Artista> artistas){
         pesquisa.adicionarAlbum(new Album(nome, data, artistas));
+    }
+
+    public void musica(String nome, String letra, Double duracao, Album album){
+        pesquisa.adicionarMusica(new Musica(nome, letra, duracao, false, album));
     }
 
     public Pesquisa getPesquisa(){
