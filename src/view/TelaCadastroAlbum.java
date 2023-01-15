@@ -33,6 +33,7 @@ public class TelaCadastroAlbum implements ActionListener{
     private JList<Artista> list = new JList<>();
 
     private JLabel titulo = new JLabel("Cadastro:");
+
     private JLabel nome = new JLabel("Nome:");
     private JTextField entradaNome = new JTextField();
 
