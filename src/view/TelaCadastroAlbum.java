@@ -210,11 +210,11 @@ public class TelaCadastroAlbum implements ActionListener{
 
             try {
                 dateFormat = new SimpleDateFormat("dd/MM/yyyy").parse(entradaData.getText());
+                controle.album(entradaNome.getText(), dateFormat, artistas);
             } catch (ParseException e1) {
                 e1.printStackTrace();
             }
             
-            controle.album(entradaNome.getText(), dateFormat, artistas);
 
             TelaAplicativo telaAplicativo = new TelaAplicativo(controle, janela, isArtista);
 
