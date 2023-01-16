@@ -12,11 +12,13 @@ import java.util.List;
 
 import javax.swing.DefaultListModel;
 import javax.swing.JButton;
+import javax.swing.JFormattedTextField;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
+import javax.swing.text.MaskFormatter;
 
 import controller.Controle;
 import model.Artista;
@@ -38,7 +40,7 @@ public class TelaCadastroAlbum implements ActionListener{
     private JTextField entradaNome = new JTextField();
 
     private JLabel data = new JLabel("Data de Lançamento:");
-    private JTextField entradaData = new JTextField();
+    private JFormattedTextField entradaData = new JFormattedTextField(setMascara("##/##/####"));
 
     private JButton botaoArtista = new JButton("Adicionar Artista");
 
@@ -240,5 +242,15 @@ public class TelaCadastroAlbum implements ActionListener{
 
         }
             
+	}
+
+    private MaskFormatter setMascara(String mascara){
+	    MaskFormatter mask = null;
+	    try{
+	        mask = new MaskFormatter(mascara);                      
+	    }catch(ParseException ex){
+	    	ex.printStackTrace();
+	    }
+	    return mask;
 	}
 }
