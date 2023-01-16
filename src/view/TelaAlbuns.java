@@ -93,6 +93,22 @@ public class TelaAlbuns implements ActionListener{
     public void actionPerformed(ActionEvent e) {
         Object src = e.getSource();
 
+        if (src == botaoVisualizar){
+            if(list.getSelectedValue() != null){
+                janela.remove(titulo);
+                janela.remove(scrollPane);
+                janela.remove(botaoVisualizar);
+                janela.remove(botaoVoltar);
+
+                TelaVisualizarAlbum telaVisualizarAlbum = new TelaVisualizarAlbum(controle, janela, isArtista, list.getSelectedValue());
+
+                telaVisualizarAlbum.show();
+
+                telaVisualizarAlbum.getBotaoVoltar().addActionListener(telaVisualizarAlbum);
+                telaVisualizarAlbum.getBotaoVisualizar().addActionListener(telaVisualizarAlbum);
+            } 
+        }
+
         if (src == botaoVoltar){
             janela.remove(titulo);
             janela.remove(scrollPane);
