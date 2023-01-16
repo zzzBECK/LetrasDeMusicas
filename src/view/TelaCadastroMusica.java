@@ -103,6 +103,7 @@ public class TelaCadastroMusica implements ActionListener{
         entradaDuracao.setLayout(null);
         entradaDuracao.setText(duracaoDigitado);
 
+        model.removeAllElements();
         model.addElement(album);
         list.setModel(model);
         scrollPane.setViewportView(list);

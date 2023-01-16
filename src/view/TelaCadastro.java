@@ -22,7 +22,7 @@ public class TelaCadastro implements ActionListener{
     private JLabel nome = new JLabel("Nome:");
     private JTextField entradaNome = new JTextField();
 
-    private JLabel rg = new JLabel("Rg:");
+    private JLabel rg = new JLabel("CPF:");
     private JTextField entradaRg = new JTextField();
 
     private JLabel estilo = new JLabel("Estilo Musical:");

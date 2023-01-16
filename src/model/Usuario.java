@@ -6,7 +6,7 @@ import java.util.List;
 public class Usuario {
     
     private String nome;
-    private String rg;
+    private String cpf;
 
     private List<Artista> artistasSeguidos = new ArrayList<>();
 
@@ -14,10 +14,10 @@ public class Usuario {
 
     }
 
-    public Usuario(String nome, String rg){
+    public Usuario(String nome, String cpf){
 
         this.nome = nome;
-        this.rg = rg;
+        this.cpf = cpf;
     }
 
 
@@ -29,17 +29,17 @@ public class Usuario {
         this.nome = nome;
     }
 
-    public String getRg() {
-        return rg;
+    public String getCpf() {
+        return cpf;
     }
 
-    public void setRg(String rg) {
-        this.rg = rg;
+    public void setCpf(String cpf) {
+        this.cpf = cpf;
     }
 
         @Override
     public String toString(){
-        return "Nome: " + nome + " RG: " + rg + " Seguindo: " + artistasSeguidos;
+        return "Nome: " + nome + " cpf: " + cpf + " Seguindo: " + artistasSeguidos;
     }
 
     public void seguirArtista(Artista artista){

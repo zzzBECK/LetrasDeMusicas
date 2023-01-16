@@ -79,6 +79,7 @@ public class TelaArtistas implements ActionListener{
     public void actionPerformed(ActionEvent e) {
         Object src = e.getSource();
 
+
         if (src == botaoVoltar){
             janela.remove(titulo);
             janela.remove(botaoVoltar);

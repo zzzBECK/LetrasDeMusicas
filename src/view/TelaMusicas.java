@@ -28,6 +28,7 @@ public class TelaMusicas implements ActionListener{
     private JScrollPane scrollPane = new JScrollPane();
 
     private JButton botaoVoltar = new JButton("Voltar");
+    private JButton botaoVisualizar = new JButton("Visualizar");
 
     public TelaMusicas(Controle controle, JFrame janela, boolean isArtista){
         this.controle = controle;
@@ -37,6 +38,10 @@ public class TelaMusicas implements ActionListener{
 
     public JButton getBotaoVoltar(){
         return botaoVoltar;
+    }
+
+    public JButton getBotaoVisualizar(){
+        return botaoVisualizar;
     }
 
     public void show(){
@@ -64,12 +69,20 @@ public class TelaMusicas implements ActionListener{
         botaoVoltar.setFont(new Font("Ms Gothic", Font.BOLD, 16));
 		botaoVoltar.setBackground(Color.decode("#A020F0"));
         botaoVoltar.setForeground(Color.WHITE);
-		botaoVoltar.setBounds(337, 494, 125, 35);
+		botaoVoltar.setBounds(264, 494, 125, 35);
         botaoVoltar.setBorder(null);
         botaoVoltar.setFocusPainted(false);
 
+        botaoVisualizar.setFont(new Font("Ms Gothic", Font.BOLD, 16));
+		botaoVisualizar.setBackground(Color.decode("#A020F0"));
+        botaoVisualizar.setForeground(Color.WHITE);
+		botaoVisualizar.setBounds(411, 494, 125, 35);
+        botaoVisualizar.setBorder(null);
+        botaoVisualizar.setFocusPainted(false);
+
         janela.add(titulo);
         janela.add(botaoVoltar);
+        janela.add(botaoVisualizar);
         janela.add(scrollPane);
 
         janela.repaint();
@@ -83,6 +96,7 @@ public class TelaMusicas implements ActionListener{
             janela.remove(titulo);
             janela.remove(scrollPane);
             janela.remove(botaoVoltar);
+            janela.remove(botaoVisualizar);
 
             TelaAplicativo telaAplicativo = new TelaAplicativo(controle, janela, isArtista);
 
@@ -95,6 +109,22 @@ public class TelaMusicas implements ActionListener{
             telaAplicativo.getCMusBotao().addActionListener(telaAplicativo);
             telaAplicativo.getBotaoVoltar().addActionListener(telaAplicativo);
 
+        }
+
+        if (src == botaoVisualizar){
+            
+            if(list.getSelectedValue() != null){
+                janela.remove(titulo);
+                janela.remove(scrollPane);
+                janela.remove(botaoVoltar);
+                janela.remove(botaoVisualizar);
+
+                TelaVisualizarMusica telaVisualizarMusica = new TelaVisualizarMusica(controle, janela, isArtista, list.getSelectedValue());
+
+                telaVisualizarMusica.show();
+
+                telaVisualizarMusica.getBotaoVoltar().addActionListener(telaVisualizarMusica);
+            }
         }
         
     }

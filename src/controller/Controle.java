@@ -16,8 +16,9 @@ public class Controle{
     public Controle(){
 
         for (int i = 0; i < 40; i++){
-            artista(null, null, null);
+            artista(String.format("%s %d", "Ricardo", i+1), String.format("%s", i), null);
         }
+
     }
 
     public void usuario(String nome, String rg){

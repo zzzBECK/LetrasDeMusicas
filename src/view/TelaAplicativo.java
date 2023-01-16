@@ -153,6 +153,7 @@ public class TelaAplicativo implements ActionListener{
 			telaAlbuns.show();
 
 			telaAlbuns.getBotaoVoltar().addActionListener(telaAlbuns);
+			telaAlbuns.getBotaoVisualizar().addActionListener(telaAlbuns);
 		}
 
 		if (src == musBotao){
@@ -168,6 +169,7 @@ public class TelaAplicativo implements ActionListener{
 			telaMusicas.show();
 
 			telaMusicas.getBotaoVoltar().addActionListener(telaMusicas);
+			telaMusicas.getBotaoVisualizar().addActionListener(telaMusicas);
 		}
 
 		if (src == cAlbmBotao){

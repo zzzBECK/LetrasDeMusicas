@@ -28,6 +28,7 @@ public class TelaAlbuns implements ActionListener{
     private JScrollPane scrollPane = new JScrollPane();
 
     private JButton botaoVoltar = new JButton("Voltar");
+    private JButton botaoVisualizar = new JButton("Visualizar");
 
     public TelaAlbuns(Controle controle, JFrame janela, boolean isArtista){
         this.controle = controle;
@@ -37,6 +38,10 @@ public class TelaAlbuns implements ActionListener{
 
     public JButton getBotaoVoltar(){
         return botaoVoltar;
+    }
+
+    public JButton getBotaoVisualizar(){
+        return botaoVisualizar;
     }
 
     public void show(){
@@ -65,12 +70,20 @@ public class TelaAlbuns implements ActionListener{
         botaoVoltar.setFont(new Font("Ms Gothic", Font.BOLD, 16));
 		botaoVoltar.setBackground(Color.decode("#A020F0"));
         botaoVoltar.setForeground(Color.WHITE);
-		botaoVoltar.setBounds(337, 494, 125, 35);
+		botaoVoltar.setBounds(264, 494, 125, 35);
         botaoVoltar.setBorder(null);
         botaoVoltar.setFocusPainted(false);
 
+        botaoVisualizar.setFont(new Font("Ms Gothic", Font.BOLD, 16));
+		botaoVisualizar.setBackground(Color.decode("#A020F0"));
+        botaoVisualizar.setForeground(Color.WHITE);
+		botaoVisualizar.setBounds(411, 494, 125, 35);
+        botaoVisualizar.setBorder(null);
+        botaoVisualizar.setFocusPainted(false);
+
         janela.add(titulo);
         janela.add(botaoVoltar);
+        janela.add(botaoVisualizar);
         janela.add(scrollPane);
 
         janela.repaint();
@@ -83,6 +96,7 @@ public class TelaAlbuns implements ActionListener{
         if (src == botaoVoltar){
             janela.remove(titulo);
             janela.remove(scrollPane);
+            janela.remove(botaoVisualizar);
             janela.remove(botaoVoltar);
 
             TelaAplicativo telaAplicativo = new TelaAplicativo(controle, janela, isArtista);
