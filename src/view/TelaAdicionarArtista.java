@@ -126,18 +126,20 @@ public class TelaAdicionarArtista implements ActionListener{
 
         if (src == botaoCadastrar){
             if (src == botaoCadastrar){
-                janela.remove(titulo);
-                janela.remove(botaoCadastrar);
-                janela.remove(botaoCancelar);
-                janela.remove(scrollPane);
-    
-                TelaCadastroAlbum telaCadastroAlbum = new TelaCadastroAlbum(controle, janela, isArtista, list.getSelectedValue(), nomeDigitado, dataDigitado, model1, artistas);
-                
-                telaCadastroAlbum.show();
-    
-                telaCadastroAlbum.getBotaoCadastrar().addActionListener(telaCadastroAlbum);
-                telaCadastroAlbum.getBotaoCancelar().addActionListener(telaCadastroAlbum);
-                telaCadastroAlbum.getBotaoArtista().addActionListener(telaCadastroAlbum);
+                if (list.getSelectedValue() != null){
+                    janela.remove(titulo);
+                    janela.remove(botaoCadastrar);
+                    janela.remove(botaoCancelar);
+                    janela.remove(scrollPane);
+        
+                    TelaCadastroAlbum telaCadastroAlbum = new TelaCadastroAlbum(controle, janela, isArtista, list.getSelectedValue(), nomeDigitado, dataDigitado, model1, artistas);
+                    
+                    telaCadastroAlbum.show();
+        
+                    telaCadastroAlbum.getBotaoCadastrar().addActionListener(telaCadastroAlbum);
+                    telaCadastroAlbum.getBotaoCancelar().addActionListener(telaCadastroAlbum);
+                    telaCadastroAlbum.getBotaoArtista().addActionListener(telaCadastroAlbum);
+                }
             }
         }
         

@@ -124,7 +124,7 @@ public class TelaAdicionarAlbum implements ActionListener{
         }
 
         if (src == botaoCadastrar){
-            if (src == botaoCadastrar){
+            if (list.getSelectedValue() != null){
                 janela.remove(titulo);
                 janela.remove(botaoCadastrar);
                 janela.remove(botaoCancelar);
