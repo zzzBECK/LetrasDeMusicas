@@ -14,7 +14,7 @@ import javax.swing.JTextArea;
 import controller.Controle;
 import model.Artista;
 import model.Musica;
-import view.album.TelaAlbuns;
+import view.album.TelaVisualizarAlbum;
 
 public class TelaVisualizarMusica implements ActionListener{
     private Controle controle;
@@ -27,11 +27,14 @@ public class TelaVisualizarMusica implements ActionListener{
 
     private JButton botaoVoltar = new JButton("Voltar");
     private JButton botaoVoltarAlbum = new JButton("Voltar");
+    private JButton botaoVoltarArtista = new JButton("Voltar");
 
     private JTextArea letra = new JTextArea();
     private JScrollPane scrollPane = new JScrollPane();
 
     private Musica musica;
+
+    private Artista art;
 
     public TelaVisualizarMusica(Controle controle, JFrame janela, Boolean isArtista, Musica musica){
         this.controle = controle;
@@ -46,6 +49,10 @@ public class TelaVisualizarMusica implements ActionListener{
 
     public JButton getBotaoVoltarAlbum(){
         return botaoVoltarAlbum;
+    }
+
+    public JButton getBotaoVoltarArtista(){
+        return botaoVoltarArtista;
     }
 
     public void show(){
@@ -144,6 +151,55 @@ public class TelaVisualizarMusica implements ActionListener{
         janela.repaint();
     }
 
+    public void showToArtista(Artista art){
+        this.art = art;
+        nome.setFont(new Font("Ms Gothic", Font.BOLD, 16));
+		nome.setForeground(Color.white);
+        nome.setBounds(50, 30, 400, 30);
+        nome.setText("Nome: " + musica.getNome());
+
+        alb.setFont(new Font("Ms Gothic", Font.BOLD, 16));
+		alb.setForeground(Color.white);
+        alb.setBounds(50, 70, 400, 30);
+        alb.setText("Álbum: " + musica.getAlbum().getNome());
+
+        arts.setFont(new Font("Ms Gothic", Font.BOLD, 16));
+		arts.setForeground(Color.white);
+        arts.setBounds(50, 110, 700, 30);
+
+        String nomeArtistas = new String();
+        for (Artista artista : musica.getAlbum().getArtistas()){
+            nomeArtistas += artista.getNome();
+            nomeArtistas += " ";
+        }
+        arts.setText("Artistas: " + nomeArtistas);
+
+
+        letra.setBounds(110, 150, 579, 300); 
+        letra.setLineWrap(true);
+        letra.setText(musica.getLetra());
+        letra.setEditable(false);
+
+        scrollPane.getViewport().add(letra);
+        scrollPane.setBounds(110, 150, 579, 300);
+        
+        botaoVoltarArtista.setFont(new Font("Ms Gothic", Font.BOLD, 16));
+		botaoVoltarArtista.setBackground(Color.decode("#A020F0"));
+        botaoVoltarArtista.setForeground(Color.WHITE);
+		botaoVoltarArtista.setBounds(337, 494, 125, 35);
+        botaoVoltarArtista.setBorder(null);
+        botaoVoltarArtista.setFocusPainted(false);
+
+        janela.add(nome);
+        janela.add(alb);
+        janela.add(arts);
+        janela.add(scrollPane);
+        janela.add(botaoVoltarArtista);
+
+
+        janela.repaint();
+    }
+
     @Override
     public void actionPerformed(ActionEvent e) {
         Object src = e.getSource();
@@ -171,12 +227,27 @@ public class TelaVisualizarMusica implements ActionListener{
             janela.remove(scrollPane);
             janela.remove(botaoVoltarAlbum);
 
-            TelaAlbuns telaAlbuns = new TelaAlbuns(controle, janela, isArtista);
+            TelaVisualizarAlbum telaVisualizarAlbum = new TelaVisualizarAlbum(controle, janela, isArtista, musica.getAlbum());
 
-			telaAlbuns.show();
+			telaVisualizarAlbum.show();
 
-			telaAlbuns.getBotaoVoltar().addActionListener(telaAlbuns);
-			telaAlbuns.getBotaoVisualizar().addActionListener(telaAlbuns);
+			telaVisualizarAlbum.getBotaoVoltar().addActionListener(telaVisualizarAlbum);
+			telaVisualizarAlbum.getBotaoVisualizar().addActionListener(telaVisualizarAlbum);
+        }
+
+        if (src == botaoVoltarArtista){
+            janela.remove(nome);
+            janela.remove(alb);
+            janela.remove(arts);
+            janela.remove(scrollPane);
+            janela.remove(botaoVoltarArtista);
+
+            TelaVisualizarAlbum telaVisualizarAlbum = new TelaVisualizarAlbum(controle, janela, isArtista, musica.getAlbum());
+
+			telaVisualizarAlbum.showToArtista(art);
+
+			telaVisualizarAlbum.getBotaoVoltarArtista().addActionListener(telaVisualizarAlbum);
+			telaVisualizarAlbum.getBotaoVisualizarArtista().addActionListener(telaVisualizarAlbum);
         }
     }
 }

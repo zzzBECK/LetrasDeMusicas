@@ -55,7 +55,7 @@ public class Album {
 
     @Override
     public String toString(){
-        return String.format("Nome: %s ", nome) + " Data: " + sdf.format(dataLancamento) + " Arista: " + getArtistas().get(getArtistas().size() - 1).getNome();
+        return String.format("Nome: %s ", nome) + " Data: " + sdf.format(dataLancamento) + " Artista: " + getArtistas().get(getArtistas().size() - 1).getNome();
     }
 
     
