@@ -139,7 +139,7 @@ public class TelaVisualizarAlbum implements ActionListener{
 
                 TelaVisualizarMusica telaVisualizarMusica = new TelaVisualizarMusica(controle, janela, isArtista, list.getSelectedValue());
 
-                telaVisualizarMusica.show();
+                telaVisualizarMusica.showToAlbum();
 
                 telaVisualizarMusica.getBotaoVoltar().addActionListener(telaVisualizarMusica);
             }
