@@ -9,6 +9,11 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 
 import controller.Controle;
+import view.album.TelaAlbuns;
+import view.album.cadastro.TelaCadastroAlbum;
+import view.artista.TelaArtistas;
+import view.musica.TelaMusicas;
+import view.musica.cadastro.TelaCadastroMusica;
 
 public class TelaAplicativo implements ActionListener{
 	private Controle controle;

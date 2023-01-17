@@ -1,4 +1,4 @@
-package view;
+package view.musica;
 
 import java.awt.Color;
 import java.awt.Font;

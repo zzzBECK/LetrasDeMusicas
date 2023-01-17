@@ -1,4 +1,4 @@
-package view;
+package view.album.cadastro;
 
 import java.awt.Color;
 import java.awt.Font;

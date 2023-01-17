@@ -1,4 +1,4 @@
-package view;
+package view.musica;
 
 import java.awt.Color;
 import java.awt.Font;
@@ -14,23 +14,24 @@ import javax.swing.JList;
 import javax.swing.JScrollPane;
 
 import controller.Controle;
-import model.Album;
+import model.Musica;
+import view.TelaAplicativo;
 
-public class TelaAlbuns implements ActionListener{
+public class TelaMusicas implements ActionListener{
     private Controle controle;
     private boolean isArtista;
     private JFrame janela;
 
-    private JLabel titulo = new JLabel("Álbuns");
+    private JLabel titulo = new JLabel("Músicas");
 
-    private DefaultListModel<Album> model = new DefaultListModel<>();
-    private JList<Album> list = new JList<>();
+    private DefaultListModel<Musica> model = new DefaultListModel<>();
+    private JList<Musica> list = new JList<>();
     private JScrollPane scrollPane = new JScrollPane();
 
     private JButton botaoVoltar = new JButton("Voltar");
     private JButton botaoVisualizar = new JButton("Visualizar");
 
-    public TelaAlbuns(Controle controle, JFrame janela, boolean isArtista){
+    public TelaMusicas(Controle controle, JFrame janela, boolean isArtista){
         this.controle = controle;
         this.janela = janela;
         this.isArtista = isArtista;
@@ -46,14 +47,13 @@ public class TelaAlbuns implements ActionListener{
 
     public void show(){
 
-		titulo.setFont(new Font("Ms Gothic", Font.BOLD, 24));
+        titulo.setFont(new Font("Ms Gothic", Font.BOLD, 24));
 		titulo.setForeground(Color.white);
-		titulo.setBounds(370, 15, 200, 48);
+		titulo.setBounds(365, 15, 200, 48);
 
-        for (Album album : controle.getPesquisa().getAlbuns()){
-            model.addElement(album);
+        for (Musica musica : controle.getPesquisa().getMusicas()){
+            model.addElement(musica);
         }
-
         list.setModel(model);
         scrollPane.setViewportView(list);
 
@@ -93,27 +93,11 @@ public class TelaAlbuns implements ActionListener{
     public void actionPerformed(ActionEvent e) {
         Object src = e.getSource();
 
-        if (src == botaoVisualizar){
-            if(list.getSelectedValue() != null){
-                janela.remove(titulo);
-                janela.remove(scrollPane);
-                janela.remove(botaoVisualizar);
-                janela.remove(botaoVoltar);
-
-                TelaVisualizarAlbum telaVisualizarAlbum = new TelaVisualizarAlbum(controle, janela, isArtista, list.getSelectedValue());
-
-                telaVisualizarAlbum.show();
-
-                telaVisualizarAlbum.getBotaoVoltar().addActionListener(telaVisualizarAlbum);
-                telaVisualizarAlbum.getBotaoVisualizar().addActionListener(telaVisualizarAlbum);
-            } 
-        }
-
         if (src == botaoVoltar){
             janela.remove(titulo);
             janela.remove(scrollPane);
-            janela.remove(botaoVisualizar);
             janela.remove(botaoVoltar);
+            janela.remove(botaoVisualizar);
 
             TelaAplicativo telaAplicativo = new TelaAplicativo(controle, janela, isArtista);
 
@@ -127,7 +111,22 @@ public class TelaAlbuns implements ActionListener{
             telaAplicativo.getBotaoVoltar().addActionListener(telaAplicativo);
 
         }
+
+        if (src == botaoVisualizar){
+            
+            if(list.getSelectedValue() != null){
+                janela.remove(titulo);
+                janela.remove(scrollPane);
+                janela.remove(botaoVoltar);
+                janela.remove(botaoVisualizar);
+
+                TelaVisualizarMusica telaVisualizarMusica = new TelaVisualizarMusica(controle, janela, isArtista, list.getSelectedValue());
+
+                telaVisualizarMusica.show();
+
+                telaVisualizarMusica.getBotaoVoltar().addActionListener(telaVisualizarMusica);
+            }
+        }
         
     }
-    
 }

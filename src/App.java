@@ -1,9 +1,9 @@
-import view.TelaPrincipal;
+import view.TelaInicial;
 
 public class App {
     public static void main(String[] args) throws Exception {
 
-        TelaPrincipal tela = new TelaPrincipal();
+        TelaInicial tela = new TelaInicial();
 
         tela.show();
         tela.getBotao().addActionListener(tela);

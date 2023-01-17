@@ -1,4 +1,4 @@
-package view;
+package view.album;
 
 import java.awt.Color;
 import java.awt.Font;
@@ -14,26 +14,33 @@ import javax.swing.JList;
 import javax.swing.JScrollPane;
 
 import controller.Controle;
+import model.Album;
+import model.Artista;
 import model.Musica;
+import view.musica.TelaVisualizarMusica;
 
-public class TelaMusicas implements ActionListener{
+public class TelaVisualizarAlbum implements ActionListener{
     private Controle controle;
-    private boolean isArtista;
     private JFrame janela;
+    private boolean isArtista;
 
-    private JLabel titulo = new JLabel("Músicas");
+    private JLabel nome = new JLabel();
+    private JLabel arts = new JLabel();
+
+    private JButton botaoVoltar = new JButton("Voltar");
+    private JButton botaoVisualizar = new JButton("Visualizar");
 
     private DefaultListModel<Musica> model = new DefaultListModel<>();
     private JList<Musica> list = new JList<>();
     private JScrollPane scrollPane = new JScrollPane();
 
-    private JButton botaoVoltar = new JButton("Voltar");
-    private JButton botaoVisualizar = new JButton("Visualizar");
+    private Album album;
 
-    public TelaMusicas(Controle controle, JFrame janela, boolean isArtista){
+    public TelaVisualizarAlbum(Controle controle, JFrame janela, boolean isArtista, Album album){
         this.controle = controle;
         this.janela = janela;
         this.isArtista = isArtista;
+        this.album = album;
     }
 
     public JButton getBotaoVoltar(){
@@ -45,12 +52,24 @@ public class TelaMusicas implements ActionListener{
     }
 
     public void show(){
+        nome.setFont(new Font("Ms Gothic", Font.BOLD, 16));
+		nome.setForeground(Color.white);
+        nome.setBounds(50, 30, 400, 30);
+        nome.setText("Nome: " + album.getNome());
 
-        titulo.setFont(new Font("Ms Gothic", Font.BOLD, 24));
-		titulo.setForeground(Color.white);
-		titulo.setBounds(365, 15, 200, 48);
+        arts.setFont(new Font("Ms Gothic", Font.BOLD, 16));
+		arts.setForeground(Color.white);
+        arts.setBounds(50, 70, 700, 30);
 
-        for (Musica musica : controle.getPesquisa().getMusicas()){
+        String nomeArtistas = new String();
+        for (Artista artista : album.getArtistas()){
+            nomeArtistas += artista.getNome();
+            nomeArtistas += " ";
+        }
+        arts.setText("Artistas: " + nomeArtistas);
+
+
+        for (Musica musica : album.getMusicas()){
             model.addElement(musica);
         }
         list.setModel(model);
@@ -58,13 +77,14 @@ public class TelaMusicas implements ActionListener{
 
         list.setForeground(Color.white);
         list.setFont(new Font("Ms Gothic", Font.BOLD, 16));
-        list.setBounds(110, 60, 579, 420);
+        list.setBounds(110, 150, 579, 300);
         list.setBackground(Color.gray);
 
         DefaultListCellRenderer renderer =  (DefaultListCellRenderer)list.getCellRenderer();  
         renderer.setHorizontalAlignment(JLabel.CENTER);
 
-        scrollPane.setBounds(110, 60, 579, 420);
+        scrollPane.setBounds(110, 150, 579, 300);
+
 
         botaoVoltar.setFont(new Font("Ms Gothic", Font.BOLD, 16));
 		botaoVoltar.setBackground(Color.decode("#A020F0"));
@@ -80,10 +100,11 @@ public class TelaMusicas implements ActionListener{
         botaoVisualizar.setBorder(null);
         botaoVisualizar.setFocusPainted(false);
 
-        janela.add(titulo);
-        janela.add(botaoVoltar);
-        janela.add(botaoVisualizar);
+        janela.add(nome);
+        janela.add(arts);
         janela.add(scrollPane);
+        janela.add(botaoVisualizar);
+        janela.add(botaoVoltar);
 
         janela.repaint();
     }
@@ -93,31 +114,28 @@ public class TelaMusicas implements ActionListener{
         Object src = e.getSource();
 
         if (src == botaoVoltar){
-            janela.remove(titulo);
+            janela.remove(nome);
+            janela.remove(arts);
             janela.remove(scrollPane);
-            janela.remove(botaoVoltar);
             janela.remove(botaoVisualizar);
+            janela.remove(botaoVoltar);
 
-            TelaAplicativo telaAplicativo = new TelaAplicativo(controle, janela, isArtista);
+            TelaAlbuns telaAlbuns = new TelaAlbuns(controle, janela, isArtista);
 
-            telaAplicativo.show();
+			telaAlbuns.show();
 
-            telaAplicativo.getArtBotao().addActionListener(telaAplicativo);
-            telaAplicativo.getAlbBotao().addActionListener(telaAplicativo);
-            telaAplicativo.getMusBotao().addActionListener(telaAplicativo);
-            telaAplicativo.getCAlbmBotao().addActionListener(telaAplicativo);
-            telaAplicativo.getCMusBotao().addActionListener(telaAplicativo);
-            telaAplicativo.getBotaoVoltar().addActionListener(telaAplicativo);
-
+			telaAlbuns.getBotaoVoltar().addActionListener(telaAlbuns);
+			telaAlbuns.getBotaoVisualizar().addActionListener(telaAlbuns);
         }
 
         if (src == botaoVisualizar){
-            
-            if(list.getSelectedValue() != null){
-                janela.remove(titulo);
+
+            if (list.getSelectedValue() != null){
+                janela.remove(nome);
+                janela.remove(arts);
                 janela.remove(scrollPane);
-                janela.remove(botaoVoltar);
                 janela.remove(botaoVisualizar);
+                janela.remove(botaoVoltar);
 
                 TelaVisualizarMusica telaVisualizarMusica = new TelaVisualizarMusica(controle, janela, isArtista, list.getSelectedValue());
 
@@ -128,4 +146,5 @@ public class TelaMusicas implements ActionListener{
         }
         
     }
+
 }

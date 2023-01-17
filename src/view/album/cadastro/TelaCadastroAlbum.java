@@ -1,4 +1,4 @@
-package view;
+package view.album.cadastro;
 
 import java.awt.Color;
 import java.awt.Font;
@@ -22,6 +22,7 @@ import javax.swing.text.MaskFormatter;
 
 import controller.Controle;
 import model.Artista;
+import view.TelaAplicativo;
 
 public class TelaCadastroAlbum implements ActionListener{
     private Controle controle;

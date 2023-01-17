@@ -11,7 +11,7 @@ import javax.swing.JLabel;
 
 import controller.Controle;
 
-public class TelaPrincipal implements ActionListener{
+public class TelaInicial implements ActionListener{
     private Controle controle = new Controle();
     private JFrame janela = new JFrame("Letras de Músicas");
 

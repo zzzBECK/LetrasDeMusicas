@@ -1,4 +1,4 @@
-package view;
+package view.musica.cadastro;
 
 import java.awt.Color;
 import java.awt.Font;
@@ -15,6 +15,7 @@ import javax.swing.JTextField;
 
 import controller.Controle;
 import model.Album;
+import view.TelaAplicativo;
 
 public class TelaCadastroMusica implements ActionListener{
     private Controle controle;

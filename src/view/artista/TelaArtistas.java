@@ -1,4 +1,4 @@
-package view;
+package view.artista;
 
 import java.awt.Color;
 import java.awt.Font;
@@ -15,6 +15,7 @@ import javax.swing.JScrollPane;
 
 import controller.Controle;
 import model.Artista;
+import view.TelaAplicativo;
 
 public class TelaArtistas implements ActionListener{
     private Controle controle;
