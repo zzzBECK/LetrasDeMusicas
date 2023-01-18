@@ -4,6 +4,8 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 
 import javax.swing.DefaultListCellRenderer;
 import javax.swing.DefaultListModel;
@@ -12,6 +14,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JScrollPane;
+import javax.swing.JTextField;
 
 import controller.Controle;
 import model.Album;
@@ -23,6 +26,8 @@ public class TelaAlbuns implements ActionListener{
     private JFrame janela;
 
     private JLabel titulo = new JLabel("Álbuns");
+    
+    private JTextField pesquisa = new JTextField();
 
     private DefaultListModel<Album> model = new DefaultListModel<>();
     private JList<Album> list = new JList<>();
@@ -30,6 +35,25 @@ public class TelaAlbuns implements ActionListener{
 
     private JButton botaoVoltar = new JButton("Voltar");
     private JButton botaoVisualizar = new JButton("Visualizar");
+
+    private KeyListener keyListener = new KeyListener() {
+        public void keyPressed(KeyEvent keyEvent) {
+            if (keyEvent.getKeyCode() == KeyEvent.VK_ENTER){
+                showPesquisa(pesquisa.getText());
+                System.out.println("Pesquisou");
+            }   
+        }
+  
+        public void keyReleased(KeyEvent keyEvent) {
+
+        }
+  
+        public void keyTyped(KeyEvent keyEvent) {
+            showPesquisa(pesquisa.getText());
+            System.out.println("Pesquisou");
+        }
+  
+    };
 
     public TelaAlbuns(Controle controle, JFrame janela, boolean isArtista){
         this.controle = controle;
@@ -45,11 +69,17 @@ public class TelaAlbuns implements ActionListener{
         return botaoVisualizar;
     }
 
+
     public void show(){
 
 		titulo.setFont(new Font("Ms Gothic", Font.BOLD, 24));
 		titulo.setForeground(Color.white);
 		titulo.setBounds(370, 15, 200, 48);
+
+        pesquisa.setBounds(505, 20, 185, 20);
+        pesquisa.setLayout(null);
+        pesquisa.setText(null);
+        pesquisa.addKeyListener(keyListener);
 
         for (Album album : controle.getPesquisa().getAlbuns()){
             model.addElement(album);
@@ -86,8 +116,36 @@ public class TelaAlbuns implements ActionListener{
         janela.add(botaoVoltar);
         janela.add(botaoVisualizar);
         janela.add(scrollPane);
+        janela.add(pesquisa);
 
         janela.repaint();
+    }
+
+    public void showPesquisa(String digitado){
+
+        model.clear();
+        for (Album album : controle.getPesquisa().getAlbuns()){
+            String temp = "";
+            for (int i = 0; i < digitado.length(); i++){
+
+
+                if (digitado.length() <= album.getNome().length()){
+                    try{
+                        temp += album.getNome().charAt(i);
+                    }
+                    catch (RuntimeException e){
+                        System.out.println(e.getMessage());
+                        System.out.println("Out of index");
+                    }
+                }
+
+            }
+
+            if (temp.toLowerCase().equals(digitado.toLowerCase())){
+                model.addElement(album);
+            }
+
+        }
     }
 
     @Override
@@ -100,6 +158,7 @@ public class TelaAlbuns implements ActionListener{
                 janela.remove(scrollPane);
                 janela.remove(botaoVisualizar);
                 janela.remove(botaoVoltar);
+                janela.remove(pesquisa);
 
                 TelaVisualizarAlbum telaVisualizarAlbum = new TelaVisualizarAlbum(controle, janela, isArtista, list.getSelectedValue());
 
@@ -115,6 +174,7 @@ public class TelaAlbuns implements ActionListener{
             janela.remove(scrollPane);
             janela.remove(botaoVisualizar);
             janela.remove(botaoVoltar);
+            janela.remove(pesquisa);
 
             TelaAplicativo telaAplicativo = new TelaAplicativo(controle, janela, isArtista);
 
