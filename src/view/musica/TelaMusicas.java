@@ -40,13 +40,17 @@ public class TelaMusicas implements ActionListener{
         public void keyPressed(KeyEvent keyEvent) {
             if (keyEvent.getKeyCode() == KeyEvent.VK_ENTER){
                 showPesquisa(pesquisa.getText());
+                System.out.println("Pesquisou");
             }   
         }
   
         public void keyReleased(KeyEvent keyEvent) {
+
         }
   
         public void keyTyped(KeyEvent keyEvent) {
+            showPesquisa(pesquisa.getText());
+            System.out.println("Pesquisou");
         }
   
       };
@@ -118,34 +122,48 @@ public class TelaMusicas implements ActionListener{
     }
 
     public void showPesquisa(String digitado){
-        titulo.setFont(new Font("Ms Gothic", Font.BOLD, 24));
-		titulo.setForeground(Color.white);
-		titulo.setBounds(365, 15, 200, 48);
-
-        pesquisa.setBounds(505, 20, 185, 20);
-        pesquisa.setLayout(null);
-        pesquisa.setText(null);
-        pesquisa.addKeyListener(keyListener);
-        pesquisa.setText(digitado);
 
         model.clear();
         for (Musica musica : controle.getPesquisa().getMusicas()){
             String temp = "";
             for (int i = 0; i < digitado.length(); i++){
-                try{
-                    temp += musica.getNome().charAt(i);
+
+
+                if (digitado.length() <= musica.getNome().length()){
+                    try{
+                        temp += musica.getNome().charAt(i);
+                    }
+                    catch (RuntimeException e){
+                        System.out.println(e.getMessage());
+                        System.out.println("Out of index");
+                    }
                 }
-                catch (RuntimeException e){
-                    System.out.println(e.getMessage());
-                    System.out.println("Out of index");
-                }
+
             }
 
-            if (temp.equals(digitado)){
+            if (temp.toLowerCase().equals(digitado.toLowerCase())){
                 model.addElement(musica);
             }
 
         }
+
+        // Jeito que achei na internet, teve a mesma funcionalidade do meu metodo
+        // for (Musica musica : controle.getPesquisa().getMusicas()){
+            
+        //     Pattern pattern = Pattern.compile(digitado, Pattern.CASE_INSENSITIVE);
+        //     Matcher matcher = pattern.matcher(musica.getNome());
+        //     boolean matchFound = matcher.find();
+        //     if (matchFound){
+        //         System.out.println("Match found");
+        //         model.addElement(musica);
+        //     }
+        //     else{
+        //         System.out.println("Match not found");
+        //     }
+          
+        // }
+
+
         list.setModel(model);
         scrollPane.setViewportView(list);
 
@@ -158,26 +176,6 @@ public class TelaMusicas implements ActionListener{
         renderer.setHorizontalAlignment(JLabel.CENTER);
 
         scrollPane.setBounds(110, 60, 579, 420);
-
-        botaoVoltar.setFont(new Font("Ms Gothic", Font.BOLD, 16));
-		botaoVoltar.setBackground(Color.decode("#A020F0"));
-        botaoVoltar.setForeground(Color.WHITE);
-		botaoVoltar.setBounds(264, 494, 125, 35);
-        botaoVoltar.setBorder(null);
-        botaoVoltar.setFocusPainted(false);
-
-        botaoVisualizar.setFont(new Font("Ms Gothic", Font.BOLD, 16));
-		botaoVisualizar.setBackground(Color.decode("#A020F0"));
-        botaoVisualizar.setForeground(Color.WHITE);
-		botaoVisualizar.setBounds(411, 494, 125, 35);
-        botaoVisualizar.setBorder(null);
-        botaoVisualizar.setFocusPainted(false);
-
-        janela.add(titulo);
-        janela.add(botaoVoltar);
-        janela.add(botaoVisualizar);
-        janela.add(scrollPane);
-        janela.add(pesquisa);
 
         janela.repaint();
     }
