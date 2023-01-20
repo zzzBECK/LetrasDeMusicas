@@ -3,3 +3,8 @@ bin/
 
 #Ignoring Vscode folder
 .vscode/
+
+#Ignoring IntelliJ folders and file
+.idea/
+out/
+*.iml
