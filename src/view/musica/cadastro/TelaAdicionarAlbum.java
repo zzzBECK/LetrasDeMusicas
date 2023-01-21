@@ -62,7 +62,7 @@ public class TelaAdicionarAlbum implements ActionListener{
 		titulo.setForeground(Color.white);
 		titulo.setBounds(300, 15, 300, 48);
 
-        for (Album album : controle.getDados().getAlbuns()){
+        for (Album album : controle.getDados().getArtistas().get(controle.getDados().getArtistas().size() - 1).getAlbuns()){
             model.addElement(album);
         }
         list.setModel(model);

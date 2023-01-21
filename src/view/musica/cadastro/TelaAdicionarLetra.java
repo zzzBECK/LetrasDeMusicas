@@ -32,10 +32,11 @@ public class TelaAdicionarLetra implements ActionListener{
     private String duracaoDigitado;
     private DefaultListModel<Album> model;
     private Album album;
+    private String letraDigitado;
 
 
     public TelaAdicionarLetra(Controle controle, JFrame janela, boolean isArtista, String nomeDigitado,
-                              String duracaoDigitado, DefaultListModel<Album> model, Album album){
+                              String duracaoDigitado, DefaultListModel<Album> model, Album album, String letraDigitado){
         this.controle = controle;
         this.janela = janela;
         this.isArtista = isArtista;
@@ -43,6 +44,7 @@ public class TelaAdicionarLetra implements ActionListener{
         this.duracaoDigitado = duracaoDigitado;
         this.model = model;
         this.album = album;
+        this.letraDigitado = letraDigitado;
     }
 
     public JButton getButaoSalvar(){
@@ -58,8 +60,13 @@ public class TelaAdicionarLetra implements ActionListener{
 		titulo.setForeground(Color.white);
 		titulo.setBounds(350, 15, 300, 48);
 
-        entradaLetra.setToolTipText("Digite a letra");
-        entradaLetra.setText("Digite a Letra:");
+        if (letraDigitado == null){
+            entradaLetra.setToolTipText("Digite a letra");
+            entradaLetra.setText("Digite a Letra:");
+        }
+        else{
+            entradaLetra.setText(letraDigitado);
+        }
         entradaLetra.setBounds(110, 60, 579, 400); 
         entradaLetra.setLineWrap(true);
 
@@ -98,14 +105,28 @@ public class TelaAdicionarLetra implements ActionListener{
             janela.remove(botaoSalvar);
             janela.remove(botaoCancelar);
 
-            TelaCadastroMusica telaCadastroMusica = new TelaCadastroMusica(controle, janela, isArtista, album, nomeDigitado, duracaoDigitado, model, null);
-			
-            telaCadastroMusica.show();
+            if (entradaLetra.getText().equals("Digite a Letra:")){
+                TelaCadastroMusica telaCadastroMusica = new TelaCadastroMusica(controle, janela, isArtista, album, nomeDigitado, duracaoDigitado, model, null);
+
+                telaCadastroMusica.show();
     
-			telaCadastroMusica.getBotaoCadastrar().addActionListener(telaCadastroMusica);
-			telaCadastroMusica.getBotaoCancelar().addActionListener(telaCadastroMusica);
-			telaCadastroMusica.getBotaoAlbum().addActionListener(telaCadastroMusica);
-			telaCadastroMusica.getBotaoLetra().addActionListener(telaCadastroMusica);
+                telaCadastroMusica.getBotaoCadastrar().addActionListener(telaCadastroMusica);
+                telaCadastroMusica.getBotaoCancelar().addActionListener(telaCadastroMusica);
+                telaCadastroMusica.getBotaoAlbum().addActionListener(telaCadastroMusica);
+                telaCadastroMusica.getBotaoLetra().addActionListener(telaCadastroMusica);
+            }
+            else{
+                TelaCadastroMusica telaCadastroMusica = new TelaCadastroMusica(controle, janela, isArtista, album, nomeDigitado, duracaoDigitado, model, entradaLetra.getText());
+                
+                telaCadastroMusica.show();
+    
+                telaCadastroMusica.getBotaoCadastrar().addActionListener(telaCadastroMusica);
+                telaCadastroMusica.getBotaoCancelar().addActionListener(telaCadastroMusica);
+                telaCadastroMusica.getBotaoAlbum().addActionListener(telaCadastroMusica);
+                telaCadastroMusica.getBotaoLetra().addActionListener(telaCadastroMusica);
+            }
+            
+
         }
 
         if (src == botaoSalvar){

@@ -32,6 +32,7 @@ public class TelaEditarMusica implements ActionListener{
     private JScrollPane scrollPane = new JScrollPane();
 
     private JButton botaoCancelar = new JButton("Cancelar");
+    private JButton botaoRemover = new JButton("Remover");
     private JButton botaoEditar = new JButton("Editar");
 
 
@@ -46,6 +47,10 @@ public class TelaEditarMusica implements ActionListener{
         return botaoEditar;
     }
 
+    public JButton getBotaoRemover(){
+        return botaoRemover;
+    }
+
     public JButton getBotaoCancelar(){
         return botaoCancelar;
     }
@@ -56,6 +61,7 @@ public class TelaEditarMusica implements ActionListener{
         nome.setBounds(50, 30, 400, 30);
         nome.setText("Nome: " + artista.getNome());
 
+        model.clear();
         for (Album album : artista.getAlbuns()){
             for (Musica musica : album.getMusicas()){
                 model.addElement(musica);
@@ -77,20 +83,28 @@ public class TelaEditarMusica implements ActionListener{
         botaoCancelar.setFont(new Font("Ms Gothic", Font.BOLD, 16));
 		botaoCancelar.setBackground(Color.decode("#A020F0"));
         botaoCancelar.setForeground(Color.WHITE);
-		botaoCancelar.setBounds(264, 494, 125, 35);
+		botaoCancelar.setBounds(190, 494, 125, 35);
         botaoCancelar.setBorder(null);
         botaoCancelar.setFocusPainted(false);
+
+        botaoRemover.setFont(new Font("Ms Gothic", Font.BOLD, 16));
+		botaoRemover.setBackground(Color.decode("#A020F0"));
+        botaoRemover.setForeground(Color.WHITE);
+		botaoRemover.setBounds(337, 494, 125, 35);
+        botaoRemover.setBorder(null);
+        botaoRemover.setFocusPainted(false);
 
         botaoEditar.setFont(new Font("Ms Gothic", Font.BOLD, 16));
 		botaoEditar.setBackground(Color.decode("#A020F0"));
         botaoEditar.setForeground(Color.WHITE);
-		botaoEditar.setBounds(411, 494, 125, 35);
+		botaoEditar.setBounds(484, 494, 125, 35);
         botaoEditar.setBorder(null);
         botaoEditar.setFocusPainted(false);
 
         janela.add(nome);
         janela.add(scrollPane);
         janela.add(botaoCancelar);
+        janela.add(botaoRemover);
         janela.add(botaoEditar);
 
         janela.repaint();
@@ -105,6 +119,7 @@ public class TelaEditarMusica implements ActionListener{
             janela.remove(nome);
             janela.remove(scrollPane);
             janela.remove(botaoCancelar);
+            janela.remove(botaoRemover);
             janela.remove(botaoEditar);
     
             
@@ -123,20 +138,32 @@ public class TelaEditarMusica implements ActionListener{
         }
 
         if (src == botaoEditar){
-            janela.remove(nome);
-            janela.remove(scrollPane);
-            janela.remove(botaoCancelar);
-            janela.remove(botaoEditar);
+            if (list.getSelectedValue() != null){
+                janela.remove(nome);
+                janela.remove(scrollPane);
+                janela.remove(botaoCancelar);
+                janela.remove(botaoRemover);
+                janela.remove(botaoEditar);
 
-            TelaMusicaSelecionada telaMusicaSelecionada = new TelaMusicaSelecionada(controle, janela, isArtista, list.getSelectedValue());
+                TelaMusicaSelecionada telaMusicaSelecionada = new TelaMusicaSelecionada(controle, janela, isArtista, list.getSelectedValue());
 
-            telaMusicaSelecionada.showEdit();
+                telaMusicaSelecionada.showEdit();
 
-            telaMusicaSelecionada.getBotaoAlbum().addActionListener(telaMusicaSelecionada);
-            telaMusicaSelecionada.getBotaoCadastrar().addActionListener(telaMusicaSelecionada);
-            telaMusicaSelecionada.getBotaoCancelar().addActionListener(telaMusicaSelecionada);
-            telaMusicaSelecionada.getBotaoLetra().addActionListener(telaMusicaSelecionada);
+                telaMusicaSelecionada.getBotaoAlbum().addActionListener(telaMusicaSelecionada);
+                telaMusicaSelecionada.getBotaoCadastrar().addActionListener(telaMusicaSelecionada);
+                telaMusicaSelecionada.getBotaoCancelar().addActionListener(telaMusicaSelecionada);
+                telaMusicaSelecionada.getBotaoLetra().addActionListener(telaMusicaSelecionada);
+            }
 
+        }
+
+        if (src == botaoRemover){
+            if (list.getSelectedValue() != null){
+
+                controle.removerMusica(list.getSelectedValue());
+
+                show();
+            }
         }
     }
 }

@@ -42,7 +42,7 @@ public class TelaCadastroMusica implements ActionListener{
     private Album album;
     private String nomeDigitado;
     private String duracaoDigitado;
-    private String letra;
+    private String letraDigitado;
 
 
 
@@ -54,7 +54,7 @@ public class TelaCadastroMusica implements ActionListener{
      
     
     public TelaCadastroMusica(Controle controle, JFrame janela, boolean isArtista, Album album, String nomeDigitado,
-                              String duracaoDigitado, DefaultListModel<Album> model, String letra){
+                              String duracaoDigitado, DefaultListModel<Album> model, String letraDigitado){
         this.controle = controle;
         this.janela = janela;
         this.isArtista = isArtista;
@@ -62,7 +62,7 @@ public class TelaCadastroMusica implements ActionListener{
         this.nomeDigitado = nomeDigitado;
         this.duracaoDigitado = duracaoDigitado;
         this.model = model;
-        this.letra = letra;
+        this.letraDigitado = letraDigitado;
     }
 
     public JButton getBotaoCadastrar(){
@@ -179,7 +179,7 @@ public class TelaCadastroMusica implements ActionListener{
 
             Double dur = Double.parseDouble(entradaDuracao.getText());
 
-            controle.musica(nomeDigitado, letra, dur, album);
+            controle.musica(nomeDigitado, letraDigitado, dur, album);
 
             TelaAplicativo telaAplicativo = new TelaAplicativo(controle, janela, isArtista);
 
@@ -207,7 +207,7 @@ public class TelaCadastroMusica implements ActionListener{
             janela.remove(botaoCadastrar);
             janela.remove(botaoCancelar);
 
-            TelaAdicionarAlbum telaAdicionarAlbum = new TelaAdicionarAlbum(controle, janela, isArtista, entradaNome.getText(), entradaDuracao.getText(), model, letra);
+            TelaAdicionarAlbum telaAdicionarAlbum = new TelaAdicionarAlbum(controle, janela, isArtista, entradaNome.getText(), entradaDuracao.getText(), model, letraDigitado);
 
             telaAdicionarAlbum.show();
 
@@ -227,7 +227,7 @@ public class TelaCadastroMusica implements ActionListener{
             janela.remove(botaoCadastrar);
             janela.remove(botaoCancelar);
 
-            TelaAdicionarLetra telaAdicionarLetra = new TelaAdicionarLetra(controle, janela, isArtista, entradaNome.getText(), entradaDuracao.getText(), model, album);
+            TelaAdicionarLetra telaAdicionarLetra = new TelaAdicionarLetra(controle, janela, isArtista, entradaNome.getText(), entradaDuracao.getText(), model, album, letraDigitado);
 
             telaAdicionarLetra.show();
 
