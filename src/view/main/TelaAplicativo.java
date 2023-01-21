@@ -228,7 +228,7 @@ public class TelaAplicativo implements ActionListener{
 
 			telaEditarAlbum.getBotaoCancelar().addActionListener(telaEditarAlbum);
 			telaEditarAlbum.getBotaoVisualizar().addActionListener(telaEditarAlbum);
-
+			telaEditarAlbum.getBotaoRemover().addActionListener(telaEditarAlbum);
 		}
 
 		if (src ==  editarMusBotao){

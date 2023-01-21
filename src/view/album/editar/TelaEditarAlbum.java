@@ -31,6 +31,7 @@ public class TelaEditarAlbum implements ActionListener{
     private JScrollPane scrollPane = new JScrollPane();
 
     private JButton botaoCancelar = new JButton("Cancelar");
+    private JButton botaoRemover = new JButton("Remover");
     private JButton botaoEditar = new JButton("Editar");
 
     public TelaEditarAlbum(Controle controle, JFrame janela, boolean isArtista){
@@ -44,6 +45,10 @@ public class TelaEditarAlbum implements ActionListener{
         return botaoEditar;
     }
 
+    public JButton getBotaoRemover(){
+        return botaoRemover;
+    }
+
     public JButton getBotaoCancelar(){
         return botaoCancelar;
     }
@@ -54,6 +59,7 @@ public class TelaEditarAlbum implements ActionListener{
         nome.setBounds(50, 30, 400, 30);
         nome.setText("Nome: " + artista.getNome());
 
+        model.clear();
         for (Album album : artista.getAlbuns()){
             model.addElement(album);
         }
@@ -73,14 +79,21 @@ public class TelaEditarAlbum implements ActionListener{
         botaoCancelar.setFont(new Font("Ms Gothic", Font.BOLD, 16));
 		botaoCancelar.setBackground(Color.decode("#A020F0"));
         botaoCancelar.setForeground(Color.WHITE);
-		botaoCancelar.setBounds(264, 494, 125, 35);
+		botaoCancelar.setBounds(190, 494, 125, 35);
         botaoCancelar.setBorder(null);
         botaoCancelar.setFocusPainted(false);
+
+        botaoRemover.setFont(new Font("Ms Gothic", Font.BOLD, 16));
+		botaoRemover.setBackground(Color.decode("#A020F0"));
+        botaoRemover.setForeground(Color.WHITE);
+		botaoRemover.setBounds(337, 494, 125, 35);
+        botaoRemover.setBorder(null);
+        botaoRemover.setFocusPainted(false);
 
         botaoEditar.setFont(new Font("Ms Gothic", Font.BOLD, 16));
 		botaoEditar.setBackground(Color.decode("#A020F0"));
         botaoEditar.setForeground(Color.WHITE);
-		botaoEditar.setBounds(411, 494, 125, 35);
+		botaoEditar.setBounds(484, 494, 125, 35);
         botaoEditar.setBorder(null);
         botaoEditar.setFocusPainted(false);
 
@@ -88,13 +101,11 @@ public class TelaEditarAlbum implements ActionListener{
         janela.add(scrollPane);
         janela.add(botaoCancelar);
         janela.add(botaoEditar);
+        janela.add(botaoRemover);
 
         janela.repaint();
     }
 
-    public void showEdit(){
-
-    }
 
     @Override
     public void actionPerformed(ActionEvent e) {
@@ -105,6 +116,7 @@ public class TelaEditarAlbum implements ActionListener{
             janela.remove(scrollPane);
             janela.remove(botaoCancelar);
             janela.remove(botaoEditar);
+            janela.remove(botaoRemover);
 
             
             TelaAplicativo telaAplicativo = new TelaAplicativo(controle, janela, isArtista);
@@ -119,6 +131,20 @@ public class TelaEditarAlbum implements ActionListener{
             telaAplicativo.getBotaoVoltar().addActionListener(telaAplicativo);
             telaAplicativo.getEditarAlbBotao().addActionListener(telaAplicativo);
             telaAplicativo.getEditarMusBotao().addActionListener(telaAplicativo);
+        }
+
+        if (src == botaoRemover){
+            if (list.getSelectedValue() != null){
+                janela.remove(nome);
+                janela.remove(scrollPane);
+                janela.remove(botaoCancelar);
+                janela.remove(botaoEditar);
+                janela.remove(botaoRemover);
+
+                controle.removerAlbum(list.getSelectedValue());
+
+                show();
+            }
         }
 
         if (src == botaoEditar){

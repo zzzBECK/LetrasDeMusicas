@@ -120,6 +120,19 @@ public class Controle{
         dados.getMusicas().remove(musica);
     }
 
+    public void removerAlbum(Album album){
+
+        for (Musica musica : album.getMusicas()){
+            dados.getMusicas().remove(musica);
+        }
+
+        for (Artista artista : album.getArtistas()){
+            artista.removerAlbum(album);
+        }
+
+        dados.getAlbuns().remove(album);
+    }
+
     public Dados getDados(){
         return dados;
     }
