@@ -22,14 +22,13 @@ public class TelaAdicionarAlbum implements ActionListener{
     private boolean isArtista;
 
     private JLabel titulo = new JLabel("Adicionar Album:");
-
     private DefaultListModel<Album> model = new DefaultListModel<>();
     private JList<Album> list = new JList<>();
+    private JScrollPane scrollPane = new JScrollPane();
 
     private JButton botaoCadastrar = new JButton("Cadastrar");
     private JButton botaoCancelar = new JButton("Cancelar");
 
-    private JScrollPane scrollPane = new JScrollPane();
 
     private String nomeDigitado;
     private String duracaoDigitado;
@@ -63,7 +62,7 @@ public class TelaAdicionarAlbum implements ActionListener{
 		titulo.setForeground(Color.white);
 		titulo.setBounds(300, 15, 300, 48);
 
-        for (Album album : controle.getPesquisa().getAlbuns()){
+        for (Album album : controle.getDados().getAlbuns()){
             model.addElement(album);
         }
         list.setModel(model);

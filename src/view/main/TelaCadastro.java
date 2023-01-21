@@ -1,4 +1,4 @@
-package view;
+package view.main;
 
 import java.awt.Color;
 import java.awt.Font;
@@ -161,6 +161,8 @@ public class TelaCadastro implements ActionListener{
                 telaAplicativo.getCAlbmBotao().addActionListener(telaAplicativo);
                 telaAplicativo.getCMusBotao().addActionListener(telaAplicativo);
                 telaAplicativo.getBotaoVoltar().addActionListener(telaAplicativo);
+                telaAplicativo.getEditarAlbBotao().addActionListener(telaAplicativo);
+                telaAplicativo.getEditarMusBotao().addActionListener(telaAplicativo);
             }
             else{
                 TelaAplicativo telaAplicativo = new TelaAplicativo(controle, janela, false);
@@ -174,6 +176,8 @@ public class TelaCadastro implements ActionListener{
                 telaAplicativo.getCAlbmBotao().addActionListener(telaAplicativo);
                 telaAplicativo.getCMusBotao().addActionListener(telaAplicativo);
                 telaAplicativo.getBotaoVoltar().addActionListener(telaAplicativo);
+                telaAplicativo.getEditarAlbBotao().addActionListener(telaAplicativo);
+                telaAplicativo.getEditarMusBotao().addActionListener(telaAplicativo);
             }
 
 

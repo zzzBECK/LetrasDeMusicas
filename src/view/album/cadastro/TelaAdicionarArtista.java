@@ -65,7 +65,7 @@ public class TelaAdicionarArtista implements ActionListener{
 		titulo.setForeground(Color.white);
 		titulo.setBounds(300, 15, 300, 48);
 
-        for (Artista artista : controle.getPesquisa().getArtistas()){
+        for (Artista artista : controle.getDados().getArtistas()){
             model.addElement(artista);
         }
         list.setModel(model);

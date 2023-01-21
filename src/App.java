@@ -1,4 +1,4 @@
-import view.TelaInicial;
+import view.main.TelaInicial;
 
 public class App {
     public static void main(String[] args) throws Exception {

@@ -18,7 +18,7 @@ import javax.swing.JTextField;
 
 import controller.Controle;
 import model.Album;
-import view.TelaAplicativo;
+import view.main.TelaAplicativo;
 
 public class TelaAlbuns implements ActionListener{
     private Controle controle;
@@ -81,7 +81,7 @@ public class TelaAlbuns implements ActionListener{
         pesquisa.setText(null);
         pesquisa.addKeyListener(keyListener);
 
-        for (Album album : controle.getPesquisa().getAlbuns()){
+        for (Album album : controle.getDados().getAlbuns()){
             model.addElement(album);
         }
 
@@ -124,7 +124,7 @@ public class TelaAlbuns implements ActionListener{
     public void showPesquisa(String digitado){
 
         model.clear();
-        for (Album album : controle.getPesquisa().getAlbuns()){
+        for (Album album : controle.getDados().getAlbuns()){
             String temp = "";
             for (int i = 0; i < digitado.length(); i++){
 
@@ -186,6 +186,8 @@ public class TelaAlbuns implements ActionListener{
             telaAplicativo.getCAlbmBotao().addActionListener(telaAplicativo);
             telaAplicativo.getCMusBotao().addActionListener(telaAplicativo);
             telaAplicativo.getBotaoVoltar().addActionListener(telaAplicativo);
+            telaAplicativo.getEditarAlbBotao().addActionListener(telaAplicativo);
+            telaAplicativo.getEditarMusBotao().addActionListener(telaAplicativo);
 
         }
         

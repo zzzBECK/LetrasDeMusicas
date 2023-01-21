@@ -1,4 +1,4 @@
-package view.musica.cadastro;
+package view.musica.editar;
 
 import java.awt.Color;
 import java.awt.Font;
@@ -15,58 +15,53 @@ import javax.swing.JTextField;
 
 import controller.Controle;
 import model.Album;
-import view.main.TelaAplicativo;
+import model.Musica;
 
-public class TelaCadastroMusica implements ActionListener{
+public class TelaMusicaSelecionada implements ActionListener{
     private Controle controle;
     private JFrame janela;
     private boolean isArtista;
+    private Musica musica;
 
-    private JLabel titulo = new JLabel("Cadastro:");
-
+    private JLabel titulo = new JLabel("Editar Música:");
     private JLabel nome = new JLabel("Nome:");
     private JTextField entradaNome = new JTextField();
 
     private JLabel duracao = new JLabel("Duração:");
     private JTextField entradaDuracao = new JTextField();
 
-    private JButton botaoLetra = new JButton("Adicionar Letra");
-    private JButton botaoCadastrar = new JButton("Cadastrar");
-    private JButton botaoCancelar = new JButton("Cancelar");
-    private JButton botaoAlbum = new JButton("Adicionar Album");
-
     private DefaultListModel<Album> model = new DefaultListModel<>();
     private JScrollPane scrollPane = new JScrollPane();
     private JList<Album> list = new JList<>();
 
-    private Album album;
+    private JButton botaoLetra = new JButton("Editar Letra");
+    private JButton botaoEditar = new JButton("Editar");
+    private JButton botaoCancelar = new JButton("Cancelar");
+    private JButton botaoAlbum = new JButton("Editar Album");
+
+
     private String nomeDigitado;
     private String duracaoDigitado;
-    private String letra;
 
-
-
-    public TelaCadastroMusica(Controle controle, JFrame janela, boolean isArtista){
+    public TelaMusicaSelecionada(Controle controle, JFrame janela, boolean isArtista, Musica musica){
         this.controle = controle;
         this.janela = janela;
         this.isArtista = isArtista;
+        this.musica = musica;
     }
-     
-    
-    public TelaCadastroMusica(Controle controle, JFrame janela, boolean isArtista, Album album, String nomeDigitado,
-                              String duracaoDigitado, DefaultListModel<Album> model, String letra){
+
+    public TelaMusicaSelecionada(Controle controle, JFrame janela, boolean isArtista, Musica musica, String nomeDigitado, String duracaoDigitado){
         this.controle = controle;
         this.janela = janela;
         this.isArtista = isArtista;
-        this.album = album;
+        this.musica = musica;
         this.nomeDigitado = nomeDigitado;
         this.duracaoDigitado = duracaoDigitado;
-        this.model = model;
-        this.letra = letra;
     }
 
+
     public JButton getBotaoCadastrar(){
-        return botaoCadastrar;
+        return botaoEditar;
     }
 
     public JButton getBotaoCancelar(){
@@ -81,7 +76,13 @@ public class TelaCadastroMusica implements ActionListener{
         return botaoLetra;
     }
 
-    public void show(){
+
+    public void showEdit(){
+        if (nomeDigitado == null && duracaoDigitado == null){
+            nomeDigitado = musica.getNome();
+            duracaoDigitado = musica.getDuracao().toString();
+        }
+
         titulo.setFont(new Font("Ms Gothic", Font.BOLD, 24));
 		titulo.setForeground(Color.white);
         titulo.setBounds(330, 70, 360, 60);
@@ -90,7 +91,6 @@ public class TelaCadastroMusica implements ActionListener{
         nome.setFont(new Font("Ms Gothic", Font.BOLD, 24));
         nome.setForeground(Color.white);
         
-        entradaNome.setText(nomeDigitado);
         entradaNome.setBounds(248, 173, 350, 23);
         entradaNome.setLayout(null);
         entradaNome.setText(nomeDigitado);
@@ -105,7 +105,7 @@ public class TelaCadastroMusica implements ActionListener{
         entradaDuracao.setText(duracaoDigitado);
 
         model.removeAllElements();
-        model.addElement(album);
+        model.addElement(musica.getAlbum());
         list.setModel(model);
         scrollPane.setViewportView(list);
 
@@ -130,12 +130,13 @@ public class TelaCadastroMusica implements ActionListener{
         botaoAlbum.setBorder(null);
         botaoAlbum.setFocusPainted(false);
 
-		botaoCadastrar.setFont(new Font("Ms Gothic", Font.BOLD, 16));
-		botaoCadastrar.setBackground(Color.decode("#A020F0"));
-        botaoCadastrar.setForeground(Color.WHITE);
-		botaoCadastrar.setBounds(416, 494, 125, 35);
-        botaoCadastrar.setBorder(null);
-        botaoCadastrar.setFocusPainted(false);
+
+		botaoEditar.setFont(new Font("Ms Gothic", Font.BOLD, 16));
+		botaoEditar.setBackground(Color.decode("#A020F0"));
+        botaoEditar.setForeground(Color.WHITE);
+		botaoEditar.setBounds(416, 494, 125, 35);
+        botaoEditar.setBorder(null);
+        botaoEditar.setFocusPainted(false);
 
         botaoCancelar.setFont(new Font("Ms Gothic", Font.BOLD, 16));
 		botaoCancelar.setBackground(Color.decode("#A020F0"));
@@ -152,20 +153,17 @@ public class TelaCadastroMusica implements ActionListener{
         janela.add(scrollPane);
         janela.add(botaoAlbum);
         janela.add(botaoLetra);
-        janela.add(botaoCadastrar);
+        janela.add(botaoEditar);
         janela.add(botaoCancelar);
 
         janela.repaint();
     }
 
-
-
-
     @Override
     public void actionPerformed(ActionEvent e) {
-		Object src = e.getSource();
+        Object src = e.getSource();
 
-        if (src == botaoCadastrar){
+        if (src == botaoLetra){
             janela.remove(titulo);
             janela.remove(nome);
             janela.remove(entradaNome);
@@ -174,25 +172,15 @@ public class TelaCadastroMusica implements ActionListener{
             janela.remove(scrollPane);
             janela.remove(botaoAlbum);
             janela.remove(botaoLetra);
-            janela.remove(botaoCadastrar);
+            janela.remove(botaoEditar);
             janela.remove(botaoCancelar);
 
-            Double dur = Double.parseDouble(entradaDuracao.getText());
+            TelaLetraEAlbum telaLetraEAlbum = new TelaLetraEAlbum(controle, janela, isArtista, musica, entradaNome.getText(), entradaDuracao.getText());
 
-            controle.musica(nomeDigitado, letra, dur, album);
+            telaLetraEAlbum.showLetra();
 
-            TelaAplicativo telaAplicativo = new TelaAplicativo(controle, janela, isArtista);
-
-            telaAplicativo.show();
-
-            telaAplicativo.getArtBotao().addActionListener(telaAplicativo);
-            telaAplicativo.getAlbBotao().addActionListener(telaAplicativo);
-            telaAplicativo.getMusBotao().addActionListener(telaAplicativo);
-            telaAplicativo.getCAlbmBotao().addActionListener(telaAplicativo);
-            telaAplicativo.getCMusBotao().addActionListener(telaAplicativo);
-            telaAplicativo.getBotaoVoltar().addActionListener(telaAplicativo);
-            telaAplicativo.getEditarAlbBotao().addActionListener(telaAplicativo);
-            telaAplicativo.getEditarMusBotao().addActionListener(telaAplicativo);
+            telaLetraEAlbum.getBotaoCancelar().addActionListener(telaLetraEAlbum);
+            telaLetraEAlbum.getBotaoSalvarLetra().addActionListener(telaLetraEAlbum);
         }
 
         if (src == botaoAlbum){
@@ -204,18 +192,18 @@ public class TelaCadastroMusica implements ActionListener{
             janela.remove(scrollPane);
             janela.remove(botaoAlbum);
             janela.remove(botaoLetra);
-            janela.remove(botaoCadastrar);
+            janela.remove(botaoEditar);
             janela.remove(botaoCancelar);
 
-            TelaAdicionarAlbum telaAdicionarAlbum = new TelaAdicionarAlbum(controle, janela, isArtista, entradaNome.getText(), entradaDuracao.getText(), model, letra);
+            TelaLetraEAlbum telaLetraEAlbum = new TelaLetraEAlbum(controle, janela, isArtista, musica, entradaNome.getText(), entradaDuracao.getText());
 
-            telaAdicionarAlbum.show();
+            telaLetraEAlbum.showAlbum();
 
-            telaAdicionarAlbum.getBotaoCadastrar().addActionListener(telaAdicionarAlbum);
-            telaAdicionarAlbum.getBotaoCancelar().addActionListener(telaAdicionarAlbum);
+            telaLetraEAlbum.getBotaoCancelar().addActionListener(telaLetraEAlbum);
+            telaLetraEAlbum.getBotaoSalvarAlbum().addActionListener(telaLetraEAlbum);
         }
 
-        if (src == botaoLetra){
+        if (src == botaoEditar){
             janela.remove(titulo);
             janela.remove(nome);
             janela.remove(entradaNome);
@@ -224,15 +212,20 @@ public class TelaCadastroMusica implements ActionListener{
             janela.remove(scrollPane);
             janela.remove(botaoAlbum);
             janela.remove(botaoLetra);
-            janela.remove(botaoCadastrar);
+            janela.remove(botaoEditar);
             janela.remove(botaoCancelar);
 
-            TelaAdicionarLetra telaAdicionarLetra = new TelaAdicionarLetra(controle, janela, isArtista, entradaNome.getText(), entradaDuracao.getText(), model, album);
+            musica.setNome(entradaNome.getText());
 
-            telaAdicionarLetra.show();
+            Double dur = Double.parseDouble(entradaDuracao.getText());
+            musica.setDuracao(dur);
 
-            telaAdicionarLetra.getBotaoCancelar().addActionListener(telaAdicionarLetra);
-            telaAdicionarLetra.getButaoSalvar().addActionListener(telaAdicionarLetra);
+            TelaEditarMusica telaEditarMusica = new TelaEditarMusica(controle, janela, isArtista);
+
+			telaEditarMusica.show();
+
+			telaEditarMusica.getBotaoCancelar().addActionListener(telaEditarMusica);
+			telaEditarMusica.getBotaoVisualizar().addActionListener(telaEditarMusica);
         }
 
         if (src == botaoCancelar){
@@ -244,23 +237,16 @@ public class TelaCadastroMusica implements ActionListener{
             janela.remove(scrollPane);
             janela.remove(botaoAlbum);
             janela.remove(botaoLetra);
-            janela.remove(botaoCadastrar);
+            janela.remove(botaoEditar);
             janela.remove(botaoCancelar);
 
-            TelaAplicativo telaAplicativo = new TelaAplicativo(controle, janela, isArtista);
+            TelaEditarMusica telaEditarMusica = new TelaEditarMusica(controle, janela, isArtista);
 
-            telaAplicativo.show();
+			telaEditarMusica.show();
 
-            telaAplicativo.getArtBotao().addActionListener(telaAplicativo);
-            telaAplicativo.getAlbBotao().addActionListener(telaAplicativo);
-            telaAplicativo.getMusBotao().addActionListener(telaAplicativo);
-            telaAplicativo.getCAlbmBotao().addActionListener(telaAplicativo);
-            telaAplicativo.getCMusBotao().addActionListener(telaAplicativo);
-            telaAplicativo.getBotaoVoltar().addActionListener(telaAplicativo);
-            telaAplicativo.getEditarAlbBotao().addActionListener(telaAplicativo);
-            telaAplicativo.getEditarMusBotao().addActionListener(telaAplicativo);
+			telaEditarMusica.getBotaoCancelar().addActionListener(telaEditarMusica);
+			telaEditarMusica.getBotaoVisualizar().addActionListener(telaEditarMusica);
         }
         
     }
-
 }

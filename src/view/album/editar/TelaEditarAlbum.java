@@ -16,7 +16,7 @@ import javax.swing.JScrollPane;
 import controller.Controle;
 import model.Album;
 import model.Artista;
-import view.TelaAplicativo;
+import view.main.TelaAplicativo;
 
 public class TelaEditarAlbum implements ActionListener{
     private Controle controle;
@@ -100,12 +100,13 @@ public class TelaEditarAlbum implements ActionListener{
     public void actionPerformed(ActionEvent e) {
         Object src = e.getSource();
 
-        janela.remove(nome);
-        janela.remove(scrollPane);
-        janela.remove(botaoCancelar);
-        janela.remove(botaoEditar);
-
         if (src == botaoCancelar){
+            janela.remove(nome);
+            janela.remove(scrollPane);
+            janela.remove(botaoCancelar);
+            janela.remove(botaoEditar);
+
+            
             TelaAplicativo telaAplicativo = new TelaAplicativo(controle, janela, isArtista);
 
             telaAplicativo.show();

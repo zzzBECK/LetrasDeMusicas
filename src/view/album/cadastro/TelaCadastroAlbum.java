@@ -22,7 +22,7 @@ import javax.swing.text.MaskFormatter;
 
 import controller.Controle;
 import model.Artista;
-import view.TelaAplicativo;
+import view.main.TelaAplicativo;
 
 public class TelaCadastroAlbum implements ActionListener{
     private Controle controle;
@@ -114,8 +114,8 @@ public class TelaCadastroAlbum implements ActionListener{
         botaoArtista.setFocusPainted(false);
 
         if(artistas.isEmpty()){
-            artistas.add(controle.getPesquisa().getArtistas().get(controle.getPesquisa().getArtistas().size() - 1));
-            model.addElement(controle.getPesquisa().getArtistas().get(controle.getPesquisa().getArtistas().size() - 1));
+            artistas.add(controle.getDados().getArtistas().get(controle.getDados().getArtistas().size() - 1));
+            model.addElement(controle.getDados().getArtistas().get(controle.getDados().getArtistas().size() - 1));
         }
 
         if (artista != null)
@@ -185,6 +185,8 @@ public class TelaCadastroAlbum implements ActionListener{
             telaAplicativo.getCAlbmBotao().addActionListener(telaAplicativo);
             telaAplicativo.getCMusBotao().addActionListener(telaAplicativo);
             telaAplicativo.getBotaoVoltar().addActionListener(telaAplicativo);
+            telaAplicativo.getEditarAlbBotao().addActionListener(telaAplicativo);
+            telaAplicativo.getEditarMusBotao().addActionListener(telaAplicativo);
         }
 
         if (src == botaoArtista){
@@ -239,6 +241,8 @@ public class TelaCadastroAlbum implements ActionListener{
             telaAplicativo.getCAlbmBotao().addActionListener(telaAplicativo);
             telaAplicativo.getCMusBotao().addActionListener(telaAplicativo);
             telaAplicativo.getBotaoVoltar().addActionListener(telaAplicativo);
+            telaAplicativo.getEditarAlbBotao().addActionListener(telaAplicativo);
+            telaAplicativo.getEditarMusBotao().addActionListener(telaAplicativo);
 
 
         }

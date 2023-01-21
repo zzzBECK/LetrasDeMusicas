@@ -12,13 +12,12 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JScrollPane;
-import javax.swing.JTextField;
 
 import controller.Controle;
 import model.Album;
 import model.Artista;
 import model.Musica;
-import view.TelaAplicativo;
+import view.main.TelaAplicativo;
 
 public class TelaEditarMusica implements ActionListener{
     private Controle controle;
@@ -35,26 +34,6 @@ public class TelaEditarMusica implements ActionListener{
     private JButton botaoCancelar = new JButton("Cancelar");
     private JButton botaoEditar = new JButton("Editar");
 
-    private JFrame janelaEditar = new JFrame("Editar Música");
-    private JLabel tituloEditar = new JLabel("Editar:");
-    private JLabel nomeEditar = new JLabel("Nome:");
-    private JTextField entradaNomeEditar = new JTextField();
-
-    private JLabel duracaoEditar = new JLabel("Duração:");
-    private JTextField entradaDuracaoEditar = new JTextField();
-
-    private JButton botaoLetra = new JButton("Adicionar Letra");
-
-    private DefaultListModel<Album> modelEditar = new DefaultListModel<>();
-    private JScrollPane scrollPaneEditar = new JScrollPane();
-    private JList<Album> listEditar = new JList<>();
-
-    private Album album;
-    private String nomeDigitado;
-    private String duracaoDigitado;
-    private String letraDigitado;
-
-    private JButton botaoAlbum = new JButton("Adicionar Album");
 
     public TelaEditarMusica(Controle controle, JFrame janela, boolean isArtista){
         this.controle = controle;
@@ -117,111 +96,18 @@ public class TelaEditarMusica implements ActionListener{
         janela.repaint();
     }
 
-    public void showEdit(Musica musica){
-        if (nomeDigitado == null && duracaoDigitado == null && letraDigitado == null){
-            nomeDigitado = musica.getNome();
-            duracaoDigitado = musica.getDuracao().toString();
-            letraDigitado = musica.getLetra();
-            album = musica.getAlbum();
-        }
-
-        tituloEditar.setFont(new Font("Ms Gothic", Font.BOLD, 24));
-		tituloEditar.setForeground(Color.white);
-        tituloEditar.setBounds(330, 70, 360, 60);
-
-        nomeEditar.setBounds(145, 170, 100, 29);
-        nomeEditar.setFont(new Font("Ms Gothic", Font.BOLD, 24));
-        nomeEditar.setForeground(Color.white);
-        
-        entradaNomeEditar.setBounds(248, 173, 350, 23);
-        entradaNomeEditar.setLayout(null);
-        entradaNomeEditar.setText(nomeDigitado);
-
-        duracaoEditar.setBounds(125, 200, 300, 29);
-        duracaoEditar.setFont(new Font("Ms Gothic", Font.BOLD, 24));
-        duracaoEditar.setForeground(Color.white);
-        
-        entradaDuracaoEditar.setText(duracaoDigitado);
-        entradaDuracaoEditar.setBounds(248, 203, 350, 23);
-        entradaDuracaoEditar.setLayout(null);
-        entradaDuracaoEditar.setText(duracaoDigitado);
-
-        modelEditar.removeAllElements();
-        modelEditar.addElement(album);
-        listEditar.setModel(modelEditar);
-        scrollPaneEditar.setViewportView(list);
-
-        listEditar.setForeground(Color.white);
-        listEditar.setFont(new Font("Ms Gothic", Font.BOLD, 16));
-        listEditar.setBackground(Color.gray);
-
-        listEditar.setBounds(250, 350, 350, 128);
-        scrollPaneEditar.setBounds(250, 350, 350, 128);
-
-        botaoLetra.setFont(new Font("Ms Gothic", Font.BOLD, 16));
-		botaoLetra.setBackground(Color.decode("#A020F0"));
-        botaoLetra.setForeground(Color.WHITE);
-		botaoLetra.setBounds(306, 260, 220, 35);
-        botaoLetra.setBorder(null);
-        botaoLetra.setFocusPainted(false);
-
-        botaoAlbum.setFont(new Font("Ms Gothic", Font.BOLD, 16));
-		botaoAlbum.setBackground(Color.decode("#A020F0"));
-        botaoAlbum.setForeground(Color.WHITE);
-		botaoAlbum.setBounds(306, 300, 220, 35);
-        botaoAlbum.setBorder(null);
-        botaoAlbum.setFocusPainted(false);
-
-
-		botaoEditar.setFont(new Font("Ms Gothic", Font.BOLD, 16));
-		botaoEditar.setBackground(Color.decode("#A020F0"));
-        botaoEditar.setForeground(Color.WHITE);
-		botaoEditar.setBounds(416, 494, 125, 35);
-        botaoEditar.setBorder(null);
-        botaoEditar.setFocusPainted(false);
-
-        botaoCancelar.setFont(new Font("Ms Gothic", Font.BOLD, 16));
-		botaoCancelar.setBackground(Color.decode("#A020F0"));
-        botaoCancelar.setForeground(Color.WHITE);
-		botaoCancelar.setBounds(272, 494, 125, 35);
-        botaoCancelar.setBorder(null);
-        botaoCancelar.setFocusPainted(false);
-
-        janelaEditar.add(tituloEditar);
-        janelaEditar.add(nomeEditar);
-        janelaEditar.add(entradaNomeEditar);
-        janelaEditar.add(duracaoEditar);
-        janelaEditar.add(entradaDuracaoEditar);
-        janelaEditar.add(scrollPaneEditar);
-        janelaEditar.add(botaoAlbum);
-        janelaEditar.add(botaoLetra);
-        janelaEditar.add(botaoEditar);
-        janelaEditar.add(botaoCancelar);
-
-        janelaEditar.setVisible(true);
-    }
-
     @Override
     public void actionPerformed(ActionEvent e) {
         Object src = e.getSource();
 
-        janela.remove(nome);
-        janela.remove(scrollPane);
-        janela.remove(botaoCancelar);
-        janela.remove(botaoEditar);
-
-        janelaEditar.remove(tituloEditar);
-        janelaEditar.remove(nomeEditar);
-        janelaEditar.remove(entradaNomeEditar);
-        janelaEditar.remove(duracaoEditar);
-        janelaEditar.remove(entradaDuracaoEditar);
-        janelaEditar.remove(scrollPaneEditar);
-        janelaEditar.remove(botaoAlbum);
-        janelaEditar.remove(botaoLetra);
-        janelaEditar.remove(botaoEditar);
-        janelaEditar.remove(botaoCancelar);
 
         if (src == botaoCancelar){
+            janela.remove(nome);
+            janela.remove(scrollPane);
+            janela.remove(botaoCancelar);
+            janela.remove(botaoEditar);
+    
+            
             TelaAplicativo telaAplicativo = new TelaAplicativo(controle, janela, isArtista);
 
             telaAplicativo.show();
@@ -237,8 +123,20 @@ public class TelaEditarMusica implements ActionListener{
         }
 
         if (src == botaoEditar){
+            janela.remove(nome);
+            janela.remove(scrollPane);
+            janela.remove(botaoCancelar);
+            janela.remove(botaoEditar);
 
-            showEdit(list.getSelectedValue());
+            TelaMusicaSelecionada telaMusicaSelecionada = new TelaMusicaSelecionada(controle, janela, isArtista, list.getSelectedValue());
+
+            telaMusicaSelecionada.showEdit();
+
+            telaMusicaSelecionada.getBotaoAlbum().addActionListener(telaMusicaSelecionada);
+            telaMusicaSelecionada.getBotaoCadastrar().addActionListener(telaMusicaSelecionada);
+            telaMusicaSelecionada.getBotaoCancelar().addActionListener(telaMusicaSelecionada);
+            telaMusicaSelecionada.getBotaoLetra().addActionListener(telaMusicaSelecionada);
+
         }
     }
 }

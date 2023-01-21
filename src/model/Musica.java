@@ -54,6 +54,12 @@ public class Musica{
         return album;
     }  
 
+    public void setAlbum(Album album){
+        this.getAlbum().removerMusica(this);
+        this.album = album;
+        this.album.adicionarMusica(this);
+    }
+
     @Override
     public String toString(){
         return "Nome: " + nome + " Duracao: " + duracao + " Artista: " + getAlbum().getArtistas().get(0).getNome();

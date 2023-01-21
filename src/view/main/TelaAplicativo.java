@@ -1,4 +1,4 @@
-package view;
+package view.main;
 
 import java.awt.Color;
 import java.awt.Font;
@@ -11,9 +11,11 @@ import javax.swing.JFrame;
 import controller.Controle;
 import view.album.TelaAlbuns;
 import view.album.cadastro.TelaCadastroAlbum;
+import view.album.editar.TelaEditarAlbum;
 import view.artista.TelaArtistas;
 import view.musica.TelaMusicas;
 import view.musica.cadastro.TelaCadastroMusica;
+import view.musica.editar.TelaEditarMusica;
 
 public class TelaAplicativo implements ActionListener{
 	private Controle controle;
@@ -25,6 +27,8 @@ public class TelaAplicativo implements ActionListener{
 	private JButton artBotao = new JButton("Artistas");
 	private JButton cAlbmBotao = new JButton("Cadastrar Álbum");
 	private JButton cMusBotao = new JButton("Cadastrar Música");
+	private JButton editarAlbBotao = new JButton("Editar Álbum");
+	private JButton editarMusBotao = new JButton("Editar Música");
 
 	private JButton botaoVoltar = new JButton("Voltar");
 
@@ -61,9 +65,18 @@ public class TelaAplicativo implements ActionListener{
 		return cMusBotao;
 	}
 
+	public JButton getEditarAlbBotao(){
+		return editarAlbBotao;
+	}
+
+	public JButton getEditarMusBotao(){
+		return editarMusBotao;
+	}
+
 	public JButton getBotaoVoltar(){
 		return botaoVoltar;
 	}
+
 
 	public void show(){
 		
@@ -91,16 +104,30 @@ public class TelaAplicativo implements ActionListener{
 		cAlbmBotao.setFont(fonte);
 		cAlbmBotao.setBackground(Color.decode("#A020F0"));
         cAlbmBotao.setForeground(Color.WHITE);
-		cAlbmBotao.setBounds(190, 300, 187, 62);
+		cAlbmBotao.setBounds(200, 300, 187, 62);
         cAlbmBotao.setBorder(null);
         cAlbmBotao.setFocusPainted(false);
 
 		cMusBotao.setFont(fonte);
 		cMusBotao.setBackground(Color.decode("#A020F0"));
         cMusBotao.setForeground(Color.WHITE);
-		cMusBotao.setBounds(432, 300, 187, 62);
+		cMusBotao.setBounds(395, 300, 187, 62);
         cMusBotao.setBorder(null);
         cMusBotao.setFocusPainted(false);
+
+		editarAlbBotao.setFont(fonte);
+		editarAlbBotao.setBackground(Color.decode("#A020F0"));
+        editarAlbBotao.setForeground(Color.WHITE);
+		editarAlbBotao.setBounds(5, 300, 187, 62);
+        editarAlbBotao.setBorder(null);
+        editarAlbBotao.setFocusPainted(false);
+
+		editarMusBotao.setFont(fonte);
+		editarMusBotao.setBackground(Color.decode("#A020F0"));
+        editarMusBotao.setForeground(Color.WHITE);
+		editarMusBotao.setBounds(590, 300, 187, 62);
+        editarMusBotao.setBorder(null);
+        editarMusBotao.setFocusPainted(false);
 
 		botaoVoltar.setFont(fonte);
 		botaoVoltar.setBackground(Color.decode("#A020F0"));
@@ -118,6 +145,8 @@ public class TelaAplicativo implements ActionListener{
 		if (isArtista){
 			janela.add(cAlbmBotao);
 			janela.add(cMusBotao);
+			janela.add(editarAlbBotao);
+			janela.add(editarMusBotao);
 		}
 
 
@@ -129,14 +158,16 @@ public class TelaAplicativo implements ActionListener{
     public void actionPerformed(ActionEvent e){
 		Object src = e.getSource();
 
-		if (src == artBotao){
+		janela.remove(musBotao);
+		janela.remove(albBotao);
+		janela.remove(artBotao);
+		janela.remove(botaoVoltar);
+		janela.remove(cAlbmBotao);
+		janela.remove(cMusBotao);
+		janela.remove(editarAlbBotao);
+		janela.remove(editarMusBotao);
 
-			janela.remove(musBotao);
-			janela.remove(albBotao);
-			janela.remove(artBotao);
-			janela.remove(botaoVoltar);
-			janela.remove(cAlbmBotao);
-			janela.remove(cMusBotao);
+		if (src == artBotao){
 
 			TelaArtistas telaArtistas = new TelaArtistas(controle, janela, isArtista);
 
@@ -147,12 +178,6 @@ public class TelaAplicativo implements ActionListener{
 		}
 
 		if (src == albBotao){
-			janela.remove(musBotao);
-			janela.remove(albBotao);
-			janela.remove(artBotao);
-			janela.remove(botaoVoltar);
-			janela.remove(cAlbmBotao);
-			janela.remove(cMusBotao);
 
 			TelaAlbuns telaAlbuns = new TelaAlbuns(controle, janela, isArtista);
 
@@ -163,12 +188,6 @@ public class TelaAplicativo implements ActionListener{
 		}
 
 		if (src == musBotao){
-			janela.remove(musBotao);
-			janela.remove(albBotao);
-			janela.remove(artBotao);
-			janela.remove(botaoVoltar);
-			janela.remove(cAlbmBotao);
-			janela.remove(cMusBotao);
 
 			TelaMusicas telaMusicas = new TelaMusicas(controle, janela, isArtista);
 
@@ -179,12 +198,6 @@ public class TelaAplicativo implements ActionListener{
 		}
 
 		if (src == cAlbmBotao){
-			janela.remove(musBotao);
-			janela.remove(albBotao);
-			janela.remove(artBotao);
-			janela.remove(botaoVoltar);
-			janela.remove(cAlbmBotao);
-			janela.remove(cMusBotao);
 
 			TelaCadastroAlbum telaCadastroAlbum = new TelaCadastroAlbum(controle, janela, isArtista);
 			
@@ -196,12 +209,6 @@ public class TelaAplicativo implements ActionListener{
 		}
 
 		if (src == cMusBotao){
-			janela.remove(musBotao);
-			janela.remove(albBotao);
-			janela.remove(artBotao);
-			janela.remove(botaoVoltar);
-			janela.remove(cAlbmBotao);
-			janela.remove(cMusBotao);
 
 			TelaCadastroMusica telaCadastroMusica = new TelaCadastroMusica(controle, janela, isArtista);
 			
@@ -213,15 +220,29 @@ public class TelaAplicativo implements ActionListener{
 			telaCadastroMusica.getBotaoLetra().addActionListener(telaCadastroMusica);
 		}
 
-		if (src == botaoVoltar){
+		if (src == editarAlbBotao){
 
-			janela.remove(musBotao);
-			janela.remove(albBotao);
-			janela.remove(artBotao);
-			janela.remove(botaoVoltar);
-			janela.remove(cAlbmBotao);
-			janela.remove(cMusBotao);
-			
+			TelaEditarAlbum telaEditarAlbum = new TelaEditarAlbum(controle, janela, isArtista);
+
+			telaEditarAlbum.show();
+
+			telaEditarAlbum.getBotaoCancelar().addActionListener(telaEditarAlbum);
+			telaEditarAlbum.getBotaoVisualizar().addActionListener(telaEditarAlbum);
+
+		}
+
+		if (src ==  editarMusBotao){
+
+			TelaEditarMusica telaEditarMusica = new TelaEditarMusica(controle, janela, isArtista);
+
+			telaEditarMusica.show();
+
+			telaEditarMusica.getBotaoCancelar().addActionListener(telaEditarMusica);
+			telaEditarMusica.getBotaoVisualizar().addActionListener(telaEditarMusica);
+		}
+
+		if (src == botaoVoltar){
+		
 			TelaCadastro telaCadastro = new TelaCadastro(controle, janela);
 
 			telaCadastro.getCheckBox().setSelected(false);
