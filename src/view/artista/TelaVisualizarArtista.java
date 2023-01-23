@@ -26,6 +26,8 @@ public class TelaVisualizarArtista implements ActionListener{
     private JLabel nome = new JLabel();
     private JLabel cpf = new JLabel();
     private JLabel qtdSeguidores = new JLabel();
+    private JLabel estiloMusical = new JLabel();
+    private JLabel titulo = new JLabel();
 
     private JButton botaoVoltar = new JButton("Voltar");
     private JButton botaoVisualizar = new JButton("Visualizar");
@@ -52,20 +54,30 @@ public class TelaVisualizarArtista implements ActionListener{
     }
 
     public void show(){
+        titulo.setFont(new Font("Ms Gothic", Font.BOLD, 20));
+		titulo.setForeground(Color.decode("#A020F0"));
+        titulo.setBounds(360, 118, 400, 30);
+        titulo.setText("Álbuns");
+
         nome.setFont(new Font("Ms Gothic", Font.BOLD, 16));
 		nome.setForeground(Color.white);
-        nome.setBounds(50, 30, 400, 30);
+        nome.setBounds(100, 30, 400, 30);
         nome.setText("Nome: " + artista.getNome());
 
         cpf.setFont(new Font("Ms Gothic", Font.BOLD, 16));
 		cpf.setForeground(Color.white);
-        cpf.setBounds(50, 70, 700, 30);
+        cpf.setBounds(100, 70, 700, 30);
         cpf.setText("CPF: " + artista.getCpf());
 
         qtdSeguidores.setFont(new Font("Ms Gothic", Font.BOLD, 16));
 		qtdSeguidores.setForeground(Color.white);
-        qtdSeguidores.setBounds(50, 110, 700, 30);
+        qtdSeguidores.setBounds(513, 70, 700, 30);
         qtdSeguidores.setText("Qtd Seguidores: " + artista.getQtdSeguidores());
+
+        estiloMusical.setFont(new Font("Ms Gothic", Font.BOLD, 16));
+		estiloMusical.setForeground(Color.white);
+        estiloMusical.setBounds(513, 30, 700, 30);
+        estiloMusical.setText("Estilo Musical: " + artista.getEstiloMusical());
 
 
         for (Album album : artista.getAlbuns()){
@@ -99,9 +111,11 @@ public class TelaVisualizarArtista implements ActionListener{
         botaoVisualizar.setBorder(null);
         botaoVisualizar.setFocusPainted(false);
 
+        janela.add(titulo);
         janela.add(nome);
         janela.add(cpf);
         janela.add(qtdSeguidores);
+        janela.add(estiloMusical);
         janela.add(scrollPane);
         janela.add(botaoVisualizar);
         janela.add(botaoVoltar);
@@ -114,9 +128,11 @@ public class TelaVisualizarArtista implements ActionListener{
         Object src = e.getSource();
         
         if (src == botaoVoltar){
+            janela.remove(titulo);
             janela.remove(nome);
             janela.remove(cpf);
             janela.remove(qtdSeguidores);
+            janela.remove(estiloMusical);
             janela.remove(scrollPane);
             janela.remove(botaoVisualizar);
             janela.remove(botaoVoltar);
@@ -131,9 +147,11 @@ public class TelaVisualizarArtista implements ActionListener{
 
         if (src == botaoVisualizar){
             if(list.getSelectedValue() != null){
+                janela.remove(titulo);
                 janela.remove(nome);
                 janela.remove(cpf);
                 janela.remove(qtdSeguidores);
+                janela.remove(estiloMusical);
                 janela.remove(scrollPane);
                 janela.remove(botaoVisualizar);
                 janela.remove(botaoVoltar);
