@@ -40,7 +40,6 @@ public class TelaMusicas implements ActionListener{
         public void keyPressed(KeyEvent keyEvent) {
             if (keyEvent.getKeyCode() == KeyEvent.VK_ENTER){
                 showPesquisa(pesquisa.getText());
-                System.out.println("Pesquisou");
             }   
         }
   
@@ -50,7 +49,6 @@ public class TelaMusicas implements ActionListener{
   
         public void keyTyped(KeyEvent keyEvent) {
             showPesquisa(pesquisa.getText());
-            System.out.println("Pesquisou");
         }
   
       };

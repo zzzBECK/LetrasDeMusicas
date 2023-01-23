@@ -148,6 +148,21 @@ public class TelaEditarAlbum implements ActionListener{
         }
 
         if (src == botaoEditar){
+            if (list.getSelectedValue() != null){
+                janela.remove(nome);
+                janela.remove(scrollPane);
+                janela.remove(botaoCancelar);
+                janela.remove(botaoEditar);
+                janela.remove(botaoRemover);
+
+                TelaAlbumSelecionado telaAlbumSelecionado = new TelaAlbumSelecionado(controle, janela, isArtista, list.getSelectedValue());
+
+                telaAlbumSelecionado.show();
+
+                telaAlbumSelecionado.getBotaoCancelar().addActionListener(telaAlbumSelecionado);
+                telaAlbumSelecionado.getBotaoEditar().addActionListener(telaAlbumSelecionado);
+
+            }
 
         }
         
