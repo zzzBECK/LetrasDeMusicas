@@ -7,6 +7,9 @@ import java.awt.event.ActionListener;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 
 import javax.swing.DefaultListModel;
 import javax.swing.JButton;
@@ -28,6 +31,10 @@ public class TelaAlbumSelecionado implements ActionListener{
     private boolean isArtista;
     private Album album;
 
+    private List<Artista> artistas = new ArrayList<>();
+    private List<Artista> artistasRemovidos = new ArrayList<>();
+    private List<Artista> artistasAdicionados = new ArrayList<>();
+
 
     private DefaultListModel<Artista> model = new DefaultListModel<>();
     private JScrollPane scrollPane = new JScrollPane();
@@ -43,8 +50,9 @@ public class TelaAlbumSelecionado implements ActionListener{
 
     private JButton botaoArtista = new JButton("Adicionar Artista");
 
-    private JButton botaoEditar = new JButton("Editar");
     private JButton botaoCancelar = new JButton("Cancelar");
+    private JButton botaoRemover = new JButton("Remover");
+    private JButton botaoEditar = new JButton("Editar");
 
     private Font fonte =  new Font("Ms Gothic", Font.BOLD, 24);
 
@@ -60,12 +68,35 @@ public class TelaAlbumSelecionado implements ActionListener{
         this.album = album;
     }
 
+    public TelaAlbumSelecionado(Controle controle, JFrame janela, boolean isArtista, Album album,
+                                String nomeDigitado, String dataDigitado, List<Artista> artistas,
+                                List<Artista> artistasRemovidos, List<Artista> artistasAdicionados){
+
+        this.controle = controle;
+        this.janela = janela;
+        this.isArtista = isArtista;
+        this.album = album;
+        this.nomeDigitado = nomeDigitado;
+        this.dataDigitado = dataDigitado;
+        this.artistas = artistas;
+        this.artistasRemovidos = artistasRemovidos;
+        this.artistasAdicionados = artistasAdicionados;
+    }
+
     public JButton getBotaoEditar(){
         return botaoEditar;
     }
 
     public JButton getBotaoCancelar(){
         return botaoCancelar;
+    }
+
+    public JButton getBotaoRemover(){
+        return botaoRemover;
+    }
+
+    public JButton getBotaoArtista(){
+        return botaoArtista;
     }
 
     public void show(){
@@ -103,34 +134,52 @@ public class TelaAlbumSelecionado implements ActionListener{
         botaoArtista.setBorder(null);
         botaoArtista.setFocusPainted(false);
 
+        model.clear();
 
-        for (Artista artista : album.getArtistas()){
-            model.addElement(artista);
+        if (artistas.isEmpty()){
+            for (Artista artista : album.getArtistas()){
+                model.addElement(artista);
+                artistas.add(artista);
+            }
+        }
+        else {
+            for (Artista artista : artistas){
+                model.addElement(artista);
+            }
         }
 
         list.setModel(model);
         scrollPane.setViewportView(list);
-
-        list.setForeground(Color.white);
-        list.setFont(new Font("Ms Gothic", Font.BOLD, 16));
-        list.setBackground(Color.gray);
-
-        list.setBounds(250, 350, 350, 128);
-        scrollPane.setBounds(250, 350, 350, 128);
         
-		botaoEditar.setFont(new Font("Ms Gothic", Font.BOLD, 16));
-		botaoEditar.setBackground(Color.decode("#A020F0"));
-        botaoEditar.setForeground(Color.WHITE);
-		botaoEditar.setBounds(416, 494, 125, 35);
-        botaoEditar.setBorder(null);
-        botaoEditar.setFocusPainted(false);
+        list.setForeground(Color.white);
+        list.setBackground(Color.gray);
+        list.setBounds(250, 350, 400, 128);
+        list.setFont(new Font("Ms Gothic", Font.BOLD, 16));
 
+        
+        scrollPane.setBounds(250, 350, 350, 128);
+
+        
         botaoCancelar.setFont(new Font("Ms Gothic", Font.BOLD, 16));
 		botaoCancelar.setBackground(Color.decode("#A020F0"));
         botaoCancelar.setForeground(Color.WHITE);
-		botaoCancelar.setBounds(272, 494, 125, 35);
+		botaoCancelar.setBounds(190, 494, 125, 35);
         botaoCancelar.setBorder(null);
         botaoCancelar.setFocusPainted(false);
+
+        botaoRemover.setFont(new Font("Ms Gothic", Font.BOLD, 16));
+		botaoRemover.setBackground(Color.decode("#A020F0"));
+        botaoRemover.setForeground(Color.WHITE);
+		botaoRemover.setBounds(337, 494, 125, 35);
+        botaoRemover.setBorder(null);
+        botaoRemover.setFocusPainted(false);
+
+        botaoEditar.setFont(new Font("Ms Gothic", Font.BOLD, 16));
+		botaoEditar.setBackground(Color.decode("#A020F0"));
+        botaoEditar.setForeground(Color.WHITE);
+		botaoEditar.setBounds(484, 494, 125, 35);
+        botaoEditar.setBorder(null);
+        botaoEditar.setFocusPainted(false);
 
         janela.add(titulo);
         janela.add(nome);
@@ -139,6 +188,7 @@ public class TelaAlbumSelecionado implements ActionListener{
         janela.add(entradaData);
         janela.add(botaoArtista);
         janela.add(botaoEditar);
+        janela.add(botaoRemover);
         janela.add(botaoCancelar);
         janela.add(scrollPane);
 
@@ -159,6 +209,7 @@ public class TelaAlbumSelecionado implements ActionListener{
             janela.remove(entradaData);
             janela.remove(botaoArtista);
             janela.remove(botaoEditar);
+            janela.remove(botaoRemover);
             janela.remove(botaoCancelar);
             janela.remove(scrollPane);
 
@@ -170,6 +221,81 @@ public class TelaAlbumSelecionado implements ActionListener{
             telaEditarAlbum.getBotaoRemover().addActionListener(telaEditarAlbum);
             telaEditarAlbum.getBotaoVisualizar().addActionListener(telaEditarAlbum);
     
+        }
+
+        if (src == botaoArtista){
+            janela.remove(titulo);
+            janela.remove(nome);
+            janela.remove(entradaNome);
+            janela.remove(data);
+            janela.remove(entradaData);
+            janela.remove(botaoArtista);
+            janela.remove(botaoEditar);
+            janela.remove(botaoRemover);
+            janela.remove(botaoCancelar);
+            janela.remove(scrollPane);
+
+            TelaAdicionarArtistaEditar telaAdicionarArtistaEditar = new TelaAdicionarArtistaEditar(controle, janela, isArtista, album,
+                                                                                                   entradaNome.getText(), entradaData.getText(),
+                                                                                                   artistas, artistasRemovidos, artistasAdicionados);
+
+            telaAdicionarArtistaEditar.show();
+
+            telaAdicionarArtistaEditar.getBotaoAdicionar().addActionListener(telaAdicionarArtistaEditar);
+            telaAdicionarArtistaEditar.getBotaoCancelar().addActionListener(telaAdicionarArtistaEditar);
+        }
+
+        if (src == botaoRemover){
+            if (list.getSelectedValue() != null && list.getSelectedValue() != controle.getDados().getArtistas().get(controle.getDados().getArtistas().size() - 1)){
+                artistas.remove(list.getSelectedValue());
+                artistasRemovidos.add(list.getSelectedValue());
+               
+                nomeDigitado = entradaNome.getText();
+                dataDigitado = entradaData.getText();
+                show();
+            }
+        }
+
+        if (src == botaoEditar){
+            janela.remove(titulo);
+            janela.remove(nome);
+            janela.remove(entradaNome);
+            janela.remove(data);
+            janela.remove(entradaData);
+            janela.remove(botaoArtista);
+            janela.remove(botaoEditar);
+            janela.remove(botaoRemover);
+            janela.remove(botaoCancelar);
+            janela.remove(scrollPane);
+
+            album.setNome(entradaNome.getText());
+
+            Date dateFormat = new Date();
+
+            try {
+                dateFormat = new SimpleDateFormat("dd/MM/yyyy").parse(entradaData.getText());
+                album.setDataLancamento(dateFormat);
+            } catch (ParseException e1) {
+                e1.printStackTrace();
+            }
+
+            for (Artista artista : artistasRemovidos){
+                artista.removerAlbum(album);
+            }
+
+            for (Artista artista : artistasAdicionados){
+                artista.adicionarAlbum(album);
+            }
+
+            album.setArtistas(artistas);
+
+            TelaEditarAlbum telaEditarAlbum = new TelaEditarAlbum(controle, janela, isArtista);
+
+            telaEditarAlbum.show();
+
+            telaEditarAlbum.getBotaoCancelar().addActionListener(telaEditarAlbum);
+            telaEditarAlbum.getBotaoRemover().addActionListener(telaEditarAlbum);
+            telaEditarAlbum.getBotaoVisualizar().addActionListener(telaEditarAlbum);
         }
         
     }

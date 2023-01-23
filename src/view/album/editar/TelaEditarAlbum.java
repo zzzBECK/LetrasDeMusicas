@@ -161,6 +161,8 @@ public class TelaEditarAlbum implements ActionListener{
 
                 telaAlbumSelecionado.getBotaoCancelar().addActionListener(telaAlbumSelecionado);
                 telaAlbumSelecionado.getBotaoEditar().addActionListener(telaAlbumSelecionado);
+                telaAlbumSelecionado.getBotaoRemover().addActionListener(telaAlbumSelecionado);
+                telaAlbumSelecionado.getBotaoArtista().addActionListener(telaAlbumSelecionado);
 
             }
 

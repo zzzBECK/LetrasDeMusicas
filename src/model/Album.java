@@ -49,6 +49,10 @@ public class Album {
         return artistas;
     }
 
+    public void setArtistas(List<Artista> artistas){
+        this.artistas = artistas;
+    }
+
     public List<Musica> getMusicas(){
         return musicas;
     }
@@ -66,6 +70,7 @@ public class Album {
     public void removerMusica(Musica musica){
         musicas.remove(musica);
     }
+
 
     public void editarMusica(String nomeMusica, String novoNome){
         Musica mus;
