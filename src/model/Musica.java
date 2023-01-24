@@ -1,5 +1,11 @@
 package model;
 
+/**
+ * Classe que representa uma musica, a qual possui um nome, letra, duracao, album e artista
+ * @author Alexandre de Santana Beck
+ * @since 2022
+ * @version 1.0
+ */
 public class Musica{
     
     private String nome;

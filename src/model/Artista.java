@@ -3,6 +3,12 @@ package model;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Classe que representa um Artista musical, o qual possui um nome, albuns e musicas e um numero de seguidores
+ * @author Alexandre de Santana Beck
+ * @since 2022
+ * @version 1.0
+ */
 public class Artista extends Usuario{
     
     private Integer qtdSeguidores;

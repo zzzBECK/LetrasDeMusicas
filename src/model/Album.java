@@ -5,6 +5,12 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+/**
+ * Classe que representa um album de musica, a qual possui um nome, data de lançamento, artistas e musicas
+ * @author Alexandre de Santana Beck
+ * @since 2022
+ * @version 1.0
+ */
 public class Album {
     
     private String nome;

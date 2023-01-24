@@ -3,6 +3,12 @@ package model;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Classe que armazena todos os dados do sistema temporariamente na memoria
+ * @author Alexandre de Santana Beck
+ * @since 2023
+ * @version 1.0
+ */
 public class Dados {
     private List<Usuario> usuarios = new ArrayList<>();
     private List<Artista> artistas = new ArrayList<>();
