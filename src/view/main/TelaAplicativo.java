@@ -34,7 +34,6 @@ public class TelaAplicativo implements ActionListener{
 
 	private Font fonte = new Font("Ms Gothic", Font.BOLD, 16);
 
-
 	public TelaAplicativo(Controle controle, JFrame janela, boolean isArtista){
 		this.controle = controle;
 		this.janela = janela;
@@ -79,7 +78,7 @@ public class TelaAplicativo implements ActionListener{
 
 
 	public void show(){
-		
+	
 		musBotao.setFont(fonte);
 		musBotao.setBackground(Color.decode("#A020F0"));
         musBotao.setForeground(Color.WHITE);
@@ -195,6 +194,10 @@ public class TelaAplicativo implements ActionListener{
 
 			telaMusicas.getBotaoVoltar().addActionListener(telaMusicas);
 			telaMusicas.getBotaoVisualizar().addActionListener(telaMusicas);
+			telaMusicas.getBotaoTocar().addActionListener(telaMusicas);
+			telaMusicas.getBotaoAvancar().addActionListener(telaMusicas);
+			telaMusicas.getBotaoRetroceder().addActionListener(telaMusicas);
+			telaMusicas.getBotaoPlay().addActionListener(telaMusicas);
 		}
 
 		if (src == cAlbmBotao){

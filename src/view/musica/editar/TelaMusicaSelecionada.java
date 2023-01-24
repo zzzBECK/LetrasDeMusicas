@@ -237,6 +237,7 @@ public class TelaMusicaSelecionada implements ActionListener{
             
                         telaEditarMusica.getBotaoCancelar().addActionListener(telaEditarMusica);
                         telaEditarMusica.getBotaoVisualizar().addActionListener(telaEditarMusica);
+                        telaEditarMusica.getBotaoRemover().addActionListener(telaEditarMusica);
                     }
                 }
                 catch(Exception e1){

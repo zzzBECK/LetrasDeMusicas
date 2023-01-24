@@ -259,6 +259,10 @@ public class TelaVisualizarMusica implements ActionListener{
 
 			telaMusicas.getBotaoVoltar().addActionListener(telaMusicas);
 			telaMusicas.getBotaoVisualizar().addActionListener(telaMusicas);
+			telaMusicas.getBotaoTocar().addActionListener(telaMusicas);
+			telaMusicas.getBotaoAvancar().addActionListener(telaMusicas);
+			telaMusicas.getBotaoRetroceder().addActionListener(telaMusicas);
+			telaMusicas.getBotaoPlay().addActionListener(telaMusicas);
         }
 
         if (src == botaoVoltarAlbum){
