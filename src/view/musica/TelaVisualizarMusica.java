@@ -24,6 +24,9 @@ public class TelaVisualizarMusica implements ActionListener{
     private JLabel nome = new JLabel();
     private JLabel alb = new JLabel();
     private JLabel arts = new JLabel();
+    private JLabel titulo = new JLabel();
+    private JLabel duracao = new JLabel();
+
 
     private JButton botaoVoltar = new JButton("Voltar");
     private JButton botaoVoltarAlbum = new JButton("Voltar");
@@ -56,10 +59,20 @@ public class TelaVisualizarMusica implements ActionListener{
     }
 
     public void show(){
+        titulo.setFont(new Font("Ms Gothic", Font.BOLD, 20));
+		titulo.setForeground(Color.decode("#A020F0"));
+        titulo.setBounds(360, 118, 400, 30);
+        titulo.setText("Letra");
+
         nome.setFont(new Font("Ms Gothic", Font.BOLD, 16));
 		nome.setForeground(Color.white);
         nome.setBounds(50, 30, 400, 30);
-        nome.setText("Nome: " + musica.getNome());
+        nome.setText("Música: " + musica.getNome());
+
+        duracao.setFont(new Font("Ms Gothic", Font.BOLD, 16));
+		duracao.setForeground(Color.white);
+        duracao.setBounds(450, 70, 400, 30);
+        duracao.setText("Duração: " + musica.getDuracao());
 
         alb.setFont(new Font("Ms Gothic", Font.BOLD, 16));
 		alb.setForeground(Color.white);
@@ -68,7 +81,7 @@ public class TelaVisualizarMusica implements ActionListener{
 
         arts.setFont(new Font("Ms Gothic", Font.BOLD, 16));
 		arts.setForeground(Color.white);
-        arts.setBounds(50, 110, 700, 30);
+        arts.setBounds(450, 30, 700, 30);
 
         String nomeArtistas = new String();
         for (Artista artista : musica.getAlbum().getArtistas()){
@@ -98,16 +111,28 @@ public class TelaVisualizarMusica implements ActionListener{
         janela.add(arts);
         janela.add(scrollPane);
         janela.add(botaoVoltar);
+        janela.add(titulo);
+        janela.add(duracao);
 
 
         janela.repaint();
     }
 
     public void showToAlbum(){
+        titulo.setFont(new Font("Ms Gothic", Font.BOLD, 20));
+		titulo.setForeground(Color.decode("#A020F0"));
+        titulo.setBounds(360, 118, 400, 30);
+        titulo.setText("Letra");
+
         nome.setFont(new Font("Ms Gothic", Font.BOLD, 16));
 		nome.setForeground(Color.white);
         nome.setBounds(50, 30, 400, 30);
-        nome.setText("Nome: " + musica.getNome());
+        nome.setText("Música: " + musica.getNome());
+
+        duracao.setFont(new Font("Ms Gothic", Font.BOLD, 16));
+		duracao.setForeground(Color.white);
+        duracao.setBounds(450, 70, 400, 30);
+        duracao.setText("Duração: " + musica.getDuracao());
 
         alb.setFont(new Font("Ms Gothic", Font.BOLD, 16));
 		alb.setForeground(Color.white);
@@ -116,7 +141,7 @@ public class TelaVisualizarMusica implements ActionListener{
 
         arts.setFont(new Font("Ms Gothic", Font.BOLD, 16));
 		arts.setForeground(Color.white);
-        arts.setBounds(50, 110, 700, 30);
+        arts.setBounds(450, 30, 700, 30);
 
         String nomeArtistas = new String();
         for (Artista artista : musica.getAlbum().getArtistas()){
@@ -146,6 +171,8 @@ public class TelaVisualizarMusica implements ActionListener{
         janela.add(arts);
         janela.add(scrollPane);
         janela.add(botaoVoltarAlbum);
+        janela.add(titulo);
+        janela.add(duracao);
 
 
         janela.repaint();
@@ -153,10 +180,20 @@ public class TelaVisualizarMusica implements ActionListener{
 
     public void showToArtista(Artista art){
         this.art = art;
+        titulo.setFont(new Font("Ms Gothic", Font.BOLD, 20));
+		titulo.setForeground(Color.decode("#A020F0"));
+        titulo.setBounds(360, 118, 400, 30);
+        titulo.setText("Letra");
+
         nome.setFont(new Font("Ms Gothic", Font.BOLD, 16));
 		nome.setForeground(Color.white);
         nome.setBounds(50, 30, 400, 30);
-        nome.setText("Nome: " + musica.getNome());
+        nome.setText("Música: " + musica.getNome());
+
+        duracao.setFont(new Font("Ms Gothic", Font.BOLD, 16));
+		duracao.setForeground(Color.white);
+        duracao.setBounds(450, 70, 400, 30);
+        duracao.setText("Duração: " + musica.getDuracao());
 
         alb.setFont(new Font("Ms Gothic", Font.BOLD, 16));
 		alb.setForeground(Color.white);
@@ -165,7 +202,7 @@ public class TelaVisualizarMusica implements ActionListener{
 
         arts.setFont(new Font("Ms Gothic", Font.BOLD, 16));
 		arts.setForeground(Color.white);
-        arts.setBounds(50, 110, 700, 30);
+        arts.setBounds(450, 30, 700, 30);
 
         String nomeArtistas = new String();
         for (Artista artista : musica.getAlbum().getArtistas()){
@@ -195,6 +232,8 @@ public class TelaVisualizarMusica implements ActionListener{
         janela.add(arts);
         janela.add(scrollPane);
         janela.add(botaoVoltarArtista);
+        janela.add(titulo);
+        janela.add(duracao);
 
 
         janela.repaint();
@@ -210,6 +249,8 @@ public class TelaVisualizarMusica implements ActionListener{
 			janela.remove(arts);
             janela.remove(scrollPane);
 			janela.remove(botaoVoltar);
+            janela.remove(titulo);
+            janela.remove(duracao);
 
 
 			TelaMusicas telaMusicas = new TelaMusicas(controle, janela, isArtista);
@@ -226,6 +267,8 @@ public class TelaVisualizarMusica implements ActionListener{
             janela.remove(arts);
             janela.remove(scrollPane);
             janela.remove(botaoVoltarAlbum);
+            janela.remove(titulo);
+            janela.remove(duracao);
 
             TelaVisualizarAlbum telaVisualizarAlbum = new TelaVisualizarAlbum(controle, janela, isArtista, musica.getAlbum());
 
@@ -241,6 +284,8 @@ public class TelaVisualizarMusica implements ActionListener{
             janela.remove(arts);
             janela.remove(scrollPane);
             janela.remove(botaoVoltarArtista);
+            janela.remove(titulo);
+            janela.remove(duracao);
 
             TelaVisualizarAlbum telaVisualizarAlbum = new TelaVisualizarAlbum(controle, janela, isArtista, musica.getAlbum());
 

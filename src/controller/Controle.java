@@ -3,8 +3,6 @@ package controller;
 import java.util.Date;
 import java.util.List;
 
-import javax.xml.catalog.Catalog;
-
 import model.Album;
 import model.Artista;
 import model.Dados;

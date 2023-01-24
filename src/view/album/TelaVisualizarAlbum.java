@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.SimpleDateFormat;
 
 import javax.swing.DefaultListCellRenderer;
 import javax.swing.DefaultListModel;
@@ -27,6 +28,8 @@ public class TelaVisualizarAlbum implements ActionListener{
 
     private JLabel nome = new JLabel();
     private JLabel arts = new JLabel();
+    private JLabel titulo = new JLabel();
+    private JLabel data = new JLabel();
 
     private JButton botaoVoltar = new JButton("Voltar");
     private JButton botaoVoltarArtista = new JButton("Voltar");
@@ -39,6 +42,8 @@ public class TelaVisualizarAlbum implements ActionListener{
 
     private Album album;
     private Artista art;
+
+    SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
 
     public TelaVisualizarAlbum(Controle controle, JFrame janela, boolean isArtista, Album album){
         this.controle = controle;
@@ -64,14 +69,25 @@ public class TelaVisualizarAlbum implements ActionListener{
     }
 
     public void show(){
+        titulo.setFont(new Font("Ms Gothic", Font.BOLD, 20));
+		titulo.setForeground(Color.decode("#A020F0"));
+        titulo.setBounds(360, 118, 400, 30);
+        titulo.setText("Músicas");
+
         nome.setFont(new Font("Ms Gothic", Font.BOLD, 16));
 		nome.setForeground(Color.white);
         nome.setBounds(50, 30, 400, 30);
-        nome.setText("Nome: " + album.getNome());
+        nome.setText("Album: " + album.getNome());
+
+        data.setFont(new Font("Ms Gothic", Font.BOLD, 16));
+		data.setForeground(Color.white);
+        data.setBounds(50, 70, 400, 30);
+        data.setText("Data: " + sdf.format(album.getDataLancamento()));
+
 
         arts.setFont(new Font("Ms Gothic", Font.BOLD, 16));
 		arts.setForeground(Color.white);
-        arts.setBounds(50, 70, 700, 30);
+        arts.setBounds(450, 30, 700, 30);
 
         String nomeArtistas = new String();
         for (Artista artista : album.getArtistas()){
@@ -115,22 +131,34 @@ public class TelaVisualizarAlbum implements ActionListener{
         janela.add(nome);
         janela.add(arts);
         janela.add(scrollPane);
+        janela.add(titulo);
         janela.add(botaoVisualizar);
         janela.add(botaoVoltar);
+        janela.add(data);
 
         janela.repaint();
     }
 
     public void showToArtista(Artista art){
+        titulo.setFont(new Font("Ms Gothic", Font.BOLD, 20));
+		titulo.setForeground(Color.decode("#A020F0"));
+        titulo.setBounds(360, 118, 400, 30);
+        titulo.setText("Músicas");
+
         this.art = art;
         nome.setFont(new Font("Ms Gothic", Font.BOLD, 16));
 		nome.setForeground(Color.white);
         nome.setBounds(50, 30, 400, 30);
         nome.setText("Nome: " + album.getNome());
 
+        data.setFont(new Font("Ms Gothic", Font.BOLD, 16));
+		data.setForeground(Color.white);
+        data.setBounds(50, 70, 400, 30);
+        data.setText("Data: " + sdf.format(album.getDataLancamento()));
+
         arts.setFont(new Font("Ms Gothic", Font.BOLD, 16));
 		arts.setForeground(Color.white);
-        arts.setBounds(50, 70, 700, 30);
+        arts.setBounds(450, 30, 700, 30);
 
         String nomeArtistas = new String();
         for (Artista artista : album.getArtistas()){
@@ -174,8 +202,10 @@ public class TelaVisualizarAlbum implements ActionListener{
         janela.add(nome);
         janela.add(arts);
         janela.add(scrollPane);
+        janela.add(titulo);
         janela.add(botaoVisualizarArtista);
         janela.add(botaoVoltarArtista);
+        janela.add(data);
 
         janela.repaint();
     }
@@ -188,8 +218,10 @@ public class TelaVisualizarAlbum implements ActionListener{
             janela.remove(nome);
             janela.remove(arts);
             janela.remove(scrollPane);
+            janela.remove(titulo);
             janela.remove(botaoVisualizar);
             janela.remove(botaoVoltar);
+            janela.remove(data);
 
             TelaAlbuns telaAlbuns = new TelaAlbuns(controle, janela, isArtista);
 
@@ -209,6 +241,8 @@ public class TelaVisualizarAlbum implements ActionListener{
                 janela.remove(botaoVisualizarArtista);
                 janela.remove(botaoVoltar);
                 janela.remove(botaoVoltarArtista);
+                janela.remove(titulo);
+                janela.remove(data);
 
 
                 TelaVisualizarMusica telaVisualizarMusica = new TelaVisualizarMusica(controle, janela, isArtista, list.getSelectedValue());
@@ -227,6 +261,8 @@ public class TelaVisualizarAlbum implements ActionListener{
             janela.remove(botaoVisualizarArtista);
             janela.remove(botaoVoltar);
             janela.remove(botaoVoltarArtista);
+            janela.remove(titulo);
+            janela.remove(data);
 
             TelaVisualizarArtista telaVisualizarArtista = new TelaVisualizarArtista(controle, janela, isArtista, art);
 
@@ -245,6 +281,8 @@ public class TelaVisualizarAlbum implements ActionListener{
                 janela.remove(botaoVisualizarArtista);
                 janela.remove(botaoVoltar);
                 janela.remove(botaoVoltarArtista);
+                janela.remove(titulo);
+                janela.remove(data);
 
                 TelaVisualizarMusica telaVisualizarMusica = new TelaVisualizarMusica(controle, janela, isArtista, list.getSelectedValue());
 

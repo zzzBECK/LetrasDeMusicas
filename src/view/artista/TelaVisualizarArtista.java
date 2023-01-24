@@ -62,7 +62,7 @@ public class TelaVisualizarArtista implements ActionListener{
         nome.setFont(new Font("Ms Gothic", Font.BOLD, 16));
 		nome.setForeground(Color.white);
         nome.setBounds(100, 30, 400, 30);
-        nome.setText("Nome: " + artista.getNome());
+        nome.setText("Artista: " + artista.getNome());
 
         cpf.setFont(new Font("Ms Gothic", Font.BOLD, 16));
 		cpf.setForeground(Color.white);
