@@ -16,6 +16,7 @@ import javax.swing.JFormattedTextField;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JList;
+import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 import javax.swing.text.MaskFormatter;
@@ -118,7 +119,7 @@ public class TelaCadastroAlbum implements ActionListener{
             model.addElement(controle.getDados().getArtistas().get(controle.getDados().getArtistas().size() - 1));
         }
 
-        if (artista != null)
+        if (artista != null && !artistas.contains(artista))
             artistas.add(artista);
 
         model.addElement(artista);
@@ -211,38 +212,53 @@ public class TelaCadastroAlbum implements ActionListener{
         }
 
         if (src == botaoCadastrar){
-            janela.remove(titulo);
-            janela.remove(nome);
-            janela.remove(entradaNome);
-            janela.remove(data);
-            janela.remove(entradaData);
-            janela.remove(botaoArtista);
-            janela.remove(botaoCadastrar);
-            janela.remove(botaoCancelar);
-            janela.remove(scrollPane);
+            if (entradaNome.getText().length() < 3){
+                JOptionPane.showMessageDialog(null, "Nome inválido!", "Erro", JOptionPane.INFORMATION_MESSAGE);
+            } 
+            else{
+                    try{
+                        if (new SimpleDateFormat("dd/MM/yyyy").parse(entradaData.getText()).after(new Date(System.currentTimeMillis()))){
+                            JOptionPane.showMessageDialog(null, "Data inválida!", "Erro", JOptionPane.INFORMATION_MESSAGE);
+                        }
+                        else{
+                            janela.remove(titulo);
+                            janela.remove(nome);
+                            janela.remove(entradaNome);
+                            janela.remove(data);
+                            janela.remove(entradaData);
+                            janela.remove(botaoArtista);
+                            janela.remove(botaoCadastrar);
+                            janela.remove(botaoCancelar);
+                            janela.remove(scrollPane);
 
-            Date dateFormat = new Date();
+                            Date dateFormat = new Date();
 
-            try {
-                dateFormat = new SimpleDateFormat("dd/MM/yyyy").parse(entradaData.getText());
-                controle.album(entradaNome.getText(), dateFormat, artistas);
-            } catch (ParseException e1) {
-                e1.printStackTrace();
+                            try {
+                                dateFormat = new SimpleDateFormat("dd/MM/yyyy").parse(entradaData.getText());
+                                controle.album(entradaNome.getText(), dateFormat, artistas);
+                            } catch (ParseException e1) {
+                                e1.printStackTrace();
+                            }
+                            
+
+                            TelaAplicativo telaAplicativo = new TelaAplicativo(controle, janela, isArtista);
+
+                            telaAplicativo.show();
+
+                            telaAplicativo.getArtBotao().addActionListener(telaAplicativo);
+                            telaAplicativo.getAlbBotao().addActionListener(telaAplicativo);
+                            telaAplicativo.getMusBotao().addActionListener(telaAplicativo);
+                            telaAplicativo.getCAlbmBotao().addActionListener(telaAplicativo);
+                            telaAplicativo.getCMusBotao().addActionListener(telaAplicativo);
+                            telaAplicativo.getBotaoVoltar().addActionListener(telaAplicativo);
+                            telaAplicativo.getEditarAlbBotao().addActionListener(telaAplicativo);
+                            telaAplicativo.getEditarMusBotao().addActionListener(telaAplicativo);
+                        }
+                    } 
+                    catch (ParseException e1) {
+                        JOptionPane.showMessageDialog(null, "Data inválida!", "Erro", JOptionPane.INFORMATION_MESSAGE);
+                    }
             }
-            
-
-            TelaAplicativo telaAplicativo = new TelaAplicativo(controle, janela, isArtista);
-
-            telaAplicativo.show();
-
-            telaAplicativo.getArtBotao().addActionListener(telaAplicativo);
-            telaAplicativo.getAlbBotao().addActionListener(telaAplicativo);
-            telaAplicativo.getMusBotao().addActionListener(telaAplicativo);
-            telaAplicativo.getCAlbmBotao().addActionListener(telaAplicativo);
-            telaAplicativo.getCMusBotao().addActionListener(telaAplicativo);
-            telaAplicativo.getBotaoVoltar().addActionListener(telaAplicativo);
-            telaAplicativo.getEditarAlbBotao().addActionListener(telaAplicativo);
-            telaAplicativo.getEditarMusBotao().addActionListener(telaAplicativo);
 
 
         }

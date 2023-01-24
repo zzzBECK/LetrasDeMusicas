@@ -11,6 +11,7 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JList;
+import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 
@@ -147,26 +148,31 @@ public class TelaLetraEAlbum implements ActionListener{
         Object src = e.getSource();
 
         if (src == botaoSalvarLetra){
-            janela.remove(tituloAlbum);
-            janela.remove(botaoSalvarAlbum);
-            janela.remove(botaoCancelar);
-            janela.remove(scrollPaneAlbum);
-            janela.remove(tituloLetra);
-            janela.remove(scrollPaneLetra);
-            janela.remove(botaoSalvarLetra);
+            if (entradaLetra.getText().isEmpty()){
+                JOptionPane.showMessageDialog(null, "Insira uma letra!", "Erro", JOptionPane.INFORMATION_MESSAGE);
+            }
+            else{
+                janela.remove(tituloAlbum);
+                janela.remove(botaoSalvarAlbum);
+                janela.remove(botaoCancelar);
+                janela.remove(scrollPaneAlbum);
+                janela.remove(tituloLetra);
+                janela.remove(scrollPaneLetra);
+                janela.remove(botaoSalvarLetra);
 
-            
+                
 
-            musica.setLetra(entradaLetra.getText());
+                musica.setLetra(entradaLetra.getText());
 
-            TelaMusicaSelecionada telaMusicaSelecionada = new TelaMusicaSelecionada(controle, janela, isArtista, musica, nomeDigitado, duracaoDigitado);
+                TelaMusicaSelecionada telaMusicaSelecionada = new TelaMusicaSelecionada(controle, janela, isArtista, musica, nomeDigitado, duracaoDigitado);
 
-            telaMusicaSelecionada.showEdit();
+                telaMusicaSelecionada.showEdit();
 
-            telaMusicaSelecionada.getBotaoAlbum().addActionListener(telaMusicaSelecionada);
-            telaMusicaSelecionada.getBotaoCadastrar().addActionListener(telaMusicaSelecionada);
-            telaMusicaSelecionada.getBotaoCancelar().addActionListener(telaMusicaSelecionada);
-            telaMusicaSelecionada.getBotaoLetra().addActionListener(telaMusicaSelecionada);
+                telaMusicaSelecionada.getBotaoAlbum().addActionListener(telaMusicaSelecionada);
+                telaMusicaSelecionada.getBotaoCadastrar().addActionListener(telaMusicaSelecionada);
+                telaMusicaSelecionada.getBotaoCancelar().addActionListener(telaMusicaSelecionada);
+                telaMusicaSelecionada.getBotaoLetra().addActionListener(telaMusicaSelecionada);
+            }
         }
 
         if (src == botaoSalvarAlbum){
@@ -178,7 +184,7 @@ public class TelaLetraEAlbum implements ActionListener{
             janela.remove(scrollPaneLetra);
             janela.remove(botaoSalvarLetra);
 
-            musica.setAlbum(listAlbum.getSelectedValue());;
+            musica.setAlbum(listAlbum.getSelectedValue());
 
             TelaMusicaSelecionada telaMusicaSelecionada = new TelaMusicaSelecionada(controle, janela, isArtista, musica, nomeDigitado, duracaoDigitado);
 

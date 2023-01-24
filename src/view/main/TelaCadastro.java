@@ -9,6 +9,7 @@ import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.plaf.metal.MetalCheckBoxIcon;
 
@@ -23,7 +24,7 @@ public class TelaCadastro implements ActionListener{
     private JTextField entradaNome = new JTextField();
 
     private JLabel rg = new JLabel("CPF:");
-    private JTextField entradaRg = new JTextField();
+    private JTextField entradaCpf = new JTextField();
 
     private JLabel estilo = new JLabel("Estilo Musical:");
     private JTextField entradaEstilo = new JTextField();
@@ -69,9 +70,9 @@ public class TelaCadastro implements ActionListener{
         rg.setFont(fonte);
         rg.setForeground(Color.white);
         
-        entradaRg.setBounds(248, 253, 350, 23);
-        entradaRg.setLayout(null);
-        entradaRg.setText(null);
+        entradaCpf.setBounds(248, 253, 350, 23);
+        entradaCpf.setLayout(null);
+        entradaCpf.setText(null);
 
         opcaoBox.setIcon(new MetalCheckBoxIcon(){
             protected int getControlSize() { return 20; }
@@ -102,7 +103,7 @@ public class TelaCadastro implements ActionListener{
         janela.add(nome);
         janela.add(entradaNome);
         janela.add(rg);
-        janela.add(entradaRg);
+        janela.add(entradaCpf);
         janela.add(opcaoBox);
         janela.add(textoBox);
         janela.add(botao);
@@ -136,52 +137,62 @@ public class TelaCadastro implements ActionListener{
 		}
 
         if (src == botao){
-
-            janela.remove(titulo);
-            janela.remove(nome);
-            janela.remove(entradaNome);
-            janela.remove(rg);
-            janela.remove(entradaRg);
-            janela.remove(opcaoBox);
-            janela.remove(textoBox);
-            janela.remove(botao);
-            janela.remove(estilo);
-            janela.remove(entradaEstilo);
-
-
-            if (opcaoBox.isSelected()){
-                TelaAplicativo telaAplicativo = new TelaAplicativo(controle, janela, true);
-
-                controle.artista(entradaNome.getText(), entradaRg.getText(), entradaEstilo.getText());
-                telaAplicativo.show();
-
-                telaAplicativo.getArtBotao().addActionListener(telaAplicativo);
-                telaAplicativo.getAlbBotao().addActionListener(telaAplicativo);
-                telaAplicativo.getMusBotao().addActionListener(telaAplicativo);
-                telaAplicativo.getCAlbmBotao().addActionListener(telaAplicativo);
-                telaAplicativo.getCMusBotao().addActionListener(telaAplicativo);
-                telaAplicativo.getBotaoVoltar().addActionListener(telaAplicativo);
-                telaAplicativo.getEditarAlbBotao().addActionListener(telaAplicativo);
-                telaAplicativo.getEditarMusBotao().addActionListener(telaAplicativo);
+            if (entradaNome.getText().length() < 3){
+                JOptionPane.showMessageDialog(null, "Nome inválido!", "Erro", JOptionPane.INFORMATION_MESSAGE);
+            }
+            else if (!controle.checkCpf(entradaCpf.getText())){
+                JOptionPane.showMessageDialog(null, "CPF inválido!", "Erro", JOptionPane.INFORMATION_MESSAGE);
+            }
+            else if (controle.cpfIsCadastrado(entradaCpf.getText())){
+                JOptionPane.showMessageDialog(null, "CPF já cadastrado!", "Erro", JOptionPane.INFORMATION_MESSAGE);
+            }
+            else if (opcaoBox.isSelected() && entradaEstilo.getText().length() < 3){
+                JOptionPane.showMessageDialog(null, "Estilo musical inválido!", "Erro", JOptionPane.INFORMATION_MESSAGE);
             }
             else{
-                TelaAplicativo telaAplicativo = new TelaAplicativo(controle, janela, false);
-
-                controle.usuario(entradaNome.getText(), entradaRg.getText());
-                telaAplicativo.show();
-
-                telaAplicativo.getArtBotao().addActionListener(telaAplicativo);
-                telaAplicativo.getAlbBotao().addActionListener(telaAplicativo);
-                telaAplicativo.getMusBotao().addActionListener(telaAplicativo);
-                telaAplicativo.getCAlbmBotao().addActionListener(telaAplicativo);
-                telaAplicativo.getCMusBotao().addActionListener(telaAplicativo);
-                telaAplicativo.getBotaoVoltar().addActionListener(telaAplicativo);
-                telaAplicativo.getEditarAlbBotao().addActionListener(telaAplicativo);
-                telaAplicativo.getEditarMusBotao().addActionListener(telaAplicativo);
+                janela.remove(titulo);
+                janela.remove(nome);
+                janela.remove(entradaNome);
+                janela.remove(rg);
+                janela.remove(entradaCpf);
+                janela.remove(opcaoBox);
+                janela.remove(textoBox);
+                janela.remove(botao);
+                janela.remove(estilo);
+                janela.remove(entradaEstilo);
+    
+    
+                if (opcaoBox.isSelected()){
+                    TelaAplicativo telaAplicativo = new TelaAplicativo(controle, janela, true);
+    
+                    controle.artista(entradaNome.getText(), entradaCpf.getText(), entradaEstilo.getText());
+                    telaAplicativo.show();
+    
+                    telaAplicativo.getArtBotao().addActionListener(telaAplicativo);
+                    telaAplicativo.getAlbBotao().addActionListener(telaAplicativo);
+                    telaAplicativo.getMusBotao().addActionListener(telaAplicativo);
+                    telaAplicativo.getCAlbmBotao().addActionListener(telaAplicativo);
+                    telaAplicativo.getCMusBotao().addActionListener(telaAplicativo);
+                    telaAplicativo.getBotaoVoltar().addActionListener(telaAplicativo);
+                    telaAplicativo.getEditarAlbBotao().addActionListener(telaAplicativo);
+                    telaAplicativo.getEditarMusBotao().addActionListener(telaAplicativo);
+                }
+                else{
+                    TelaAplicativo telaAplicativo = new TelaAplicativo(controle, janela, false);
+    
+                    controle.usuario(entradaNome.getText(), entradaCpf.getText());
+                    telaAplicativo.show();
+    
+                    telaAplicativo.getArtBotao().addActionListener(telaAplicativo);
+                    telaAplicativo.getAlbBotao().addActionListener(telaAplicativo);
+                    telaAplicativo.getMusBotao().addActionListener(telaAplicativo);
+                    telaAplicativo.getCAlbmBotao().addActionListener(telaAplicativo);
+                    telaAplicativo.getCMusBotao().addActionListener(telaAplicativo);
+                    telaAplicativo.getBotaoVoltar().addActionListener(telaAplicativo);
+                    telaAplicativo.getEditarAlbBotao().addActionListener(telaAplicativo);
+                    telaAplicativo.getEditarMusBotao().addActionListener(telaAplicativo);
+                }
             }
-
-
-            
         }
 	}
 }

@@ -17,6 +17,7 @@ import javax.swing.JFormattedTextField;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JList;
+import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 import javax.swing.text.MaskFormatter;
@@ -257,45 +258,62 @@ public class TelaAlbumSelecionado implements ActionListener{
         }
 
         if (src == botaoEditar){
-            janela.remove(titulo);
-            janela.remove(nome);
-            janela.remove(entradaNome);
-            janela.remove(data);
-            janela.remove(entradaData);
-            janela.remove(botaoArtista);
-            janela.remove(botaoEditar);
-            janela.remove(botaoRemover);
-            janela.remove(botaoCancelar);
-            janela.remove(scrollPane);
 
-            album.setNome(entradaNome.getText());
+            if (entradaNome.getText().length() < 3){
+                JOptionPane.showMessageDialog(null, "Nome inválido!", "Erro", JOptionPane.INFORMATION_MESSAGE);
+            } 
+            else{
+                    try{
+                        if (new SimpleDateFormat("dd/MM/yyyy").parse(entradaData.getText()).after(new Date(System.currentTimeMillis()))){
+                            JOptionPane.showMessageDialog(null, "Data inválida!", "Erro", JOptionPane.INFORMATION_MESSAGE);
+                        }
+                        else{
+                            janela.remove(titulo);
+                            janela.remove(nome);
+                            janela.remove(entradaNome);
+                            janela.remove(data);
+                            janela.remove(entradaData);
+                            janela.remove(botaoArtista);
+                            janela.remove(botaoEditar);
+                            janela.remove(botaoRemover);
+                            janela.remove(botaoCancelar);
+                            janela.remove(scrollPane);
 
-            Date dateFormat = new Date();
+                            album.setNome(entradaNome.getText());
 
-            try {
-                dateFormat = new SimpleDateFormat("dd/MM/yyyy").parse(entradaData.getText());
-                album.setDataLancamento(dateFormat);
-            } catch (ParseException e1) {
-                e1.printStackTrace();
+                            Date dateFormat = new Date();
+
+                            try {
+                                dateFormat = new SimpleDateFormat("dd/MM/yyyy").parse(entradaData.getText());
+                                album.setDataLancamento(dateFormat);
+                            } catch (ParseException e1) {
+                                e1.printStackTrace();
+                            }
+                
+                            for (Artista artista : artistasRemovidos){
+                                artista.removerAlbum(album);
+                            }
+                
+                            for (Artista artista : artistasAdicionados){
+                                artista.adicionarAlbum(album);
+                            }
+                
+                            album.setArtistas(artistas);
+                
+                            TelaEditarAlbum telaEditarAlbum = new TelaEditarAlbum(controle, janela, isArtista);
+                
+                            telaEditarAlbum.show();
+                
+                            telaEditarAlbum.getBotaoCancelar().addActionListener(telaEditarAlbum);
+                            telaEditarAlbum.getBotaoRemover().addActionListener(telaEditarAlbum);
+                            telaEditarAlbum.getBotaoVisualizar().addActionListener(telaEditarAlbum);
+                        }
+                    } 
+                    catch (ParseException e1) {
+                        JOptionPane.showMessageDialog(null, "Data inválida!", "Erro", JOptionPane.INFORMATION_MESSAGE);
+                    }
             }
 
-            for (Artista artista : artistasRemovidos){
-                artista.removerAlbum(album);
-            }
-
-            for (Artista artista : artistasAdicionados){
-                artista.adicionarAlbum(album);
-            }
-
-            album.setArtistas(artistas);
-
-            TelaEditarAlbum telaEditarAlbum = new TelaEditarAlbum(controle, janela, isArtista);
-
-            telaEditarAlbum.show();
-
-            telaEditarAlbum.getBotaoCancelar().addActionListener(telaEditarAlbum);
-            telaEditarAlbum.getBotaoRemover().addActionListener(telaEditarAlbum);
-            telaEditarAlbum.getBotaoVisualizar().addActionListener(telaEditarAlbum);
         }
         
     }

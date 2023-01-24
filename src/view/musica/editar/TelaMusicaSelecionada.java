@@ -10,6 +10,7 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JList;
+import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 
@@ -204,28 +205,47 @@ public class TelaMusicaSelecionada implements ActionListener{
         }
 
         if (src == botaoEditar){
-            janela.remove(titulo);
-            janela.remove(nome);
-            janela.remove(entradaNome);
-            janela.remove(duracao);
-            janela.remove(entradaDuracao);
-            janela.remove(scrollPane);
-            janela.remove(botaoAlbum);
-            janela.remove(botaoLetra);
-            janela.remove(botaoEditar);
-            janela.remove(botaoCancelar);
 
-            musica.setNome(entradaNome.getText());
+            if (entradaNome.getText().length() < 3){
+                JOptionPane.showMessageDialog(null, "Nome inválido!", "Erro", JOptionPane.INFORMATION_MESSAGE);
+            }
+            else{
+                try{
+                    if (Double.parseDouble(entradaDuracao.getText()) <= 0 || (Double.parseDouble(entradaDuracao.getText()) - (int)Double.parseDouble(entradaDuracao.getText())) >= 0.6){
+                        JOptionPane.showMessageDialog(null, "Duração inválida!", "Erro", JOptionPane.INFORMATION_MESSAGE);
+                    }
+                    else{
+                        janela.remove(titulo);
+                        janela.remove(nome);
+                        janela.remove(entradaNome);
+                        janela.remove(duracao);
+                        janela.remove(entradaDuracao);
+                        janela.remove(scrollPane);
+                        janela.remove(botaoAlbum);
+                        janela.remove(botaoLetra);
+                        janela.remove(botaoEditar);
+                        janela.remove(botaoCancelar);
 
-            Double dur = Double.parseDouble(entradaDuracao.getText());
-            musica.setDuracao(dur);
+                        musica.setNome(entradaNome.getText());
 
-            TelaEditarMusica telaEditarMusica = new TelaEditarMusica(controle, janela, isArtista);
+                        Double dur = Double.parseDouble(entradaDuracao.getText());
+                        musica.setDuracao(dur);
+            
+                        TelaEditarMusica telaEditarMusica = new TelaEditarMusica(controle, janela, isArtista);
+            
+                        telaEditarMusica.show();
+            
+                        telaEditarMusica.getBotaoCancelar().addActionListener(telaEditarMusica);
+                        telaEditarMusica.getBotaoVisualizar().addActionListener(telaEditarMusica);
+                    }
+                }
+                catch(Exception e1){
+                    JOptionPane.showMessageDialog(null, "Duração inválida ou música sem letra!", "Erro", JOptionPane.INFORMATION_MESSAGE);
+                }
+            }
 
-			telaEditarMusica.show();
 
-			telaEditarMusica.getBotaoCancelar().addActionListener(telaEditarMusica);
-			telaEditarMusica.getBotaoVisualizar().addActionListener(telaEditarMusica);
+
         }
 
         if (src == botaoCancelar){

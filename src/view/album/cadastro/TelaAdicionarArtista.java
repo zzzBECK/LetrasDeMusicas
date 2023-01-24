@@ -13,6 +13,7 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JList;
+import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 
 import controller.Controle;
@@ -126,19 +127,25 @@ public class TelaAdicionarArtista implements ActionListener{
 
         if (src == botaoCadastrar){
             if (src == botaoCadastrar){
-                if (list.getSelectedValue() != null){
-                    janela.remove(titulo);
-                    janela.remove(botaoCadastrar);
-                    janela.remove(botaoCancelar);
-                    janela.remove(scrollPane);
-        
-                    TelaCadastroAlbum telaCadastroAlbum = new TelaCadastroAlbum(controle, janela, isArtista, list.getSelectedValue(), nomeDigitado, dataDigitado, model1, artistas);
-                    
-                    telaCadastroAlbum.show();
-        
-                    telaCadastroAlbum.getBotaoCadastrar().addActionListener(telaCadastroAlbum);
-                    telaCadastroAlbum.getBotaoCancelar().addActionListener(telaCadastroAlbum);
-                    telaCadastroAlbum.getBotaoArtista().addActionListener(telaCadastroAlbum);
+                if (artistas.contains(list.getSelectedValue())){
+                    JOptionPane.showMessageDialog(null, "Artista já cadastrado!", "Erro", JOptionPane.INFORMATION_MESSAGE);
+                }
+                else{
+
+                    if (list.getSelectedValue() != null){
+                        janela.remove(titulo);
+                        janela.remove(botaoCadastrar);
+                        janela.remove(botaoCancelar);
+                        janela.remove(scrollPane);
+            
+                        TelaCadastroAlbum telaCadastroAlbum = new TelaCadastroAlbum(controle, janela, isArtista, list.getSelectedValue(), nomeDigitado, dataDigitado, model1, artistas);
+                        
+                        telaCadastroAlbum.show();
+            
+                        telaCadastroAlbum.getBotaoCadastrar().addActionListener(telaCadastroAlbum);
+                        telaCadastroAlbum.getBotaoCancelar().addActionListener(telaCadastroAlbum);
+                        telaCadastroAlbum.getBotaoArtista().addActionListener(telaCadastroAlbum);
+                    }
                 }
             }
         }

@@ -10,6 +10,7 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JList;
+import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 
@@ -166,33 +167,55 @@ public class TelaCadastroMusica implements ActionListener{
 		Object src = e.getSource();
 
         if (src == botaoCadastrar){
-            janela.remove(titulo);
-            janela.remove(nome);
-            janela.remove(entradaNome);
-            janela.remove(duracao);
-            janela.remove(entradaDuracao);
-            janela.remove(scrollPane);
-            janela.remove(botaoAlbum);
-            janela.remove(botaoLetra);
-            janela.remove(botaoCadastrar);
-            janela.remove(botaoCancelar);
+            if (entradaNome.getText().length() < 3){
+                JOptionPane.showMessageDialog(null, "Nome inválido!", "Erro", JOptionPane.INFORMATION_MESSAGE);
+            }
+            else{
+                try{
+                    if (Double.parseDouble(entradaDuracao.getText()) <= 0 || (Double.parseDouble(entradaDuracao.getText()) - (int)Double.parseDouble(entradaDuracao.getText())) >= 0.6){
+                        JOptionPane.showMessageDialog(null, "Duração inválida!", "Erro", JOptionPane.INFORMATION_MESSAGE);
+                    }
+                    else if (letraDigitado.isEmpty()){
+                        JOptionPane.showMessageDialog(null, "Adicione uma letra!", "Erro", JOptionPane.INFORMATION_MESSAGE);
+                    }
+                    else if (album == null){
+                        JOptionPane.showMessageDialog(null, "Adicione um album!", "Erro", JOptionPane.INFORMATION_MESSAGE);
+                    }
 
-            Double dur = Double.parseDouble(entradaDuracao.getText());
+                    else{
+                        janela.remove(titulo);
+                        janela.remove(nome);
+                        janela.remove(entradaNome);
+                        janela.remove(duracao);
+                        janela.remove(entradaDuracao);
+                        janela.remove(scrollPane);
+                        janela.remove(botaoAlbum);
+                        janela.remove(botaoLetra);
+                        janela.remove(botaoCadastrar);
+                        janela.remove(botaoCancelar);
 
-            controle.musica(nomeDigitado, letraDigitado, dur, album);
+                        Double dur = Double.parseDouble(entradaDuracao.getText());
 
-            TelaAplicativo telaAplicativo = new TelaAplicativo(controle, janela, isArtista);
+                        controle.musica(entradaNome.getText(), letraDigitado, dur, album);
 
-            telaAplicativo.show();
+                        TelaAplicativo telaAplicativo = new TelaAplicativo(controle, janela, isArtista);
 
-            telaAplicativo.getArtBotao().addActionListener(telaAplicativo);
-            telaAplicativo.getAlbBotao().addActionListener(telaAplicativo);
-            telaAplicativo.getMusBotao().addActionListener(telaAplicativo);
-            telaAplicativo.getCAlbmBotao().addActionListener(telaAplicativo);
-            telaAplicativo.getCMusBotao().addActionListener(telaAplicativo);
-            telaAplicativo.getBotaoVoltar().addActionListener(telaAplicativo);
-            telaAplicativo.getEditarAlbBotao().addActionListener(telaAplicativo);
-            telaAplicativo.getEditarMusBotao().addActionListener(telaAplicativo);
+                        telaAplicativo.show();
+
+                        telaAplicativo.getArtBotao().addActionListener(telaAplicativo);
+                        telaAplicativo.getAlbBotao().addActionListener(telaAplicativo);
+                        telaAplicativo.getMusBotao().addActionListener(telaAplicativo);
+                        telaAplicativo.getCAlbmBotao().addActionListener(telaAplicativo);
+                        telaAplicativo.getCMusBotao().addActionListener(telaAplicativo);
+                        telaAplicativo.getBotaoVoltar().addActionListener(telaAplicativo);
+                        telaAplicativo.getEditarAlbBotao().addActionListener(telaAplicativo);
+                        telaAplicativo.getEditarMusBotao().addActionListener(telaAplicativo);
+                    }
+                }
+                catch(Exception e1){
+                    JOptionPane.showMessageDialog(null, "Duração inválida ou música sem letra!", "Erro", JOptionPane.INFORMATION_MESSAGE);
+                }
+            }
         }
 
         if (src == botaoAlbum){

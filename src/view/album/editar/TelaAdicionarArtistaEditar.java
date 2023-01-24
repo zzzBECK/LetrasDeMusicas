@@ -13,6 +13,7 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JList;
+import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 
 import controller.Controle;
@@ -118,25 +119,29 @@ public class TelaAdicionarArtistaEditar implements ActionListener{
 
         if (src == botaoAdicionar){
             if (list.getSelectedValue() != null){
-                janela.remove(titulo);
-                janela.remove(botaoAdicionar);
-                janela.remove(botaoCancelar);
-                janela.remove(scrollPane);
+                if (artistas.contains(list.getSelectedValue())){
+                    JOptionPane.showMessageDialog(null, "Artista já selecionado!", "Erro", JOptionPane.INFORMATION_MESSAGE);
+                }
+                else{
+                    janela.remove(titulo);
+                    janela.remove(botaoAdicionar);
+                    janela.remove(botaoCancelar);
+                    janela.remove(scrollPane);
 
-                artistas.add(list.getSelectedValue());
-                artistasAdicionados.add(list.getSelectedValue());
+                    artistas.add(list.getSelectedValue());
+                    artistasAdicionados.add(list.getSelectedValue());
 
-                TelaAlbumSelecionado telaAlbumSelecionado = new TelaAlbumSelecionado(controle, janela, isArtista, album,
-                                                                                     nomeDigitado, dataDigitado, artistas,
-                                                                                     artistasRemovidos, artistasAdicionados);
-                
-                telaAlbumSelecionado.show();
+                    TelaAlbumSelecionado telaAlbumSelecionado = new TelaAlbumSelecionado(controle, janela, isArtista, album,
+                                                                                        nomeDigitado, dataDigitado, artistas,
+                                                                                        artistasRemovidos, artistasAdicionados);
+                    
+                    telaAlbumSelecionado.show();
 
-                telaAlbumSelecionado.getBotaoArtista().addActionListener(telaAlbumSelecionado);
-                telaAlbumSelecionado.getBotaoCancelar().addActionListener(telaAlbumSelecionado);
-                telaAlbumSelecionado.getBotaoEditar().addActionListener(telaAlbumSelecionado);
-                telaAlbumSelecionado.getBotaoRemover().addActionListener(telaAlbumSelecionado);
-
+                    telaAlbumSelecionado.getBotaoArtista().addActionListener(telaAlbumSelecionado);
+                    telaAlbumSelecionado.getBotaoCancelar().addActionListener(telaAlbumSelecionado);
+                    telaAlbumSelecionado.getBotaoEditar().addActionListener(telaAlbumSelecionado);
+                    telaAlbumSelecionado.getBotaoRemover().addActionListener(telaAlbumSelecionado);
+                }
             }
             
         }

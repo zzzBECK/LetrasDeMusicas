@@ -1,8 +1,9 @@
 package controller;
 
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+
+import javax.xml.catalog.Catalog;
 
 import model.Album;
 import model.Artista;
@@ -15,10 +16,6 @@ public class Controle{
     private Dados dados = new Dados();
 
     public Controle(){
-
-        for (int i = 0; i < 10; i++){
-            artista(String.format("%s %d", "Ricardo", i+1), String.format("%s", i), null);
-        }
 
 
         // String letra = """
@@ -137,5 +134,57 @@ public class Controle{
         dados.getAlbuns().remove(album);
     }
 
+    public boolean checkCpf(String cpf){
 
-}
+        try{
+            int soma1 = 0, soma2 = 0, n1 = Character.getNumericValue(cpf.charAt(9)), n2 = Character.getNumericValue(cpf.charAt(10));
+
+            int[] lista1 = {10, 9, 8, 7, 6, 5, 4, 3, 2};
+            int[] lista2 = {11, 10, 9, 8, 7, 6, 5, 4, 3, 2};
+        
+
+            if (cpf.length() != 11){
+
+                return false;
+            }
+            else{
+                for (int i = 0; i < 10; i++){
+                    if (i != 9){
+                        soma1 += Character.getNumericValue(cpf.charAt(i)) * lista1[i];
+                    }
+                    soma2 += Character.getNumericValue(cpf.charAt(i)) * lista2[i];
+                }
+
+                if ((soma1 % 11 < 2 && n1 == 0) || (n1 == 11 - (soma1 % 11))){
+                    if ((soma2 % 11 < 2 && n2 == 0) || (n2 == 11 - (soma2 % 11))){
+                        return true;
+                    }
+                }
+            }
+
+            return false;
+        }
+        catch (Exception e){
+            System.out.println("Erro no cpf");
+        }
+
+        return false;
+    }
+
+    public boolean cpfIsCadastrado(String cpf){
+
+        for (Usuario usuario : dados.getUsuarios()){
+            if (usuario.getCpf().equals(cpf)){
+                return true;
+            }
+        }
+
+        for (Artista artista : dados.getArtistas()){
+            if (artista.getCpf().equals(cpf)){
+                return true;
+            }
+        }
+
+        return false;
+    }
+}   
