@@ -98,8 +98,8 @@ public class Controle{
         return dados;
     }
 
-    public void usuario(String nome, String rg){
-        dados.adicionarUsuario(new Usuario(nome, rg));
+    public void usuario(String nome, String cpf){
+        dados.adicionarUsuario(new Usuario(nome, cpf));
     }
 
     public void artista(String nome, String rg, String estiloMusical){
