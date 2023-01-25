@@ -18,6 +18,12 @@ import model.Album;
 import model.Artista;
 import view.main.TelaAplicativo;
 
+/**
+ * Classe que lista os albuns a serem selecionados para edição
+ * @author Alexandre de Santana Beck
+ * @since 2023
+ * @version 1.0
+ */
 public class TelaEditarAlbum implements ActionListener{
     private Controle controle;
     private JFrame janela;
@@ -34,6 +40,12 @@ public class TelaEditarAlbum implements ActionListener{
     private JButton botaoRemover = new JButton("Remover");
     private JButton botaoEditar = new JButton("Editar");
 
+    /**
+     * Contrutor padrao da classe
+     * @param controle
+     * @param janela
+     * @param isArtista
+     */
     public TelaEditarAlbum(Controle controle, JFrame janela, boolean isArtista){
         this.controle = controle;
         this.janela = janela;
@@ -53,6 +65,9 @@ public class TelaEditarAlbum implements ActionListener{
         return botaoCancelar;
     }
 
+    /**
+     * Metodo que faz a configuração da tela e faz sua atualização
+     */
     public void show(){
         nome.setFont(new Font("Ms Gothic", Font.BOLD, 16));
 		nome.setForeground(Color.white);
@@ -107,6 +122,11 @@ public class TelaEditarAlbum implements ActionListener{
     }
 
 
+    /**
+     * metodo que é executado quando há um evento
+     * eventos: cancelar, remover, editar
+     * @param e
+     */
     @Override
     public void actionPerformed(ActionEvent e) {
         Object src = e.getSource();

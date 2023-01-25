@@ -20,6 +20,12 @@ import controller.Controle;
 import model.Album;
 import model.Artista;
 
+/**
+ * Classe que represnta a tela de Adicionar artista, na tela de Editar artista
+ * @author Alexandre de Santana Beck
+ * @since 2023
+ * @version 1.0
+ */
 public class TelaAdicionarArtistaEditar implements ActionListener{
     private Controle controle;
     private JFrame janela;
@@ -41,7 +47,18 @@ public class TelaAdicionarArtistaEditar implements ActionListener{
 
     private JScrollPane scrollPane = new JScrollPane();
 
-
+    /**
+     * Construtor padrao da classe, com parametros digitados na tela anterior
+     * @param controle
+     * @param janela
+     * @param isArtista
+     * @param album
+     * @param nomeDigitado
+     * @param dataDigitado
+     * @param artistas
+     * @param artistasRemovidos
+     * @param artistasAdicionados
+     */
     public TelaAdicionarArtistaEditar(Controle controle, JFrame janela, boolean isArtista, Album album,
                                       String nomeDigitado, String dataDigitado, List<Artista> artistas,
                                       List<Artista> artistasRemovidos, List<Artista> artistasAdicionados){
@@ -66,7 +83,9 @@ public class TelaAdicionarArtistaEditar implements ActionListener{
         return botaoCancelar;
     }
 
-
+    /**
+     * Meotodo que altera a configuração da tela e faz sua atualização
+     */
     public void show(){
 
         titulo.setFont(new Font("Ms Gothic", Font.BOLD, 24));
@@ -113,6 +132,11 @@ public class TelaAdicionarArtistaEditar implements ActionListener{
         janela.repaint();
     }
 
+    /**
+     * Meotodo que é executado quando realiza-se um evento
+     * eventos: adicionar, cancelar
+     * @param e
+     */
     @Override
     public void actionPerformed(ActionEvent e) {
         Object src = e.getSource();

@@ -15,24 +15,11 @@ public class Dados {
     private List<Album> albuns = new ArrayList<>();
     private List<Musica> musicas = new ArrayList<>();
 
+    /**
+     * Contrutor vazio da classe
+     */
     public Dados(){
 
-    }
-
-    public void adicionarUsuario(Usuario usuario){
-        usuarios.add(usuario);
-    }
-
-    public void adicionarArtista(Artista artista){
-        artistas.add(artista);
-    }
-
-    public void adicionarAlbum(Album album){
-        albuns.add(album);
-    }
-
-    public void adicionarMusica(Musica musica){
-        musicas.add(musica);
     }
 
     public List<Usuario> getUsuarios(){
@@ -51,8 +38,36 @@ public class Dados {
         return musicas;
     }
 
-    public Artista procurarArtista(String nome){
-        Artista art = artistas.stream().filter(x -> x.getNome().toLowerCase().equals(nome.toLowerCase())).findAny().orElse(null);
-        return art;
+    /**
+     * Adiciona usuarios instanciados na Controle na lista de usuarios
+     * @param usuario
+     */
+    public void adicionarUsuario(Usuario usuario){
+        usuarios.add(usuario);
     }
+
+    /**
+     * Adiciona artistas instancioados na Controle na lista de artistas
+     * @param artista
+     */
+    public void adicionarArtista(Artista artista){
+        artistas.add(artista);
+    }
+
+    /**
+     * Adiciona albuns instancioados na Controle na lista de albuns
+     * @param album
+     */
+    public void adicionarAlbum(Album album){
+        albuns.add(album);
+    }
+
+    /**
+     * Adiciona musicas instancioados na Controle na lista de musicas
+     * @param musica
+     */
+    public void adicionarMusica(Musica musica){
+        musicas.add(musica);
+    }
+
 }

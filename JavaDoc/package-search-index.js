@@ -1,0 +1,1 @@
+packageSearchIndex = [{"l":"All Packages","u":"allpackages-index.html"},{"l":"controller"},{"l":"model"},{"l":"view.album"},{"l":"view.album.cadastro"},{"l":"view.album.editar"},{"l":"view.artista"},{"l":"view.main"},{"l":"view.musica"},{"l":"view.musica.cadastro"},{"l":"view.musica.editar"}];updateSearchResults();

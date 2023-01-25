@@ -15,6 +15,14 @@ public class Musica{
 
     private Album album;
 
+    /**
+     * Contrutor padrao de musica
+     * @param nome
+     * @param letra
+     * @param duracao
+     * @param statusTocando
+     * @param album
+     */
     public Musica(String nome, String letra, Double duracao, boolean statusTocando, Album album){
         this.nome = nome;
         this.letra = letra;
@@ -75,14 +83,13 @@ public class Musica{
             return "Nome: " + nome + " Duracao: " + duracao + " Artista: " + getAlbum().getArtistas().get(0).getNome() + " (Tocando)";
         }
     }
-    
+
+    /**
+     * Metodo que altera o status da musica para tocando caso ela nao esteja tocando, e vice versa.
+     */
     public void tocarOuPausar(){
 
-        if (statusTocando == true)
-            statusTocando = false;
-
-        else
-            statusTocando = true;
+        statusTocando = !statusTocando;
     }
 
 }

@@ -26,6 +26,12 @@ import controller.Controle;
 import model.Album;
 import model.Artista;
 
+/**
+ * Classe que represnta o album selecionado para edição, ja com seus dadods previamente inseridos
+ * @author Alexandre de Santana Beck
+ * @since 2023
+ * @version 1.0
+ */
 public class TelaAlbumSelecionado implements ActionListener{
     private Controle controle;
     private JFrame janela;
@@ -60,8 +66,13 @@ public class TelaAlbumSelecionado implements ActionListener{
     private String nomeDigitado;
     private String dataDigitado;
 
-
-
+    /**
+     * Contrutor padrao da classe
+     * @param controle
+     * @param janela
+     * @param isArtista
+     * @param album
+     */
     public TelaAlbumSelecionado(Controle controle, JFrame janela, boolean isArtista, Album album){
         this.controle = controle;
         this.janela = janela;
@@ -69,6 +80,19 @@ public class TelaAlbumSelecionado implements ActionListener{
         this.album = album;
     }
 
+    /**
+     * Contrutor utilizado para manter os dados contidos na tela antes de navegar
+     * pela tela de adicionar adicionar artistsa
+     * @param controle
+     * @param janela
+     * @param isArtista
+     * @param album
+     * @param nomeDigitado
+     * @param dataDigitado
+     * @param artistas
+     * @param artistasRemovidos
+     * @param artistasAdicionados
+     */
     public TelaAlbumSelecionado(Controle controle, JFrame janela, boolean isArtista, Album album,
                                 String nomeDigitado, String dataDigitado, List<Artista> artistas,
                                 List<Artista> artistasRemovidos, List<Artista> artistasAdicionados){
@@ -197,7 +221,11 @@ public class TelaAlbumSelecionado implements ActionListener{
         janela.repaint();
     }
 
-
+    /**
+     * meotodo executado quando há um evento
+     * eventos: cancelar, adcionar artista, remover artista, editar
+     * @param e
+     */
     @Override
     public void actionPerformed(ActionEvent e) {
         Object src = e.getSource();
@@ -318,6 +346,11 @@ public class TelaAlbumSelecionado implements ActionListener{
         
     }
 
+    /**
+     * Metodo utilizado para formatar o input da data no formato dd/MM/yyyy
+     * @param mascara
+     * @return
+     */
     private MaskFormatter setMascara(String mascara){
 	    MaskFormatter mask = null;
 	    try{

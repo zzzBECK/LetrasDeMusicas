@@ -21,6 +21,13 @@ import model.Musica;
 import view.artista.TelaVisualizarArtista;
 import view.musica.TelaVisualizarMusica;
 
+/**
+ * Classe que represnta a tela especifica de album selecionado para visualização
+ * possui a listagem dos atributos do album junto com a lista de musicas que ele possue
+ * @author Alexandre de Santana Beck
+ * @since 2023
+ * @version 1.0
+ */
 public class TelaVisualizarAlbum implements ActionListener{
     private Controle controle;
     private JFrame janela;
@@ -45,6 +52,13 @@ public class TelaVisualizarAlbum implements ActionListener{
 
     SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
 
+    /**
+     * Contrutor da TelaVisualizarAlbum com parametros de controle para dados
+     * @param controle
+     * @param janela
+     * @param isArtista
+     * @param album
+     */
     public TelaVisualizarAlbum(Controle controle, JFrame janela, boolean isArtista, Album album){
         this.controle = controle;
         this.janela = janela;
@@ -68,6 +82,9 @@ public class TelaVisualizarAlbum implements ActionListener{
         return botaoVisualizarArtista;
     }
 
+    /**
+     * metodo que faz a configuração da tela e faz sua atualização
+     */
     public void show(){
         titulo.setFont(new Font("Ms Gothic", Font.BOLD, 20));
 		titulo.setForeground(Color.decode("#A020F0"));
@@ -139,6 +156,11 @@ public class TelaVisualizarAlbum implements ActionListener{
         janela.repaint();
     }
 
+    /**
+     * metodo que configura a tela, porém o botao de voltar é diferente do metodo show(), para voltar pra
+     * tela de visualizar artista
+     * @param art
+     */
     public void showToArtista(Artista art){
         titulo.setFont(new Font("Ms Gothic", Font.BOLD, 20));
 		titulo.setForeground(Color.decode("#A020F0"));
@@ -160,7 +182,7 @@ public class TelaVisualizarAlbum implements ActionListener{
 		arts.setForeground(Color.white);
         arts.setBounds(450, 30, 700, 30);
 
-        String nomeArtistas = new String();
+        String nomeArtistas = "";
         for (Artista artista : album.getArtistas()){
             nomeArtistas += artista.getNome();
             nomeArtistas += " ";
@@ -210,6 +232,11 @@ public class TelaVisualizarAlbum implements ActionListener{
         janela.repaint();
     }
 
+    /**
+     * metodo que é executado quando ocorre algum evento
+     * eventos: voltar, visualizar
+     * @param e
+     */
     @Override
     public void actionPerformed(ActionEvent e) {
         Object src = e.getSource();

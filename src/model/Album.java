@@ -21,7 +21,12 @@ public class Album {
 
     SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
 
-
+    /**
+     * Construtor da classe Album
+     * @param nome
+     * @param dataLancamento
+     * @param artistas
+     */
     public Album(String nome, Date dataLancamento, List<Artista> artistas){
 
         this.nome = nome;
@@ -68,30 +73,20 @@ public class Album {
         return String.format("Nome: %s ", nome) + " Data: " + sdf.format(dataLancamento) + " Artista: " + getArtistas().get(0).getNome();
     }
 
-    
+    /**
+     * Adiciona uma musica na lista de musicas do album
+     * @param musica
+     */
     public void adicionarMusica(Musica musica){
         musicas.add(musica);
     }
 
+    /**
+     * Remove uma musica na lista de musicas do album
+     * @param musica
+     */
     public void removerMusica(Musica musica){
         musicas.remove(musica);
-    }
-
-
-    public void editarMusica(String nomeMusica, String novoNome){
-        Musica mus;
-    
-        mus = musicas.stream().filter(y -> y.getNome().equals(nomeMusica)).findAny().orElse(null);
-
-        if (mus.equals(null)){
-            System.out.println("Musica inexistente!");
-        }
-
-        for (Musica x : musicas){
-            if (mus == x){
-                x.setNome(novoNome);
-            }
-        }
     }
 
 }

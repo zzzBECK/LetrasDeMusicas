@@ -16,10 +16,20 @@ public class Artista extends Usuario{
 
     private List<Album> albuns = new ArrayList<>();
 
+    /**
+     * Contrutor vazio do Artista para facilicar na hora de codar
+     */
     public Artista(){
         super();
     }
 
+    /**
+     * Contrutor padrao do Artista
+     * @param nome
+     * @param cpf
+     * @param qtdSeguidores
+     * @param estiloMusical
+     */
     public Artista(String nome, String cpf, Integer qtdSeguidores, String estiloMusical){
         super(nome, cpf);
         this.qtdSeguidores = qtdSeguidores;
@@ -55,28 +65,21 @@ public class Artista extends Usuario{
                             " Estilo Musical: " + estiloMusical;
     }
 
+    /**
+     * Adiciona um album na lista de albuns do artitsa
+     * @param album
+     */
     public void adicionarAlbum(Album album){
         albuns.add(album);
     }
 
+    /**
+     * remove um album da lista de albuns do artista
+     * @param album
+     */
     public void removerAlbum(Album album){
         albuns.remove(album);
     }
 
-    public void editarAlbum(String nomeAlbum, String novoNome){
-        Album alb;
-        
-        alb = albuns.stream().filter(x -> x.getNome().toLowerCase().equals(nomeAlbum.toLowerCase())).findAny().orElse(null);
-
-        if (alb == null)
-            System.out.println("Album inexistente!");
-
-        for (Album y : albuns){
-            if (alb == y){
-                y.setNome(novoNome);
-            }
-        }
-
-    }
 
 }

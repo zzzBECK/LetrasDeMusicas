@@ -20,6 +20,12 @@ import controller.Controle;
 import model.Artista;
 import view.main.TelaAplicativo;
 
+/**
+ * Classe que representa a tela de listagem dos artistas cadastrados
+ * @author Alexandre de Santana Beck
+ * @since 2023
+ * @version 1.0
+ */
 public class TelaArtistas implements ActionListener{
     private Controle controle;
     private JFrame janela;
@@ -37,23 +43,38 @@ public class TelaArtistas implements ActionListener{
     private JButton botaoVisualizar = new JButton("Visualizar");
 
     private KeyListener keyListener = new KeyListener() {
+        /**
+         * metodo de verificação ao apertar o enter, para realizar a atualização da lista por meio da pesquisa
+         * @param keyEvent
+         */
         public void keyPressed(KeyEvent keyEvent) {
             if (keyEvent.getKeyCode() == KeyEvent.VK_ENTER){
                 showPesquisa(pesquisa.getText());
             }   
         }
-  
+        /**
+         * metodo vazio, pois é obrigarótio ao instanciar um KeyListener
+         * @param keyEvent
+         */
         public void keyReleased(KeyEvent keyEvent) {
 
         }
-  
+        /**
+         * metodo de verificação ao apertar o qualquer tecla, para realizar a atualização da lista por meio da pesquisa
+         * @param keyEvent
+         */
         public void keyTyped(KeyEvent keyEvent) {
             showPesquisa(pesquisa.getText());
         }
   
     };
 
-    
+    /**
+     * Construtor padrao da classe
+     * @param controle
+     * @param janela
+     * @param isArtista
+     */
     public TelaArtistas(Controle controle, JFrame janela, boolean isArtista){
         this.controle = controle;
         this.janela = janela;
@@ -68,6 +89,9 @@ public class TelaArtistas implements ActionListener{
         return botaoVisualizar;
     }
 
+    /**
+     * metodo que faz a configuração da página e faz sua atualização
+     */
     public void show(){
         titulo.setFont(new Font("Ms Gothic", Font.BOLD, 24));
 		titulo.setForeground(Color.white);
@@ -117,6 +141,10 @@ public class TelaArtistas implements ActionListener{
         janela.repaint();
     }
 
+    /**
+     * metodo que atualiza a lista de artistas de acordo com o que foi digitado na barra de pesquisa
+     * @param digitado
+     */
     public void showPesquisa(String digitado){
 
         model.clear();
@@ -137,13 +165,18 @@ public class TelaArtistas implements ActionListener{
 
             }
 
-            if (temp.toLowerCase().equals(digitado.toLowerCase())){
+            if (temp.equalsIgnoreCase(digitado)){
                 model.addElement(artista);
             }
 
         }
     }
 
+    /**
+     * metodo que é executado ao realizar um evento
+     * eventos: visualizar artista, voltar
+     * @param e
+     */
     @Override
     public void actionPerformed(ActionEvent e) {
         Object src = e.getSource();

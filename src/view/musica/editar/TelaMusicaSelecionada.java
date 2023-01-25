@@ -160,6 +160,11 @@ public class TelaMusicaSelecionada implements ActionListener{
         janela.repaint();
     }
 
+    /**
+     * Metodo que roda quando algum evento é realizado
+     * eventos: adicionar letra, adicionar album, cancelar e editar
+     * @param e
+     */
     @Override
     public void actionPerformed(ActionEvent e) {
         Object src = e.getSource();
@@ -211,7 +216,9 @@ public class TelaMusicaSelecionada implements ActionListener{
             }
             else{
                 try{
-                    if (Double.parseDouble(entradaDuracao.getText()) <= 0 || (Double.parseDouble(entradaDuracao.getText()) - (int)Double.parseDouble(entradaDuracao.getText())) >= 0.6){
+                    if  (Double.parseDouble(entradaDuracao.getText()) <= 0 ||
+                        (Double.parseDouble(entradaDuracao.getText()) - (int)Double.parseDouble(entradaDuracao.getText())) >= 0.59998){
+
                         JOptionPane.showMessageDialog(null, "Duração inválida!", "Erro", JOptionPane.INFORMATION_MESSAGE);
                     }
                     else{

@@ -154,9 +154,7 @@ public class Controle{
                 }
 
                 if ((soma1 % 11 < 2 && n1 == 0) || (n1 == 11 - (soma1 % 11))){
-                    if ((soma2 % 11 < 2 && n2 == 0) || (n2 == 11 - (soma2 % 11))){
-                        return true;
-                    }
+                    return (soma2 % 11 < 2 && n2 == 0) || (n2 == 11 - (soma2 % 11));
                 }
             }
 

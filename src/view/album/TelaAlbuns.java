@@ -20,6 +20,12 @@ import controller.Controle;
 import model.Album;
 import view.main.TelaAplicativo;
 
+/**
+ * Classe que represnta a tela de listagem de todos os albuns cadastrados
+ * @author Alexandre de Santana Beck
+ * @since 2023
+ * @version 1.0
+ */
 public class TelaAlbuns implements ActionListener{
     private Controle controle;
     private boolean isArtista;
@@ -53,6 +59,12 @@ public class TelaAlbuns implements ActionListener{
   
     };
 
+    /**
+     * Contrutor padrao da classe TelaAlbuns
+     * @param controle
+     * @param janela
+     * @param isArtista
+     */
     public TelaAlbuns(Controle controle, JFrame janela, boolean isArtista){
         this.controle = controle;
         this.janela = janela;
@@ -68,6 +80,9 @@ public class TelaAlbuns implements ActionListener{
     }
 
 
+    /**
+     * metodo que altera a configuração da tela
+     */
     public void show(){
 
 		titulo.setFont(new Font("Ms Gothic", Font.BOLD, 24));
@@ -119,6 +134,10 @@ public class TelaAlbuns implements ActionListener{
         janela.repaint();
     }
 
+    /**
+     * metodo que atualiza a lista de albuns de acordo com o que foi pesquisado
+     * @param digitado
+     */
     public void showPesquisa(String digitado){
 
         model.clear();
@@ -146,6 +165,11 @@ public class TelaAlbuns implements ActionListener{
         }
     }
 
+    /**
+     * Metodo que é ativado quando algum evento acontece
+     * eventos: visualizar e voltar
+     * @param e
+     */
     @Override
     public void actionPerformed(ActionEvent e) {
         Object src = e.getSource();
