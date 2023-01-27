@@ -15,6 +15,12 @@ import javax.swing.plaf.metal.MetalCheckBoxIcon;
 
 import controller.Controle;
 
+/**
+ * Classe que representa a tela de cadastro inicial
+ * @author Alexandre de Santana Beck
+ * @since 2023
+ * @version 1.0
+ */
 public class TelaCadastro implements ActionListener{
     private Controle controle;
     private JFrame janela;
@@ -36,7 +42,11 @@ public class TelaCadastro implements ActionListener{
     
     private Font fonte =  new Font("Ms Gothic", Font.BOLD, 24);
 
-
+    /**
+     * Contrutor padrao da classe
+     * @param controle
+     * @param janela
+     */
     public TelaCadastro(Controle controle, JFrame janela){
         this.controle = controle;
         this.janela = janela;
@@ -52,6 +62,9 @@ public class TelaCadastro implements ActionListener{
     }
 
 
+    /**
+     * metodo que faz a configuração da tela e faz sua atualização
+     */
     public void show(){
 
         titulo.setFont(fonte);
@@ -112,6 +125,9 @@ public class TelaCadastro implements ActionListener{
         janela.repaint();
     }
 
+    /**
+     * metodo que adiciona o input de estilo musical, caso o checkbox esteja selecionado
+     */
     public void showEstilo(){
 
         if (opcaoBox.isSelected()){
@@ -128,6 +144,11 @@ public class TelaCadastro implements ActionListener{
     }
 
 
+    /**
+     * metodo que é executado quando um evento é realizado
+     * eventos: opcao de entrar com artista (checkBox), e cadastar (Usuario ou Artista)
+     * @param e
+     */
     @Override
     public void actionPerformed(ActionEvent e){
 		Object src = e.getSource();

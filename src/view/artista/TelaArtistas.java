@@ -174,7 +174,7 @@ public class TelaArtistas implements ActionListener{
 
     /**
      * metodo que é executado ao realizar um evento
-     * eventos: visualizar artista, voltar
+     * eventos: visualizar artista, voltar para TelaAplicativo
      * @param e
      */
     @Override

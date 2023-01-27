@@ -25,6 +25,12 @@ import controller.Controle;
 import model.Artista;
 import view.main.TelaAplicativo;
 
+/**
+ * Classe que representa a tela para realizar o cadastro de um album
+ * @author Alexandre de Santana Beck
+ * @since 2023
+ * @version 1.0
+ */
 public class TelaCadastroAlbum implements ActionListener{
     private Controle controle;
     private JFrame janela;
@@ -54,13 +60,29 @@ public class TelaCadastroAlbum implements ActionListener{
     private String nomeDigitado;
     private String dataDigitado;
 
-
+    /**
+     * Contrutor padrao da classe, utilizado pela TelaAplicativo
+     * @param controle
+     * @param janela
+     * @param isArtista
+     */
     public TelaCadastroAlbum(Controle controle, JFrame janela, boolean isArtista){
         this.controle = controle;
         this.janela = janela;
         this.isArtista = isArtista;
     }
 
+    /**
+     * construtor adicional, utilizado pela tela de AdicionarArtista, com o intuito de manter os dados
+     * @param controle
+     * @param janela
+     * @param isArtista
+     * @param artista
+     * @param nomeDigitado
+     * @param dataDigitado
+     * @param model
+     * @param artistas
+     */
     public TelaCadastroAlbum(Controle controle, JFrame janela, boolean isArtista, Artista artista, String nomeDigitado,
                              String dataDigitado, DefaultListModel<Artista> model, List<Artista> artistas){                            
         this.controle = controle;
@@ -85,6 +107,9 @@ public class TelaCadastroAlbum implements ActionListener{
         return botaoArtista;
     }
 
+    /**
+     * Metodo que configura a tela e faz sua atualização
+     */
     public void show(){
 
         titulo.setFont(fonte);
@@ -161,6 +186,11 @@ public class TelaCadastroAlbum implements ActionListener{
         janela.repaint();
     }
 
+    /**
+     * Meotodo que é executado quando um evento é realizado
+     * eventos: cancelar, adicionar artista, cadastrar album
+     * @param e
+     */
     @Override
     public void actionPerformed(ActionEvent e){
 		Object src = e.getSource();
@@ -265,6 +295,11 @@ public class TelaCadastroAlbum implements ActionListener{
             
 	}
 
+    /**
+     * Metodo que estabelece o padrao de data no input
+     * @param mascara
+     * @return mask
+     */
     private MaskFormatter setMascara(String mascara){
 	    MaskFormatter mask = null;
 	    try{

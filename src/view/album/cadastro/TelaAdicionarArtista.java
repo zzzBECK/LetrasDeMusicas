@@ -19,6 +19,12 @@ import javax.swing.JScrollPane;
 import controller.Controle;
 import model.Artista;
 
+/**
+ * Classe que lista os artista a serem selecionados no album
+ * @author Alexandre de Santana Beck
+ * @since 2023
+ * @version 1.0
+ */
 public class TelaAdicionarArtista implements ActionListener{
     private Controle controle;
     private JFrame janela;
@@ -40,6 +46,16 @@ public class TelaAdicionarArtista implements ActionListener{
 
     private List<Artista> artistas = new ArrayList<>();
 
+    /**
+     * Contrutor padrao com dados da tela anterior, para manter o que foi escrito
+     * @param controle
+     * @param janela
+     * @param isArtista
+     * @param nomeDigitado
+     * @param dataDigitado
+     * @param model
+     * @param artistas
+     */
     public TelaAdicionarArtista(Controle controle, JFrame janela, boolean isArtista, String nomeDigitado,
                                 String dataDigitado, DefaultListModel<Artista> model, List<Artista> artistas){
         this.controle = controle;
@@ -59,7 +75,9 @@ public class TelaAdicionarArtista implements ActionListener{
         return botaoCancelar;
     }
 
-
+    /**
+     * Metodo que faz a configuração da tela e faz sua atualização
+     */
     public void show(){
 
         titulo.setFont(new Font("Ms Gothic", Font.BOLD, 24));
@@ -106,6 +124,11 @@ public class TelaAdicionarArtista implements ActionListener{
         janela.repaint();
     }
 
+    /**
+     * metodo que é executado quando há a realização de um evento
+     * eventos: cancelar, cadastrar artista
+     * @param e
+     */
     @Override
     public void actionPerformed(ActionEvent e) {
         Object src = e.getSource();
@@ -125,30 +148,30 @@ public class TelaAdicionarArtista implements ActionListener{
 			telaCadastroAlbum.getBotaoArtista().addActionListener(telaCadastroAlbum);
         }
 
-        if (src == botaoCadastrar){
-            if (src == botaoCadastrar){
-                if (artistas.contains(list.getSelectedValue())){
-                    JOptionPane.showMessageDialog(null, "Artista já cadastrado!", "Erro", JOptionPane.INFORMATION_MESSAGE);
-                }
-                else{
 
-                    if (list.getSelectedValue() != null){
-                        janela.remove(titulo);
-                        janela.remove(botaoCadastrar);
-                        janela.remove(botaoCancelar);
-                        janela.remove(scrollPane);
-            
-                        TelaCadastroAlbum telaCadastroAlbum = new TelaCadastroAlbum(controle, janela, isArtista, list.getSelectedValue(), nomeDigitado, dataDigitado, model1, artistas);
-                        
-                        telaCadastroAlbum.show();
-            
-                        telaCadastroAlbum.getBotaoCadastrar().addActionListener(telaCadastroAlbum);
-                        telaCadastroAlbum.getBotaoCancelar().addActionListener(telaCadastroAlbum);
-                        telaCadastroAlbum.getBotaoArtista().addActionListener(telaCadastroAlbum);
-                    }
+        if (src == botaoCadastrar){
+            if (artistas.contains(list.getSelectedValue())){
+                JOptionPane.showMessageDialog(null, "Artista já cadastrado!", "Erro", JOptionPane.INFORMATION_MESSAGE);
+            }
+            else{
+
+                if (list.getSelectedValue() != null){
+                    janela.remove(titulo);
+                    janela.remove(botaoCadastrar);
+                    janela.remove(botaoCancelar);
+                    janela.remove(scrollPane);
+
+                    TelaCadastroAlbum telaCadastroAlbum = new TelaCadastroAlbum(controle, janela, isArtista, list.getSelectedValue(), nomeDigitado, dataDigitado, model1, artistas);
+
+                    telaCadastroAlbum.show();
+
+                    telaCadastroAlbum.getBotaoCadastrar().addActionListener(telaCadastroAlbum);
+                    telaCadastroAlbum.getBotaoCancelar().addActionListener(telaCadastroAlbum);
+                    telaCadastroAlbum.getBotaoArtista().addActionListener(telaCadastroAlbum);
                 }
             }
         }
+
         
     }
 }

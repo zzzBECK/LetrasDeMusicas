@@ -18,6 +18,12 @@ import model.Album;
 import model.Artista;
 import view.album.TelaVisualizarAlbum;
 
+/**
+ * Classe que representa a tela que mostra um artista selecionado, com seus atributos e a listagem do seus albuns
+ * @author Alexandre de Santana Beck
+ * @since 2023
+ * @version 1.0
+ */
 public class TelaVisualizarArtista implements ActionListener{
     private Controle controle;
     private JFrame janela;
@@ -38,6 +44,13 @@ public class TelaVisualizarArtista implements ActionListener{
 
     private Artista artista;
 
+    /**
+     * Contrutor padrao da classe
+     * @param controle
+     * @param janela
+     * @param isArtista
+     * @param artista
+     */
     public TelaVisualizarArtista(Controle controle, JFrame janela, boolean isArtista, Artista artista){
         this.controle = controle;
         this.janela = janela;
@@ -53,6 +66,9 @@ public class TelaVisualizarArtista implements ActionListener{
         return botaoVisualizar;
     }
 
+    /**
+     * metodo que configura a tela e faz sua atualização
+     */
     public void show(){
         titulo.setFont(new Font("Ms Gothic", Font.BOLD, 20));
 		titulo.setForeground(Color.decode("#A020F0"));
@@ -123,6 +139,11 @@ public class TelaVisualizarArtista implements ActionListener{
         janela.repaint();
     }
 
+    /**
+     * metodo que é executado quando há a realização de um evento
+     * eventos: voltar para TelaArtistas, visualizar album do artista
+     * @param e
+     */
     @Override
     public void actionPerformed(ActionEvent e) {
         Object src = e.getSource();

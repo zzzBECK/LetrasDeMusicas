@@ -17,6 +17,13 @@ import view.musica.TelaMusicas;
 import view.musica.cadastro.TelaCadastroMusica;
 import view.musica.editar.TelaEditarMusica;
 
+/**
+ * Classe que representa a tela principal do aplicativo,
+ * no caso a tela que possui as opções de listagem, cadastro e edição
+ * @author Alexandre de Santana Beck
+ * @since 2023
+ * @version 1.0
+ */
 public class TelaAplicativo implements ActionListener{
 	private Controle controle;
     private JFrame janela;
@@ -34,6 +41,12 @@ public class TelaAplicativo implements ActionListener{
 
 	private Font fonte = new Font("Ms Gothic", Font.BOLD, 16);
 
+	/**
+	 * Construtor padrao da classe
+	 * @param controle
+	 * @param janela
+	 * @param isArtista
+	 */
 	public TelaAplicativo(Controle controle, JFrame janela, boolean isArtista){
 		this.controle = controle;
 		this.janela = janela;
@@ -76,7 +89,9 @@ public class TelaAplicativo implements ActionListener{
 		return botaoVoltar;
 	}
 
-
+	/**
+	 * metodo que faz a configuração da tela e faz sua atualização
+	 */
 	public void show(){
 	
 		musBotao.setFont(fonte);
@@ -152,7 +167,12 @@ public class TelaAplicativo implements ActionListener{
         janela.repaint();
     }
 
-
+	/**
+	 * Metodo que é executado quando um evento é realizado
+	 * eventos: listar artistas, listar albuns, listar musicas, cadastar album, cadastrar musica,
+	 * editar album, editar musica, voltar para TelaCadastro
+	 * @param e
+	 */
 	@Override
     public void actionPerformed(ActionEvent e){
 		Object src = e.getSource();

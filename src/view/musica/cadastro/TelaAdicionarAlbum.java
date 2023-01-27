@@ -16,6 +16,12 @@ import javax.swing.JScrollPane;
 import controller.Controle;
 import model.Album;
 
+/**
+ * Classe que representa a tela de adicionar album quando for cadastrar uma musica
+ * @author Alexandre de Santana Beck
+ * @since 2023
+ * @version 1.0
+ */
 public class TelaAdicionarAlbum implements ActionListener{
     private Controle controle;
     private JFrame janela;
@@ -35,7 +41,16 @@ public class TelaAdicionarAlbum implements ActionListener{
     private DefaultListModel<Album> model1;
     private String letra;
 
-
+    /**
+     * contrutor padrao com atributos para salvar dados da tela anterior
+     * @param controle
+     * @param janela
+     * @param isArtista
+     * @param nomeDigitado
+     * @param duracaoDigitado
+     * @param model
+     * @param letra
+     */
     public TelaAdicionarAlbum(Controle controle, JFrame janela, boolean isArtista, String nomeDigitado,
                               String duracaoDigitado, DefaultListModel<Album> model, String letra){
         this.controle = controle;
@@ -56,6 +71,9 @@ public class TelaAdicionarAlbum implements ActionListener{
     }
 
 
+    /**
+     * Metodo que faz a configuração da tela e faz sua atualização
+     */
     public void show(){
 
         titulo.setFont(new Font("Ms Gothic", Font.BOLD, 24));
@@ -102,6 +120,11 @@ public class TelaAdicionarAlbum implements ActionListener{
         janela.repaint();
     }
 
+    /**
+     * metodo que é executado quando realiza-se um evento
+     * eventos: cancelar, cadastrar album na musica, ambos voltam pra TelaCadastroMusica
+     * @param e
+     */
     @Override
     public void actionPerformed(ActionEvent e) {
         Object src = e.getSource();

@@ -11,6 +11,12 @@ import javax.swing.JLabel;
 
 import controller.Controle;
 
+/**
+ * Classe que representa a tela inicial, que contém o nome do aplicativo e botao para inciá-lo
+ * @author Alexandre de Santana Beck
+ * @since 2023
+ * @version 1.0
+ */
 public class TelaInicial implements ActionListener{
     private Controle controle = new Controle();
     private JFrame janela = new JFrame("Letras de Músicas");
@@ -19,7 +25,9 @@ public class TelaInicial implements ActionListener{
 	private JButton botao = new JButton("Entrar");
 	private Font fonte = new Font("Ms Gothic", Font.BOLD, 24);
 
-
+	/**
+	 * Metodo que faz a configuração da tela e faz sua atualização
+	 */
     public void show(){
 
         janela.getContentPane().setBackground(Color.darkGray);
@@ -51,7 +59,12 @@ public class TelaInicial implements ActionListener{
 	public JButton getBotao(){
 		return botao;
 	}
-	
+
+	/**
+	 * metodo que é executado quando um evento é realizado
+	 * eventos: entrar (inciar aplicativo)
+	 * @param e
+	 */
 	@Override
 	public void actionPerformed(ActionEvent e){
 		Object src = e.getSource();
