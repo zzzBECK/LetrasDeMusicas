@@ -2,6 +2,7 @@ package view.musica;
 
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
@@ -9,6 +10,7 @@ import java.awt.event.KeyListener;
 
 import javax.swing.DefaultListCellRenderer;
 import javax.swing.DefaultListModel;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -34,6 +36,7 @@ public class TelaMusicas implements ActionListener{
     private JLabel titulo = new JLabel("Músicas");
 
     private JTextField pesquisa = new JTextField();
+    private JLabel lupa = new JLabel();
 
     private DefaultListModel<Musica> model = new DefaultListModel<>();
     private JList<Musica> list = new JList<>();
@@ -131,6 +134,11 @@ public class TelaMusicas implements ActionListener{
         pesquisa.setText(null);
         pesquisa.addKeyListener(keyListener);
 
+        ImageIcon imageIcon = new ImageIcon(new ImageIcon("imgs\\lupa.png").getImage().getScaledInstance(20, 20, Image.SCALE_DEFAULT));
+
+        lupa.setIcon(imageIcon);
+        lupa.setBounds(466, 20, 20, 20);
+
         model.clear();
         for (Musica musica : controle.getDados().getMusicas()){
             model.addElement(musica);
@@ -169,6 +177,8 @@ public class TelaMusicas implements ActionListener{
         botaoTocar.setBorder(null);
         botaoTocar.setFocusPainted(false);
 
+
+        janela.add(lupa);
         janela.add(titulo);
         janela.add(botaoVoltar);
         janela.add(botaoVisualizar);
@@ -253,6 +263,7 @@ public class TelaMusicas implements ActionListener{
         if (src == botaoVoltar){
             janela.setSize(800, 600);
 
+            janela.remove(lupa);
             janela.remove(titulo);
             janela.remove(scrollPane);
             janela.remove(botaoVoltar);
@@ -285,6 +296,7 @@ public class TelaMusicas implements ActionListener{
             if(list.getSelectedValue() != null){
                 janela.setSize(800, 600);
 
+                janela.remove(lupa);
                 janela.remove(titulo);
                 janela.remove(scrollPane);
                 janela.remove(botaoVoltar);
