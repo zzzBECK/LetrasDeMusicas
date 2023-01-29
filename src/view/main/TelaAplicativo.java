@@ -194,6 +194,8 @@ public class TelaAplicativo implements ActionListener{
 
 			telaArtistas.getBotaoVoltar().addActionListener(telaArtistas);
 			telaArtistas.getBotaoVisualizar().addActionListener(telaArtistas);
+			telaArtistas.getBotaoSeguir().addActionListener(telaArtistas);
+			telaArtistas.getBotaoPararDeSeguir().addActionListener(telaArtistas);
 		}
 
 		if (src == albBotao){

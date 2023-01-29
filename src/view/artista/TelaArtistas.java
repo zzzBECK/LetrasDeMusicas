@@ -41,6 +41,8 @@ public class TelaArtistas implements ActionListener{
 
     private JButton botaoVoltar = new JButton("Voltar");
     private JButton botaoVisualizar = new JButton("Visualizar");
+    private JButton botaoSeguir = new JButton("Seguir");
+    private JButton botaoPararDeSeguir = new JButton("Parar de Seguir");
 
     private KeyListener keyListener = new KeyListener() {
         /**
@@ -89,6 +91,14 @@ public class TelaArtistas implements ActionListener{
         return botaoVisualizar;
     }
 
+    public JButton getBotaoSeguir() {
+        return botaoSeguir;
+    }
+
+    public JButton getBotaoPararDeSeguir(){
+        return botaoPararDeSeguir;
+    }
+
     /**
      * metodo que faz a configuração da página e faz sua atualização
      */
@@ -102,6 +112,7 @@ public class TelaArtistas implements ActionListener{
         pesquisa.setText(null);
         pesquisa.addKeyListener(keyListener);
 
+        model.clear();
         for (Artista artista : controle.getDados().getArtistas()){
             model.addElement(artista);
         }
@@ -121,22 +132,39 @@ public class TelaArtistas implements ActionListener{
         botaoVoltar.setFont(new Font("Ms Gothic", Font.BOLD, 16));
 		botaoVoltar.setBackground(Color.decode("#A020F0"));
         botaoVoltar.setForeground(Color.WHITE);
-		botaoVoltar.setBounds(264, 494, 125, 35);
+		botaoVoltar.setBounds(117, 494, 125, 35);
         botaoVoltar.setBorder(null);
         botaoVoltar.setFocusPainted(false);
 
         botaoVisualizar.setFont(new Font("Ms Gothic", Font.BOLD, 16));
 		botaoVisualizar.setBackground(Color.decode("#A020F0"));
         botaoVisualizar.setForeground(Color.WHITE);
-		botaoVisualizar.setBounds(411, 494, 125, 35);
+		botaoVisualizar.setBounds(264, 494, 125, 35);
         botaoVisualizar.setBorder(null);
         botaoVisualizar.setFocusPainted(false);
+
+        botaoSeguir.setFont(new Font("Ms Gothic", Font.BOLD, 16));
+        botaoSeguir.setBackground(Color.decode("#A020F0"));
+        botaoSeguir.setForeground(Color.WHITE);
+        botaoSeguir.setBounds(411, 494, 125, 35);
+        botaoSeguir.setBorder(null);
+        botaoSeguir.setFocusPainted(false);
+
+        botaoPararDeSeguir.setFont(new Font("Ms Gothic", Font.BOLD, 16));
+        botaoPararDeSeguir.setBackground(Color.decode("#A020F0"));
+        botaoPararDeSeguir.setForeground(Color.WHITE);
+        botaoPararDeSeguir.setBounds(558, 494, 125, 35);
+        botaoPararDeSeguir.setBorder(null);
+        botaoPararDeSeguir.setFocusPainted(false);
+
 
         janela.add(titulo);
         janela.add(botaoVoltar);
         janela.add(botaoVisualizar);
         janela.add(scrollPane);
         janela.add(pesquisa);
+        janela.add(botaoSeguir);
+        janela.add(botaoPararDeSeguir);
 
         janela.repaint();
     }
@@ -174,7 +202,7 @@ public class TelaArtistas implements ActionListener{
 
     /**
      * metodo que é executado ao realizar um evento
-     * eventos: visualizar artista, voltar para TelaAplicativo
+     * eventos: visualizar artista, voltar para TelaAplicativo, seguir e parar de seguir
      * @param e
      */
     @Override
@@ -189,6 +217,8 @@ public class TelaArtistas implements ActionListener{
                 janela.remove(botaoVisualizar);
                 janela.remove(scrollPane);
                 janela.remove(pesquisa);
+                janela.remove(botaoSeguir);
+                janela.remove(botaoPararDeSeguir);
 
                 TelaVisualizarArtista telaVisualizarArtista = new TelaVisualizarArtista(controle, janela, isArtista, list.getSelectedValue());
 
@@ -205,6 +235,8 @@ public class TelaArtistas implements ActionListener{
             janela.remove(botaoVisualizar);
             janela.remove(scrollPane);
             janela.remove(pesquisa);
+            janela.remove(botaoSeguir);
+            janela.remove(botaoPararDeSeguir);
 
             TelaAplicativo telaAplicativo = new TelaAplicativo(controle, janela, isArtista);
 
@@ -218,6 +250,22 @@ public class TelaArtistas implements ActionListener{
             telaAplicativo.getBotaoVoltar().addActionListener(telaAplicativo);
             telaAplicativo.getEditarAlbBotao().addActionListener(telaAplicativo);
             telaAplicativo.getEditarMusBotao().addActionListener(telaAplicativo);
+        }
+
+        if (src == botaoSeguir){
+            if (list.getSelectedValue() != null){
+                list.getSelectedValue().seguirArtista(list.getSelectedValue());
+
+                show();
+            }
+        }
+
+        if (src == botaoPararDeSeguir){
+            if (list.getSelectedValue() != null){
+                list.getSelectedValue().pararDeSeguirArtista(list.getSelectedValue());
+            }
+
+            show();
         }
         
     }

@@ -63,6 +63,7 @@ public class Usuario {
      */
     public void seguirArtista(Artista artista){
         artistasSeguidos.add(artista);
+        artista.setQtdSeguidores(artista.getQtdSeguidores() + 1);
     }
 
     /**
@@ -71,6 +72,8 @@ public class Usuario {
      */
     public void pararDeSeguirArtista(Artista artista){
         artistasSeguidos.remove(artista);
+        artista.setQtdSeguidores(artista.getQtdSeguidores() - 1);
+
     }
 
 

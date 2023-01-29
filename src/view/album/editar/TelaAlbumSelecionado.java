@@ -61,7 +61,7 @@ public class TelaAlbumSelecionado implements ActionListener{
     private JButton botaoRemover = new JButton("Remover");
     private JButton botaoEditar = new JButton("Editar");
 
-    private Font fonte =  new Font("Ms Gothic", Font.BOLD, 24);
+    private Font fonte =  new Font("Ms Gothic", Font.BOLD, 18);
 
     private String nomeDigitado;
     private String dataDigitado;
@@ -289,7 +289,10 @@ public class TelaAlbumSelecionado implements ActionListener{
 
             if (entradaNome.getText().length() < 3){
                 JOptionPane.showMessageDialog(null, "Nome inválido!", "Erro", JOptionPane.INFORMATION_MESSAGE);
-            } 
+            }
+            else if (controle.albumIsCadastrado(entradaNome.getText())){
+                JOptionPane.showMessageDialog(null, "Álbum já cadastrado!", "Erro", JOptionPane.INFORMATION_MESSAGE);
+            }
             else{
                     try{
                         if (new SimpleDateFormat("dd/MM/yyyy").parse(entradaData.getText()).after(new Date(System.currentTimeMillis()))){

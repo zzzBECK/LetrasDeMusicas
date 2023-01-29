@@ -55,7 +55,7 @@ public class TelaCadastroAlbum implements ActionListener{
     private JButton botaoCadastrar = new JButton("Cadastrar");
     private JButton botaoCancelar = new JButton("Cancelar");
 
-    private Font fonte =  new Font("Ms Gothic", Font.BOLD, 24);
+    private Font fonte =  new Font("Ms Gothic", Font.BOLD, 18);
 
     private String nomeDigitado;
     private String dataDigitado;
@@ -244,7 +244,10 @@ public class TelaCadastroAlbum implements ActionListener{
         if (src == botaoCadastrar){
             if (entradaNome.getText().length() < 3){
                 JOptionPane.showMessageDialog(null, "Nome inválido!", "Erro", JOptionPane.INFORMATION_MESSAGE);
-            } 
+            }
+            else if (controle.albumIsCadastrado(entradaNome.getText())){
+                JOptionPane.showMessageDialog(null, "Álbum já cadastrado!", "Erro", JOptionPane.INFORMATION_MESSAGE);
+            }
             else{
                     try{
                         if (new SimpleDateFormat("dd/MM/yyyy").parse(entradaData.getText()).after(new Date(System.currentTimeMillis()))){

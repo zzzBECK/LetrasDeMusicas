@@ -16,6 +16,12 @@ import model.Artista;
 import model.Musica;
 import view.album.TelaVisualizarAlbum;
 
+/**
+ * Classe que representa a tela de visualição de uma musica especifica, podendo ver sua letra e atributos relacionados
+ * @author Alexandre de Santana Beck
+ * @since 2023
+ * @version 1.0
+ */
 public class TelaVisualizarMusica implements ActionListener{
     private Controle controle;
     private JFrame janela;
@@ -39,6 +45,13 @@ public class TelaVisualizarMusica implements ActionListener{
 
     private Artista art;
 
+    /**
+     * Construtor padrao da classe
+     * @param controle
+     * @param janela
+     * @param isArtista
+     * @param musica
+     */
     public TelaVisualizarMusica(Controle controle, JFrame janela, Boolean isArtista, Musica musica){
         this.controle = controle;
         this.janela = janela;
@@ -58,6 +71,10 @@ public class TelaVisualizarMusica implements ActionListener{
         return botaoVoltarArtista;
     }
 
+    /**
+     * metodo que faz a configuração da tela e faz sua atualização
+     * utilizado quando estava na TelaMusicas
+     */
     public void show(){
         titulo.setFont(new Font("Ms Gothic", Font.BOLD, 20));
 		titulo.setForeground(Color.decode("#A020F0"));
@@ -118,6 +135,10 @@ public class TelaVisualizarMusica implements ActionListener{
         janela.repaint();
     }
 
+    /**
+     * metodo que faz a configuração da tela e faz sua atualização
+     * utilizado quando estava na TelaVisualizarAlbum
+     */
     public void showToAlbum(){
         titulo.setFont(new Font("Ms Gothic", Font.BOLD, 20));
 		titulo.setForeground(Color.decode("#A020F0"));
@@ -178,6 +199,10 @@ public class TelaVisualizarMusica implements ActionListener{
         janela.repaint();
     }
 
+    /**
+     * metodo que faz a configuração da tela e faz sua atualização
+     * utilizado quando estava na TelaVisualziarArtista
+     */
     public void showToArtista(Artista art){
         this.art = art;
         titulo.setFont(new Font("Ms Gothic", Font.BOLD, 20));
@@ -239,6 +264,11 @@ public class TelaVisualizarMusica implements ActionListener{
         janela.repaint();
     }
 
+    /**
+     * metodo que é executado quando um evento é realizado
+     * eventos: voltar para TelaMusicas, voltar para tela VisualizarAlbum
+     * @param e
+     */
     @Override
     public void actionPerformed(ActionEvent e) {
         Object src = e.getSource();

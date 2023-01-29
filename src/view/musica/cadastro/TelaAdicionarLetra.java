@@ -15,6 +15,12 @@ import javax.swing.JTextArea;
 import controller.Controle;
 import model.Album;
 
+/**
+ * Classe que representa a tela de adicionar letra na musica a ser cadastrada
+ * @author Alexandre de Santana Beck
+ * @since 2023
+ * @version 1.0
+ */
 public class TelaAdicionarLetra implements ActionListener{
     private Controle controle;
     private JFrame janela;
@@ -34,7 +40,17 @@ public class TelaAdicionarLetra implements ActionListener{
     private Album album;
     private String letraDigitado;
 
-
+    /**
+     * construtor padrao da classe com dados digitados na TelaCadastroMusica
+     * @param controle
+     * @param janela
+     * @param isArtista
+     * @param nomeDigitado
+     * @param duracaoDigitado
+     * @param model
+     * @param album
+     * @param letraDigitado
+     */
     public TelaAdicionarLetra(Controle controle, JFrame janela, boolean isArtista, String nomeDigitado,
                               String duracaoDigitado, DefaultListModel<Album> model, Album album, String letraDigitado){
         this.controle = controle;
@@ -55,6 +71,9 @@ public class TelaAdicionarLetra implements ActionListener{
         return botaoCancelar;
     }
 
+    /**
+     * metodo que faz a configuração da tela e sua a atualização
+     */
     public void show(){
         titulo.setFont(new Font("Ms Gothic", Font.BOLD, 24));
 		titulo.setForeground(Color.white);
@@ -95,6 +114,11 @@ public class TelaAdicionarLetra implements ActionListener{
         janela.repaint();
     }
 
+    /**
+     * metodo que é executado quando um evento é realizado
+     * eventos: cancelar, salvar letra
+     * @param e
+     */
     @Override
     public void actionPerformed(ActionEvent e) {
         Object src = e.getSource();

@@ -20,6 +20,12 @@ import controller.Controle;
 import model.Musica;
 import view.main.TelaAplicativo;
 
+/**
+ * Classe que representa a tela de listagem das musicas cadastradas
+ * @author Alexandre de Santana Beck
+ * @since 2023
+ * @version 1.0
+ */
 public class TelaMusicas implements ActionListener{
     private Controle controle;
     private boolean isArtista;
@@ -45,22 +51,40 @@ public class TelaMusicas implements ActionListener{
     private JButton botaoRetroceder = new JButton("Retroceder");
 
     private KeyListener keyListener = new KeyListener() {
+        /**
+         * metodo que é ativado quando aperta enter apos digitar algo na barra de pesquisa
+         * @param keyEvent
+         */
         public void keyPressed(KeyEvent keyEvent) {
             if (keyEvent.getKeyCode() == KeyEvent.VK_ENTER){
                 showPesquisa(pesquisa.getText());
             }   
         }
-  
+
+        /**
+         * metodo vazio pois é obrigatório, porem nao foi utilizado
+         * @param keyEvent
+         */
         public void keyReleased(KeyEvent keyEvent) {
 
         }
-  
+
+        /**
+         * metodo que é ativado ao digitar qualquer letra na barra de pesquisa
+         * @param keyEvent
+         */
         public void keyTyped(KeyEvent keyEvent) {
             showPesquisa(pesquisa.getText());
         }
   
       };
 
+    /**
+     * contrutor padrao da classe
+     * @param controle
+     * @param janela
+     * @param isArtista
+     */
     public TelaMusicas(Controle controle, JFrame janela, boolean isArtista){
         this.controle = controle;
         this.janela = janela;
@@ -93,6 +117,9 @@ public class TelaMusicas implements ActionListener{
     }
 
 
+    /**
+     * metodo que faz a configuração da tela e faz sua atualização
+     */
     public void show(){
 
         titulo.setFont(new Font("Ms Gothic", Font.BOLD, 24));
@@ -152,6 +179,10 @@ public class TelaMusicas implements ActionListener{
         janela.repaint();
     }
 
+    /**
+     * metodo que atualiza a lista de musicas de acordo com o que foi digitado na barra de pesquisa
+     * @param digitado
+     */
     public void showPesquisa(String digitado){
 
         model.clear();
@@ -172,7 +203,7 @@ public class TelaMusicas implements ActionListener{
 
             }
 
-            if (temp.toLowerCase().equals(digitado.toLowerCase())){
+            if (temp.equalsIgnoreCase(digitado)){
                 model.addElement(musica);
             }
 
@@ -194,7 +225,6 @@ public class TelaMusicas implements ActionListener{
           
         // }
 
-
         list.setModel(model);
         scrollPane.setViewportView(list);
 
@@ -211,6 +241,11 @@ public class TelaMusicas implements ActionListener{
         janela.repaint();
     }
 
+    /**
+     * meotod que é executado quando um evento é realizado
+     * eventos: voltar pra TelaAplicativo, visualizar musica, tocar musica, play/pause;avançar;retroceder
+     * @param e
+     */
     @Override
     public void actionPerformed(ActionEvent e) {
         Object src = e.getSource();

@@ -162,8 +162,10 @@ public class TelaVisualizarArtista implements ActionListener{
 
 			telaArtistas.show();
 
-			telaArtistas.getBotaoVoltar().addActionListener(telaArtistas);
+            telaArtistas.getBotaoVoltar().addActionListener(telaArtistas);
             telaArtistas.getBotaoVisualizar().addActionListener(telaArtistas);
+            telaArtistas.getBotaoSeguir().addActionListener(telaArtistas);
+            telaArtistas.getBotaoPararDeSeguir().addActionListener(telaArtistas);
         }
 
         if (src == botaoVisualizar){

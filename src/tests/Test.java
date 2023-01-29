@@ -2,10 +2,14 @@ package tests;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import model.Artista;
 import org.junit.jupiter.api.Test;
 
 
 import controller.*;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Classe para realizaçao de testes de metodos
@@ -38,5 +42,23 @@ class Teste {
 		assertFalse(controle.cpfIsCadastrado("32613684038"));
 		assertFalse(controle.cpfIsCadastrado("12146675039"));
 		assertTrue(controle.cpfIsCadastrado("28124715068"));
+	}
+
+	@Test
+	void testAlbumIsCadastrado(){
+		List<Artista> list = new ArrayList<>();
+		list.add(new Artista("teste", "03780718154", 8, "teste"));
+
+		controle.album("Master Of Puppets", null, list);
+		controle.album("Veigh", null, list);
+
+
+		assertTrue(controle.albumIsCadastrado("Master Of Puppets"));
+		assertTrue(controle.albumIsCadastrado("master of puppets"));
+		assertFalse(controle.albumIsCadastrado("MasterOfPuppets"));
+		assertTrue(controle.albumIsCadastrado("veigh"));
+		assertFalse(controle.albumIsCadastrado("veigh master"));
+
+
 	}
 }

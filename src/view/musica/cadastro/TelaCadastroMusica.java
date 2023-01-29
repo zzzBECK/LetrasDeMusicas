@@ -18,6 +18,12 @@ import controller.Controle;
 import model.Album;
 import view.main.TelaAplicativo;
 
+/**
+ * Classe que representa a tela de cadastrar musica
+ * @author Alexandre de Santana Beck
+ * @since 2023
+ * @version 1.0
+ */
 public class TelaCadastroMusica implements ActionListener{
     private Controle controle;
     private JFrame janela;
@@ -46,14 +52,29 @@ public class TelaCadastroMusica implements ActionListener{
     private String letraDigitado;
 
 
-
+    /**
+     * construtor padrao da classe
+     * @param controle
+     * @param janela
+     * @param isArtista
+     */
     public TelaCadastroMusica(Controle controle, JFrame janela, boolean isArtista){
         this.controle = controle;
         this.janela = janela;
         this.isArtista = isArtista;
     }
-     
-    
+
+    /**
+     * construtor utilizado pelas classes TelaAdicionarAlbum e TelaAdicionarLetra
+     * @param controle
+     * @param janela
+     * @param isArtista
+     * @param album
+     * @param nomeDigitado
+     * @param duracaoDigitado
+     * @param model
+     * @param letraDigitado
+     */
     public TelaCadastroMusica(Controle controle, JFrame janela, boolean isArtista, Album album, String nomeDigitado,
                               String duracaoDigitado, DefaultListModel<Album> model, String letraDigitado){
         this.controle = controle;
@@ -82,6 +103,9 @@ public class TelaCadastroMusica implements ActionListener{
         return botaoLetra;
     }
 
+    /**
+     * metodo que faz a configuração da tela e faz sua atualização
+     */
     public void show(){
         titulo.setFont(new Font("Ms Gothic", Font.BOLD, 24));
 		titulo.setForeground(Color.white);
@@ -159,9 +183,11 @@ public class TelaCadastroMusica implements ActionListener{
         janela.repaint();
     }
 
-
-
-
+    /**
+     * metodo que é executado quando um evento é realizado
+     * eventos: adicionar album, adicionar letra, cancelar, cadastar musica
+     * @param e
+     */
     @Override
     public void actionPerformed(ActionEvent e) {
 		Object src = e.getSource();
