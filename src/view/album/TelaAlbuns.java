@@ -1,20 +1,12 @@
 package view.album;
 
-import java.awt.Color;
-import java.awt.Font;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
-import javax.swing.DefaultListCellRenderer;
-import javax.swing.DefaultListModel;
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JList;
-import javax.swing.JScrollPane;
-import javax.swing.JTextField;
+import javax.swing.*;
 
 import controller.Controle;
 import model.Album;
@@ -34,6 +26,7 @@ public class TelaAlbuns implements ActionListener{
     private JLabel titulo = new JLabel("Álbuns");
     
     private JTextField pesquisa = new JTextField();
+    private JLabel lupa = new JLabel();
 
     private DefaultListModel<Album> model = new DefaultListModel<>();
     private JList<Album> list = new JList<>();
@@ -94,6 +87,10 @@ public class TelaAlbuns implements ActionListener{
         pesquisa.setText(null);
         pesquisa.addKeyListener(keyListener);
 
+        ImageIcon imageIcon = new ImageIcon(new ImageIcon("imgs//lupa.png").getImage().getScaledInstance(20, 20, Image.SCALE_DEFAULT));
+        lupa.setIcon(imageIcon);
+        lupa.setBounds(480, 20, 20, 20);
+
         for (Album album : controle.getDados().getAlbuns()){
             model.addElement(album);
         }
@@ -125,6 +122,7 @@ public class TelaAlbuns implements ActionListener{
         botaoVisualizar.setBorder(null);
         botaoVisualizar.setFocusPainted(false);
 
+        janela.add(lupa);
         janela.add(titulo);
         janela.add(botaoVoltar);
         janela.add(botaoVisualizar);
@@ -176,6 +174,7 @@ public class TelaAlbuns implements ActionListener{
 
         if (src == botaoVisualizar){
             if(list.getSelectedValue() != null){
+                janela.remove(lupa);
                 janela.remove(titulo);
                 janela.remove(scrollPane);
                 janela.remove(botaoVisualizar);
@@ -192,6 +191,7 @@ public class TelaAlbuns implements ActionListener{
         }
 
         if (src == botaoVoltar){
+            janela.remove(lupa);
             janela.remove(titulo);
             janela.remove(scrollPane);
             janela.remove(botaoVisualizar);

@@ -134,10 +134,9 @@ public class TelaMusicas implements ActionListener{
         pesquisa.setText(null);
         pesquisa.addKeyListener(keyListener);
 
-        ImageIcon imageIcon = new ImageIcon(new ImageIcon("imgs\\lupa.png").getImage().getScaledInstance(20, 20, Image.SCALE_DEFAULT));
-
+        ImageIcon imageIcon = new ImageIcon(new ImageIcon("imgs//lupa.png").getImage().getScaledInstance(20, 20, Image.SCALE_DEFAULT));
         lupa.setIcon(imageIcon);
-        lupa.setBounds(466, 20, 20, 20);
+        lupa.setBounds(480, 20, 20, 20);
 
         model.clear();
         for (Musica musica : controle.getDados().getMusicas()){
